@@ -1,0 +1,7 @@
+DROP TABLE IF EXISTS comment_likes CASCADE;
+
+CREATE TABLE comment_likes (
+  id SERIAL PRIMARY KEY NOT NULL,
+  user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+  comment_id INTEGER REFERENCES comments(id) ON DELETE CASCADE
+);
