@@ -3,8 +3,12 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter, Routes, Route} from 'react-router-dom';
 import './index.css';
 
+<<<<<<< HEAD
 import LandingPage from './components/LandingPage';
 import GeneralFeed from './components/GeneralFeed';
+=======
+import App from './App';
+>>>>>>> master
 
 
 // const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -20,20 +24,4 @@ import GeneralFeed from './components/GeneralFeed';
 //   </React.StrictMode>
 // );
 
-ReactDOM.render(
-  
-  <React.StrictMode>
-    <BrowserRouter>
-      {/* DO NOT REMOVE Nav COMPONENT FROM HERE */}
-      
-
-      <Routes>
-      <Route path="/" element={<LandingPage />} />
-      <Route path="/posts" element={<GeneralFeed />} />
-      </Routes>
-        
-    </BrowserRouter>
-  </React.StrictMode>
-
-
-, document.getElementById('root'));
+ReactDOM.render(<App />, document.getElementById('root'));
