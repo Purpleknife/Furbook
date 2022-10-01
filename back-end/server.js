@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const morgan = require('morgan');
 const app = express();
@@ -25,12 +26,12 @@ const friendshipsRoutes = require('./routes/friendships');
 const messagesRoutes = require('./routes/messages');
 const postsRoutes = require('./routes/posts');
 const conversationsRoutes = require('./routes/conversations');
-
+const db = require('./db/connection');
 // Mount all resource routes
 app.use('/messages', messagesRoutes);
 app.use('/conversations', conversationsRoutes);
 app.use('/friendships', friendshipsRoutes);
-app.use('/posts', postsRoutes);
+app.use('/posts', postsRoutes(db));
 app.use('/', usersRoutes);
 
 // Sample GET route

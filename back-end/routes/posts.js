@@ -1,8 +1,16 @@
 const express = require('express');
 const router  = express.Router();
+const db = require('../db/connection');
 
 // GET /posts
 // Show user general feed / Load all user’s posts + friends’ posts + comments under each post
+router.get('/', (req, res) => {
+  const queryString = 'SELECT * FROM posts';
+  
+  db.query(queryString).then(data => {
+    res.json(data.rows);
+  });
+});
 
 // POST /posts
 // Add new post

@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route} from 'react-router-dom';
 import './index.css';
 
 import LandingPage from './components/LandingPage';
+import Posts from './components/Posts';
 
 
 // const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -28,6 +29,7 @@ ReactDOM.render(
 
       <Routes>
       <Route path="/" element={<LandingPage />} />
+      <Route path="/posts" element={<Posts />} />
       </Routes>
         
     </BrowserRouter>
