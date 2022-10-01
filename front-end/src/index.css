@@ -4,8 +4,9 @@
 }
 
 
-body {
-  width: auto;
-  height: auto;
-  background-color: #ffcd32;
+html, body {
+  margin: 0;
+  padding: 0;
+
+
 }

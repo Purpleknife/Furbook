@@ -2,11 +2,12 @@
 @import "../styles/variables";
 
 .landing-page {
-  //background-color: $primary-color;
+  background-color: $primary-color;
   display: flexbox;
   align-items: center;
   justify-content: center;
   text-align: center;
+  min-height: 100vh;
 }
 
 .app-name  {

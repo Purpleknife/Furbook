@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom';
 import './LandingPage.scss';
 import axios from 'axios';
 
-
 const LandingPage = () => {
   const [user, setUser] = useState(null);
 
@@ -20,6 +19,7 @@ const LandingPage = () => {
   };
 
   return (
+
     <div className="landing-page">
       <img
           className="cover"
