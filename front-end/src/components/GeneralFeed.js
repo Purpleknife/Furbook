@@ -45,7 +45,6 @@ const GeneralFeed = (props) => {
 
   return (
     <section className='main-container'>
-      <h1>Posts page</h1>
       <div className='feed-container'>
         {postList}
       </div>
