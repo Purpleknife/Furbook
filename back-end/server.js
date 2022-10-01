@@ -32,6 +32,7 @@ app.use('/conversations', conversationsRoutes);
 app.use('/friendships', friendshipsRoutes);
 app.use('/posts', postsRoutes);
 app.use('/', usersRoutes);
+app.use('/users', usersRoutes);
 
 // Sample GET route
 // app.get('/api/data', (req, res) => res.json({

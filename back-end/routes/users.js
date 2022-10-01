@@ -19,8 +19,11 @@ router.get('/:id', (req, res) => {
 
 
 //Profile route:
-router.get('/users/:id', (req, res) => {
-  const queryString = `SELECT * FROM posts WHERE creator = $1;`
+router.get('/users', (req, res) => {
+  const queryString = `
+    SELECT users.*, posts.* FROM posts
+    JOIN users ON users.id = creator
+    WHERE creator = $1;`
   const queryParams = req.session.user_id;
 
   db.query(queryString, queryParams)

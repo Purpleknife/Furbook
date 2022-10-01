@@ -1,6 +1,74 @@
 
 @import "../styles/variables";
 
-.test {
-  color: $primary-color;
+.landing-page {
+  //background-color: $primary-color;
+  display: flexbox;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.app-name  {
+  font-family: $primary-font;
+  font-size: 8em;
+  margin-top: -8px;
+  margin-bottom: -8px;
+}
+
+.slogon {
+  font-family: $secondary-font;
+  font-size: 1.5em;
+}
+
+#logo {
+  font-weight: bold;
+}
+
+
+.footer {
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  bottom:0px;
+  margin-left: -250px;
+  left: 36%;
+  height: 30%;
+}
+
+.login__btn {
+  appearance: button;
+  background-color: #000;
+  background-image: none;
+  border: 1px solid #000;
+  border-radius: 4px;
+  box-shadow: $secondary-color 4px 4px 0 0,#000 4px 4px 0 1px;
+  box-sizing: border-box;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  margin: 0 5px 10px 0;
+  overflow: visible;
+  padding: 12px 40px;
+  text-align: center;
+  text-transform: none;
+  touch-action: manipulation;
+  user-select: none;
+  -webkit-user-select: none;
+  vertical-align: middle;
+  white-space: nowrap;
+  font-weight: bold;
+  font-family: $secondary-font;
+  text-decoration: none;
+}
+
+.login__btn:focus {
+  text-decoration: none;
+}
+
+.login__btn:hover {
+  text-decoration: none;
 }
