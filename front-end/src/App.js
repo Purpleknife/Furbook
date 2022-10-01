@@ -7,6 +7,7 @@ import axios from 'axios';
 import LandingPage from './components/LandingPage';
 import SideNav from './components/SideNav';
 import ProfileContainer from './components/ProfileContainer';
+import GeneralFeed from './components/GeneralFeed';
 
 const App = () => {
   const [user, setUser] = useState(null);
@@ -32,6 +33,7 @@ const App = () => {
 
       <Routes>
         <Route path="/" element={<LandingPage setUser={setUser}/>} />
+        <Route path="/posts" element={<GeneralFeed />} />
         <Route path="/users" element={<div className="wrapper"><SideNav user={user} setUser={setUser}/><ProfileContainer user={user} posts={posts}/></div>} />
       </Routes>
         
