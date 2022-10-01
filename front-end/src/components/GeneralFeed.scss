@@ -1,0 +1,23 @@
+@import '../styles/variables';
+
+body {
+  font-family: $primary-font;
+  width: 100vw;
+  height: 100vh;
+}
+
+.main-container {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  // text-align: center;
+  // margin: auto;
+  background-color: $secondary-color;
+  color: $other-color
+}
+
+.feed-container {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+}

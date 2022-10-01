@@ -34,8 +34,8 @@ const db = require('./db/connection');
 app.use('/messages', messagesRoutes);
 app.use('/conversations', conversationsRoutes);
 app.use('/friendships', friendshipsRoutes(db));
-app.use('/posts', postsRoutes);
-app.use('/', usersRoutes);
+app.use('/posts', postsRoutes(db));
+app.use('/', usersRoutes(db));
 
 // Sample GET route
 // app.get('/api/data', (req, res) => res.json({
