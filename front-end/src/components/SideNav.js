@@ -1,7 +1,17 @@
 import React from 'react';
+import axios from 'axios';
+import { Link } from 'react-router-dom';
 import './SideNav.scss';
 
 const SideNav = (props) => {
+
+  const logout = () => {
+    axios.get('/logout')
+      .then((data) => {
+        console.log('logout data', data);
+        props.setUser(null);
+      })
+  }
 
   return (
     <div className="sidebar">
@@ -23,7 +33,10 @@ const SideNav = (props) => {
     <p className="other-name">My Friends</p>
 
     <p className="other-name">My Chats</p>
-    
+
+    <div className="logout">
+      <Link className="logout__btn" to="/" onClick={logout}>Logout</Link>
+    </div>
 
     <img
           className="side-footer-image"

@@ -66,6 +66,14 @@ module.exports = (db) => {
     });
   });
 
+
+  //Logout route:
+  router.get('/logout', (req, res) => {
+    req.session = null;
+    console.log('User logged out.')
+    //return res.redirect('/');
+  });
+
   return router;
 };
 

@@ -32,7 +32,7 @@ const App = () => {
 
       <Routes>
         <Route path="/" element={<LandingPage setUser={setUser}/>} />
-        <Route path="/users" element={<div className="wrapper"><SideNav user={user}/><ProfileContainer user={user} posts={posts}/></div>} />
+        <Route path="/users" element={<div className="wrapper"><SideNav user={user} setUser={setUser}/><ProfileContainer user={user} posts={posts}/></div>} />
       </Routes>
         
     </BrowserRouter>
