@@ -1,10 +1,10 @@
 import { useState,useEffect } from 'react';
 import axios from 'axios';
-import './Posts.scss';
+import './GeneralFeed.scss';
 
 import Post from './Post';
 
-const Posts = (props) => {
+const GeneralFeed = (props) => {
 
   const [posts, setPosts] = useState();
   const [postList, setPostList] = useState([])
@@ -28,8 +28,8 @@ const Posts = (props) => {
           image_url={post.image_url}
         />
       )
-    })
-    setPostList(generatedList)
+    });
+    setPostList(generatedList);
   }
 
   useEffect(() => {
@@ -44,12 +44,14 @@ const Posts = (props) => {
   }, [posts])
 
   return (
-    <div className='flex'>
+    <section className='main-container'>
       <h1>Posts page</h1>
-      {postList}
-    </div>
+      <div className='feed-container'>
+        {postList}
+      </div>
+    </section>
   );
 
 }
  
-export default Posts;
+export default GeneralFeed;
