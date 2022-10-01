@@ -8,6 +8,7 @@ import LandingPage from './components/LandingPage';
 import SideNav from './components/SideNav';
 import ProfileContainer from './components/ProfileContainer';
 import GeneralFeed from './components/GeneralFeed';
+import Friendships from './components/Friendships';
 
 const App = () => {
   const [user, setUser] = useState(null);
