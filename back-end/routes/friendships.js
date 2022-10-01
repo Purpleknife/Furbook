@@ -18,9 +18,9 @@ module.exports = (db) => {
     SELECT * FROM friendships 
     JOIN users on users.id IN (sender, receiver)
     WHERE NOT users.id = $1
+    AND status = false
     AND sender = $1 
-    OR receiver = $1
-    AND status = false;
+    OR receiver = $1;
   `;
 
   // Get current user's friends
