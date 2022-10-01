@@ -18,14 +18,22 @@ const ProfileContainer = (props) => {
           className="profile-image"
           src={props.user.image_url}
       />
+      <div className="profile-info">
+        <p>{props.user.first_name} {props.user.last_name}</p>
 
-        {props.user.first_name} {props.user.last_name}
+        <p>Relationship Status: {props.user.relationship_status}</p>
 
-        {props.user.relationsip_status}
+        <p>Birthday: {props.user.birthday}</p>
 
-        {props.user.birthday}
+        <p>Location:{props.user.location}</p>
 
-        {props.user.location}
+        <div className="profile__btns">
+        <button className="profile__btn">Message</button>&nbsp;
+        <button className="profile__btn">Friend Request</button>
+        </div>
+      </div>
+
+
       </div>
       {/* {postsList} */}
     </div>
