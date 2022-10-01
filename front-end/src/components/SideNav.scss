@@ -1,0 +1,62 @@
+@import "../styles/variables";
+
+.sidebar {
+  padding: 15px;
+  background-color: $secondary-color;
+  width: 25%;
+  height: 100vh;
+  position: fixed;
+  display: flexbox;
+  align-items: center;
+  justify-content: center;
+
+  .side-logo {
+    margin-left: 8em;
+  }
+
+  .side-name {
+    font-family: $primary-font;
+    font-size: 50px;
+    text-align: center;
+    margin-top: -3px;
+  }
+
+  .side-profile {
+    display: flex;
+    align-items: center;
+    margin-left: 2em;
+  }
+
+  .name {
+    margin-left: 1em;
+    font-family: $secondary-font;
+    font-weight: bold;
+  }
+
+  .side-profile-image {
+    height: 20%;
+    width: 20%;
+    border-radius: 50%;
+  }
+
+  .side-friends-image {
+    height: 10%;
+    width: 10%;
+    border-radius: 50%;
+    margin-left: 2em;
+  }
+
+  .side-footer-image {
+    display: flex;
+    margin-left: 23em;
+    position: absolute;
+    bottom:0px;
+    width: 20%;
+  }
+
+  .other-name {
+    margin-left: 8em;
+    font-family: $secondary-font;
+    font-weight: bold;
+  }
+}

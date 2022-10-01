@@ -19,17 +19,6 @@ const LandingPage = (props) => {
     
   };
 
-  // //gets the data//works
-  // const getUser = () => {
-    
-  // };
-
-  // useEffect(() => {
-  //   login();
-  // }, []);
-
-
-
   return (
 
     <div className="landing-page">
