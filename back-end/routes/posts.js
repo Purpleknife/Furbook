@@ -25,3 +25,4 @@ const router  = express.Router();
 // DELETE /posts/:post_id/comments/:comment_id
 // Delete a comment
 
+module.exports = router;

@@ -6,10 +6,11 @@
     "axios": "^0.18.1",
     "bootstrap": "^5.2.1",
     "classnames": "^2.3.2",
+    "node-sass": "^7.0.3",
     "react": "^16.8.6",
-    "react-dom": "^16.8.6",
+    "react-dom": "^16.14.0",
     "react-router-dom": "^6.4.1",
-    "react-scripts": "2.1.8"
+    "react-scripts": "^5.0.1"
   },
   "scripts": {
     "start": "react-scripts start",

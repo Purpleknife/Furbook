@@ -10,3 +10,4 @@ const router  = express.Router();
 // DELETE /friendships/:friend_id
 // Delete a friend
 
+module.exports = router;

@@ -63,6 +63,8 @@ router.put('/users/:id', (req, res) => {
   });
 });
 
+module.exports = router;
+
 // GET /users/:user_id
 // Show profile & show the user’s posts
 

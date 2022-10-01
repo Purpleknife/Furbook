@@ -12,3 +12,4 @@ const router  = express.Router();
 // POST /conversations/:conversation_id/messages
 // Send a new message in that conversation
 
+module.exports = router;

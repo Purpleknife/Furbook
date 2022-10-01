@@ -1,13 +1,17 @@
 const express = require('express');
-const app = Express();
+const morgan = require('morgan');
+const app = express();
 const bodyParser = require('body-parser');
+const cookieSession = require('cookie-session');
+const methodOverride = require('method-override');
 const PORT = 8080;
 
 // Express Configuration
+app.use(morgan('dev'));
+app.use(express.urlencoded({ extended: true }));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.use(morgan('dev'));
-app.use(express.static('public'));
+
 app.use(cookieSession({
   name: 'session',
   keys: ['key1']

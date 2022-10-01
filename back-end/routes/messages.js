@@ -5,3 +5,4 @@ const router  = express.Router();
 
 // POST /messages/new
 // Create message to friend
+module.exports = router;
