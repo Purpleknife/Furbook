@@ -4,19 +4,41 @@ import Friend from './Friend';
 // import './Friendships.scss';
 
 const Friendships = () => {
-  const [friends, setFriends] = useState([]);
 
-  const getFriends = () => {
-    axios.get('/friendships')
-      .then((res) => {
-        console.log("Friends data from Axios request: ", res.data);
-        setFriends(res.data);
-      })
-  };
+  // INITIAL STATE
+  const [state, setState] = useState({
+    friends: {},
+    pending: {}
+  });
 
+  // const [friends, setFriends] = useState([]);
+
+  // API CALLS
   useEffect(() => {
-    getFriends();
-  }, []);
+    Promise.all([
+      axios.get('/friendships'),
+      axios.get('/friendships/pending')
+    ]).then((all) => {
+      setState(prev => ({
+        friends: all[0].data,
+        pending: all[1].data
+      }));
+    });
+  }, [])
+
+
+
+  // const getFriends = () => {
+  //   axios.get('/friendships')
+  //     .then((res) => {
+  //       console.log("Friends data from Axios request: ", res.data);
+  //       setFriends(res.data);
+  //     })
+  // };
+
+  // useEffect(() => {
+  //   getFriends();
+  // }, []);
 
   const friendItem = friends.map(friend => {
     return (
