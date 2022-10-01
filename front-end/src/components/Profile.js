@@ -4,6 +4,7 @@ import SideNav from './SideNav';
 
 const Profile = () => {
 
+  
   return (
     <div>
       <SideNav />

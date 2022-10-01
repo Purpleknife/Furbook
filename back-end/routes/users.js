@@ -4,7 +4,7 @@ const router  = express.Router();
 
 module.exports = (db) => { 
   //Login route:
-  router.get('/:id', (req, res) => {
+  router.get('/login/:id', (req, res) => {
     const queryString = `SELECT * FROM users WHERE users.id = $1;`;
     const queryParams = [req.session.user_id || 1];
 

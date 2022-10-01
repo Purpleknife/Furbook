@@ -3,8 +3,7 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter, Routes, Route} from 'react-router-dom';
 import './index.css';
 
-import LandingPage from './components/LandingPage';
-import Profile from './components/Profile';
+import App from './App';
 
 
 // const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -20,20 +19,4 @@ import Profile from './components/Profile';
 //   </React.StrictMode>
 // );
 
-ReactDOM.render(
-  
-  <React.StrictMode>
-    <BrowserRouter>
-      {/* DO NOT REMOVE Nav COMPONENT FROM HERE */}
-      
-
-      <Routes>
-      <Route path="/" element={<LandingPage />} />
-      <Route path="/users" element={<Profile />} />
-      </Routes>
-        
-    </BrowserRouter>
-  </React.StrictMode>
-
-
-, document.getElementById('root'));
+ReactDOM.render(<App />, document.getElementById('root'));

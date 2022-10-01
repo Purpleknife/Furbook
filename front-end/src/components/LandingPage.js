@@ -1,22 +1,34 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Link } from 'react-router-dom';
+//import { Link } from 'react-router-dom';
 
 import './LandingPage.scss';
 import axios from 'axios';
 
-const LandingPage = () => {
-  const [user, setUser] = useState(null);
+const LandingPage = (props) => {
 
   const navigate = useNavigate();
 
-  const login = async (e) => {
-
+  const login = async() => {
     await axios.get('/login/1')
-      const userData = await axios.get('/users');
-      setUser(userData.data[0]);
-      navigate('/users');
+      .then((res) => {
+        console.log("User data: ", {...res.data[0]});
+        props.setUser(res.data[0]);
+        navigate('/users');
+      })
+    
   };
+
+  // //gets the data//works
+  // const getUser = () => {
+    
+  // };
+
+  // useEffect(() => {
+  //   login();
+  // }, []);
+
+
 
   return (
 
@@ -34,10 +46,7 @@ const LandingPage = () => {
         <p>Make friends, find true love or <i>maybe just gossip about your human?</i></p>
         <p>If yes, <span id='logo'>Furbook</span> is the place for you!</p>
 
-
-        <Link className="login__btn" to="/users" onClick={login}>
-            Login
-        </Link>
+        <button className="login__btn" onClick={login}>Login</button>
 
       </div>
 
