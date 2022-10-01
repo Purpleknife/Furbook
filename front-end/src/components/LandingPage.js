@@ -1,6 +1,6 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
-//import { Link } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
+
 
 import './LandingPage.scss';
 import axios from 'axios';

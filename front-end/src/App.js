@@ -34,8 +34,8 @@ const App = () => {
 
       <Routes>
         <Route path="/" element={<LandingPage setUser={setUser}/>} />
-        <Route path="/posts" element={<GeneralFeed />} />
         <Route path="/users" element={<div className="wrapper"><SideNav user={user} setUser={setUser}/><ProfileContainer user={user} posts={posts}/></div>} />
+        <Route path="/posts" element={<><SideNav user={user} setUser={setUser}/><GeneralFeed /></> }/>
         <Route path='/friendships' element={<Friendships />} />
       </Routes>
         
