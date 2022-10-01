@@ -1,8 +1,8 @@
 const express = require('express');
 const router  = express.Router();
-const db = require('../db/connection');
+//const db = require('../db/connection');
 
-
+module.exports = (db) => { 
 //Login route:
 router.get('/:id', (req, res) => {
   const queryString = `SELECT * FROM users WHERE users.id = $1;`;
@@ -19,16 +19,17 @@ router.get('/:id', (req, res) => {
 
 
 //Profile route:
-router.get('/users', (req, res) => {
+router.get('/users/:id', (req, res) => {
   const queryString = `
     SELECT users.*, posts.* FROM posts
     JOIN users ON users.id = creator
     WHERE creator = $1;`
-  const queryParams = req.session.user_id;
+  const queryParams = [req.session.user_id || 1];
 
   db.query(queryString, queryParams)
     .then(data => {
       res.json(data.rows);
+      console.log('data', data);
     })
     .catch(error => {
       console.log(error.message);
@@ -66,7 +67,9 @@ router.put('/users/:id', (req, res) => {
   });
 });
 
-module.exports = router;
+return router;
+}
+
 
 // GET /users/:user_id
 // Show profile & show the user’s posts

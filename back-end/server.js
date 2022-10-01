@@ -5,7 +5,7 @@ const bodyParser = require('body-parser');
 const cookieSession = require('cookie-session');
 const methodOverride = require('method-override');
 const PORT = 8080;
-
+require('dotenv').config();
 // Express Configuration
 app.use(morgan('dev'));
 app.use(express.urlencoded({ extended: true }));
@@ -25,14 +25,14 @@ const friendshipsRoutes = require('./routes/friendships');
 const messagesRoutes = require('./routes/messages');
 const postsRoutes = require('./routes/posts');
 const conversationsRoutes = require('./routes/conversations');
-
+const db = require('./db/connection');
 // Mount all resource routes
 app.use('/messages', messagesRoutes);
 app.use('/conversations', conversationsRoutes);
 app.use('/friendships', friendshipsRoutes);
 app.use('/posts', postsRoutes);
-app.use('/', usersRoutes);
-app.use('/users', usersRoutes);
+app.use('/', usersRoutes(db));
+
 
 // Sample GET route
 // app.get('/api/data', (req, res) => res.json({
