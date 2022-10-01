@@ -38,8 +38,17 @@ const Friendships = () => {
   });
 
   return (
-    <main className='friends-list'>
-      {friendItem}
+    <main>
+      <section className='pending'>
+        <h2>Friend Requests</h2>
+      </section>
+      <section className='friends'>
+        <h2>My Friends</h2>
+        <section className='friends-list'>
+          {friendItem}
+        </section>
+      </section>
+      
     </main>
   );
 };
