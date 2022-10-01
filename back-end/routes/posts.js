@@ -10,6 +10,7 @@ module.exports = (db) => {
     const queryString = 'SELECT * FROM posts';
     
     db.query(queryString).then(data => {
+      console.log(data.rows);
       res.json(data.rows);
     });
   });

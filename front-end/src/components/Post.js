@@ -9,6 +9,8 @@ const Post = (props) => {
       <h4>Username: {props.creator}</h4>
       <p>{props.content}</p>
       <img className="img-thumbnail" src={props.image_url} alt='Post Image' />
+      <p>Likes</p>
+      <p>Comments</p>
     </div>
   );
 }
