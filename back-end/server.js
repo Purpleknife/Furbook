@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const morgan = require('morgan');
 const app = express();
@@ -5,7 +6,7 @@ const bodyParser = require('body-parser');
 const cookieSession = require('cookie-session');
 const methodOverride = require('method-override');
 const PORT = 8080;
-require('dotenv').config();
+
 // Express Configuration
 app.use(morgan('dev'));
 app.use(express.urlencoded({ extended: true }));
