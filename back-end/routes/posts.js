@@ -1,3 +1,4 @@
+const { query } = require('express');
 const express = require('express');
 const router  = express.Router();
 // const db = require('../db/connection');
@@ -7,9 +8,18 @@ module.exports = (db) => {
   // GET /posts
   // Show user general feed / Load all user’s posts + friends’ posts + comments under each post
   router.get('/', (req, res) => {
-    const queryString = 'SELECT * FROM posts';
+
+    const user = req.session.user_id || 1
+
+    const queryString = `
+    SELECT * 
+    FROM posts
+    WHERE creator = $1
+    `;
+
+    const queryParams = [user];
     
-    db.query(queryString).then(data => {
+    db.query(queryString, queryParams).then(data => {
       console.log(data.rows);
       res.json(data.rows);
     });
