@@ -1,17 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Friend from './Friend';
-// import './Friendships.scss';
+import './Friendships.scss';
 
 const Friendships = () => {
 
   // INITIAL STATE
   const [state, setState] = useState({
-    friends: {},
-    pending: {}
+    friends: [],
+    pending: []
   });
-
-  // const [friends, setFriends] = useState([]);
 
   // API CALLS
   useEffect(() => {
@@ -20,39 +18,28 @@ const Friendships = () => {
       axios.get('/friendships/pending')
     ]).then((all) => {
       setState(prev => ({
+        ...prev,
         friends: all[0].data,
         pending: all[1].data
       }));
     });
   }, [])
 
-
-
-  // const getFriends = () => {
-  //   axios.get('/friendships')
-  //     .then((res) => {
-  //       console.log("Friends data from Axios request: ", res.data);
-  //       setFriends(res.data);
-  //     })
-  // };
-
-  // useEffect(() => {
-  //   getFriends();
-  // }, []);
-
-  const friendItem = friends.map(friend => {
+  // INDIVIDUAL FRIEND COMPONENT
+  const friendItem = state.friends.map(friend => {
     return (
       <Friend
         key={friend.id}
-        friend_id={friend.receiver}
+        first_name={friend.first_name}
+        last_name={friend.last_name}
+        picture={friend.image_url}
       />
     )
   });
 
   return (
-    <main>
-      <div className="test">FRIENDSHIPS</div>
-      <div>{friendItem}</div>
+    <main className='friends-list'>
+      {friendItem}
     </main>
   );
 };
