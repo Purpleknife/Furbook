@@ -1,32 +1,36 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Friend from './Friend';
+import FriendshipPending from './FriendshipPending';
 import './Friendships.scss';
 
 const Friendships = () => {
 
   // INITIAL STATE
-  const [state, setState] = useState({
-    friends: [],
-    pending: []
-  });
+  const [friends, setFriends] = useState([]);
+  const [pending, setPending] = useState([]);
 
-  // API CALLS
+  // API CALL
   useEffect(() => {
-    Promise.all([
-      axios.get('/friendships'),
-      axios.get('/friendships/pending')
-    ]).then((all) => {
-      setState(prev => ({
-        ...prev,
-        friends: all[0].data,
-        pending: all[1].data
-      }));
-    });
-  }, [])
+    axios.get('/friendships')
+      .then((res) => {
+        console.log("AXIOS FRIENDS DATA: ", res)
+        const confirmedFriendships = [];
+        const pendingFriendships = [];
+        for (const friendship of res.data) {
+          if (friendship.status === true) {
+            confirmedFriendships.push(friendship);
+          } else {
+            pendingFriendships.push(friendship);
+          };
+        };
+        setFriends(confirmedFriendships);
+        setPending(pendingFriendships);
+      });
+  }, []);
 
-  // INDIVIDUAL FRIEND COMPONENT
-  const friendItem = state.friends.map(friend => {
+  // INDIVIDUAL FRIEND COMPONENT FOR CONFIRMED FRIENDSHIPS
+  const friendItem = friends.map(friend => {
     return (
       <Friend
         key={friend.id}
@@ -37,10 +41,25 @@ const Friendships = () => {
     )
   });
 
+  // INDIVIDUAL FRIEND COMPONENT FOR PENDING FRIENDSHIPS
+  const pendingFriendItem = pending.map(pendingFriend => {
+    return (
+      <FriendshipPending
+        key={pendingFriend.id}
+        first_name={pendingFriend.first_name}
+        last_name={pendingFriend.last_name}
+        picture={pendingFriend.image_url}
+      />
+    )
+  });
+
   return (
     <main>
       <section className='pending'>
         <h2>Friend Requests</h2>
+        <section className='pending-list'>
+          {pendingFriendItem}
+        </section>
       </section>
       <section className='friends'>
         <h2>My Friends</h2>
