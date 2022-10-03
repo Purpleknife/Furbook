@@ -1,12 +1,20 @@
 import React from 'react';
 import './ProfileContainer.scss';
 
+import PostProfile from './PostProfile';
 
 const ProfileContainer = (props) => {
 
   const postsList = props.posts.map(post => {
     return (
-      post.content
+      <PostProfile
+        key={post.id}
+        content={post.content} 
+        creator={post.creator}
+        image_url={post.image_url}
+        creator_name={props.user.first_name + ' ' + props.user.last_name}
+        creator_image={props.user.image_url}
+      />
 
     )
   });
