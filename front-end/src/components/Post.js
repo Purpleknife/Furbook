@@ -17,7 +17,7 @@ const Post = (props) => {
         <p>Comments</p>
       </div>
       <div className='post-footer'>
-
+        {/* Comments will go here. Needs logged in users img and a textarea */}
       </div>
     </div>
   );
