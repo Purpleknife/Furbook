@@ -1,13 +1,13 @@
 import React from 'react';
 import './ProfileContainer.scss';
 
-import PostProfile from './PostProfile';
+import Post from './Post';
 
 const ProfileContainer = (props) => {
 
   const postsList = props.posts.map(post => {
     return (
-      <PostProfile
+      <Post
         key={post.id}
         content={post.content} 
         creator={post.creator}
