@@ -1,4 +1,6 @@
 import React from "react";
+import './FriendshipPending.scss';
+import './Friend.scss';
 
 const FriendshipPending = (props) => {
   return (
@@ -10,8 +12,8 @@ const FriendshipPending = (props) => {
           <p>{props.first_name} {props.last_name}</p>
         </div>
         <div className="friend-actions">
-          <button class="btn"><i class="fa-solid fa-messages"></i> Message</button>
-          <button class="btn"><i class="fa-solid fa-xmark"></i> Remove</button>
+          <button class="btn"><i class="fa-solid fa-messages"></i>Accept</button>
+          <button class="btn"><i class="fa-solid fa-xmark"></i>Decline</button>
         </div>
       </main>
   );

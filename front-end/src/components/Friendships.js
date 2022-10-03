@@ -29,18 +29,6 @@ const Friendships = () => {
       });
   }, []);
 
-  // INDIVIDUAL FRIEND COMPONENT FOR CONFIRMED FRIENDSHIPS
-  const friendItem = friends.map(friend => {
-    return (
-      <Friend
-        key={friend.id}
-        first_name={friend.first_name}
-        last_name={friend.last_name}
-        picture={friend.image_url}
-      />
-    )
-  });
-
   // INDIVIDUAL FRIEND COMPONENT FOR PENDING FRIENDSHIPS
   const pendingFriendItem = pending.map(pendingFriend => {
     return (
@@ -49,6 +37,18 @@ const Friendships = () => {
         first_name={pendingFriend.first_name}
         last_name={pendingFriend.last_name}
         picture={pendingFriend.image_url}
+      />
+    )
+  });
+
+  // INDIVIDUAL FRIEND COMPONENT FOR CONFIRMED FRIENDSHIPS
+  const friendItem = friends.map(friend => {
+    return (
+      <Friend
+        key={friend.id}
+        first_name={friend.first_name}
+        last_name={friend.last_name}
+        picture={friend.image_url}
       />
     )
   });
