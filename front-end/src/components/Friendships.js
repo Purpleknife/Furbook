@@ -8,14 +8,16 @@ const Friendships = () => {
 
   // INITIAL STATE
   const [friends, setFriends] = useState([]);
+  const [friendsCounter, setFriendsCounter] = useState(0)
   const [pending, setPending] = useState([]);
+  const [pendingCounter, setPendingCounter] = useState(0)
 
   // API CALL
   useEffect(() => {
     axios.get('/friendships')
       .then((res) => {
         console.log("AXIOS FRIENDS DATA: ", res)
-        
+
         // Separate confirmed friendships from pending friendships
         const confirmedFriendships = [];
         const pendingFriendships = [];
@@ -27,21 +29,27 @@ const Friendships = () => {
             pendingFriendships.push(friendship);
           };
         };
-        
+ 
         setFriends(confirmedFriendships);
+        setFriendsCounter(confirmedFriendships.length);
         setPending(pendingFriendships);
+        setPendingCounter(pendingFriendships.length);
       });
-  }, []);
+  }, [friendsCounter]);
 
   // REMOVE FRIENDSHIP
-  const unfriend = async (friend_id) => {
-    await axios.delete(`/friendships/${friend_id}`);
+  const unfriend = (friend_id) => {
+    axios.delete(`/friendships/${friend_id}`);
     console.log("Axios request to unfriend");
     
     // Remove the friend from the friends state
     setFriends(prev => prev.filter(friend => {
       return friend !== friend_id;
     }));
+
+    // Remove 1 in FriendsCounter
+    setFriendsCounter(prev => prev - 1);
+    console.log("Friends counter :", friendsCounter)
   };
 
   // INDIVIDUAL FRIEND COMPONENT FOR PENDING FRIENDSHIPS
@@ -73,13 +81,13 @@ const Friendships = () => {
   return (
     <main>
       <section className='friends'>
-        <h2>Friend Requests</h2>
+        <h2>Friend Requests ({pendingCounter})</h2>
         <section className='friends-list'>
           {pendingFriendItem}
         </section>
       </section>
       <section className='friends'>
-        <h2>My Friends</h2>
+        <h2>My Friends ({friendsCounter})</h2>
         <section className='friends-list'>
           {friendItem}
         </section>
