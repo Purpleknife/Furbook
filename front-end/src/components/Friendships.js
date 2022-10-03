@@ -35,7 +35,41 @@ const Friendships = () => {
         setPending(pendingFriendships);
         setPendingCounter(pendingFriendships.length);
       });
-  }, [friendsCounter]);
+  }, [friendsCounter, pendingCounter]);
+
+  // ACCEPT FRIENDSHIP
+  const accept = (friend_id) => {
+    axios.put(`/friendships/${friend_id}`);
+    console.log("Axios request to accept friendship");
+
+    // Add new friend to the friends state
+    let newFriend = {};
+    for (const friend of pending) {
+      if (friend.id === friend_id) {
+        newFriend = friend;
+      }
+    };
+    setFriends((prev) => [...prev, newFriend]);
+
+    // Add 1 in FriendsCounter
+    setFriendsCounter(prev => prev + 1);
+    console.log("Friends counter :", friendsCounter)
+  };
+
+  // DECLINE FRIENDSHIP
+  const decline = (friend_id) => {
+    axios.delete(`/friendships/${friend_id}`);
+    console.log("Axios request to decline friendship");
+    
+    // Remove the friend from the pending state
+    setPending(prev => prev.filter(friend => {
+      return friend !== friend_id;
+    }));
+
+    // Remove 1 in PendingCounter
+    setPendingCounter(prev => prev - 1);
+    console.log("Pending requests counter :", pendingCounter)
+  };
 
   // REMOVE FRIENDSHIP
   const unfriend = (friend_id) => {
@@ -57,9 +91,12 @@ const Friendships = () => {
     return (
       <FriendshipPending
         key={pendingFriend.id}
+        id={pendingFriend.id}
         first_name={pendingFriend.first_name}
         last_name={pendingFriend.last_name}
         picture={pendingFriend.image_url}
+        accept={accept}
+        decline={decline}
       />
     )
   });
