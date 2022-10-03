@@ -19,6 +19,13 @@ module.exports = (db) => {
     OR receiver = $1;
   `;
 
+  const acceptFriendship = `
+    UPDATE friendships
+    SET status = true
+    WHERE sender = $1
+    OR receiver = $1;
+  `;
+
   // Get current user's friends
   router.get('/', (req, res) => {
     const queryParams = [req.session.user_id || 1];
@@ -38,9 +45,21 @@ module.exports = (db) => {
   // Send a friend request
 
 
+  // Accept friendship
+  router.put('/:friend_id', (req, res) => {
+    const queryParams = [req.params.friend_id];
+    console.log("REQ.PARAMS.FRIEND_ID: ", req.params.friend_id);
+    const queryString = acceptFriendship;
 
-  // DELETE /friendships/:friend_id
-  // Delete a friend
+    db.query(queryString, queryParams)
+      .then(() => {
+        console.log("Friendship successfully accepted");
+      })
+  });
+
+
+
+  // Remove friendship
   router.delete('/:friend_id', (req, res) => {
     const queryParams = [req.params.friend_id];
     console.log("REQ.PARAMS.FRIEND_ID: ", req.params.friend_id);
