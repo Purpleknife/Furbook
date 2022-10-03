@@ -21,6 +21,7 @@ module.exports = (db) => {
     FROM friendships
     JOIN users ON users.id IN (sender, receiver)
     JOIN posts ON posts.creator = users.id
+    JOIN postlikes ON posts.id = post_id
     WHERE NOT users.id = $1
     AND sender = $1
     OR receiver = $1
