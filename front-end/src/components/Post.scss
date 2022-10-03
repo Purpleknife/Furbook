@@ -28,12 +28,22 @@
   margin-left: 27em;
   padding-top: 1em;
   cursor: pointer;
+  color: grey;
+
+  #edit:hover {
+    color: rgb(57, 138, 165);
+  }
+
+  #delete:hover {
+    color: red;
+  }
 }
 
 .input-field-post {
   width: 100%;
   padding: 10px;
   border: 1px solid #dfdfdf;
+  font-family: $secondary-font;
 }
 
 .post-content {

@@ -9,8 +9,13 @@
 
   .edit {
     display: inline-block;
-    padding-left: 5em;
+    padding-left: 8em;
     cursor: pointer;
+    color: grey;
+
+    &:hover {
+      color: rgb(57, 138, 165);
+    }
   }
 
   .profile-card {

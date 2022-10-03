@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 
+import axios from 'axios';
+
 import './Post.scss'
 
 const Post = (props) => {
@@ -26,9 +28,33 @@ const Post = (props) => {
   const onKeyDown = (event) => {
     if (event.key === "Enter") {
       setEditInput({ editing: false });
-      //editProfile();
+      //editPost();
     }
   };
+
+  // const editPost = async() => {
+ //   await axios.put(`/posts/${props.post.id}`, { 
+  //     content: inputContent
+  //    })
+  //     .then((res) => {
+  //       console.log("axios.put data: ", res.data);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     });
+  // };
+
+  // const deletePost = async() => {
+  //   await axios.delete(`/posts/${props.post.id}`, { 
+  //     content: inputContent
+  //    })
+  //     .then((res) => {
+  //       console.log("axios.delete data: ", res.data);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     });
+  // };
 
   return ( 
     <div className="post-body">
@@ -37,7 +63,7 @@ const Post = (props) => {
         <h4>{props.creator_name}</h4>
         <div className="edit-delete">
           <i style={viewMode} id="edit" onClick={edit} className="fa-solid fa-pen-to-square"></i>&nbsp; 
-          <i className="fa-solid fa-trash"></i>
+          <i id="delete" className="fa-solid fa-trash"></i>
         </div>
       </div>
       <p><span style={viewMode} className="post-content">{inputContent ? inputContent : props.content}</span>
