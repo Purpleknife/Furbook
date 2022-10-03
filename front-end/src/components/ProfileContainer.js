@@ -8,7 +8,6 @@ import Post from './Post';
 const ProfileContainer = (props) => {
   const [editInput, setEditInput] = useState({
     editing: false
-    //editedItem: ''
   });
   const [inputName, setInputName] = useState(props.user.first_name + ' ' + props.user.last_name);
   const [inputRelation, setInputRelation] = useState(props.user.relationship_status);
@@ -18,7 +17,6 @@ const ProfileContainer = (props) => {
   const edit = () => {
     setEditInput({
       editing: true
-      //editedItem: item
     });
   };
 

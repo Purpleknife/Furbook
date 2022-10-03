@@ -23,6 +23,24 @@
   }
 }
 
+.edit-delete {
+  display: flex;
+  margin-left: 27em;
+  padding-top: 1em;
+  cursor: pointer;
+}
+
+.input-field-post {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #dfdfdf;
+}
+
+.post-content {
+  font-family: $secondary-font;
+  font-size: 1.25em;
+}
+
 .post-title {
   display: flex;
   flex-flow: row;
@@ -30,6 +48,7 @@
   max-width: 700px;
   background-color: $primary-color;
   border-radius: 50px;
+  font-family: $primary-font;
 
   img {
     max-height: 50px;
@@ -77,8 +96,8 @@
   }
 } 
 
-.post-footer {
-  input {
+// .post-footer {
+//   input {
   
-  }
-}
+//   }
+// }
