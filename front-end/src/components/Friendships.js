@@ -15,8 +15,11 @@ const Friendships = () => {
     axios.get('/friendships')
       .then((res) => {
         console.log("AXIOS FRIENDS DATA: ", res)
+        
+        // Separate confirmed friendships from pending friendships
         const confirmedFriendships = [];
         const pendingFriendships = [];
+        
         for (const friendship of res.data) {
           if (friendship.status === true) {
             confirmedFriendships.push(friendship);
@@ -24,10 +27,22 @@ const Friendships = () => {
             pendingFriendships.push(friendship);
           };
         };
+        
         setFriends(confirmedFriendships);
         setPending(pendingFriendships);
       });
   }, []);
+
+  // REMOVE FRIENDSHIP
+  const unfriend = async (friend_id) => {
+    await axios.delete(`/friendships/${friend_id}`);
+    console.log("Axios request to unfriend");
+    
+    // Remove the friend from the friends state
+    setFriends(prev => prev.filter(friend => {
+      return friend !== friend_id;
+    }));
+  };
 
   // INDIVIDUAL FRIEND COMPONENT FOR PENDING FRIENDSHIPS
   const pendingFriendItem = pending.map(pendingFriend => {
@@ -46,9 +61,11 @@ const Friendships = () => {
     return (
       <Friend
         key={friend.id}
+        id={friend.id}
         first_name={friend.first_name}
         last_name={friend.last_name}
         picture={friend.image_url}
+        unfriend={unfriend}
       />
     )
   });

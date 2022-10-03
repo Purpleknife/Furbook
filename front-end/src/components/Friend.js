@@ -2,6 +2,13 @@ import React from "react";
 import './Friend.scss';
 
 const Friend = (props) => {
+
+  // REMOVE FRIENDSHIP
+  const destroy = () => {
+    console.log("Destroy function called")
+    props.unfriend(props.id);
+  };
+
   return (
       <main className="friend-card">
         <div className="friend-info">
@@ -12,7 +19,7 @@ const Friend = (props) => {
         </div>
         <div className="friend-actions">
           <button className="btn"><i className="fa-solid fa-messages"></i> Message</button>
-          <button className="btn"><i className="fa-solid fa-xmark"></i> Remove</button>
+          <button className="btn" onClick={destroy}><i className="fa-solid fa-xmark"></i> Remove</button>
         </div>
       </main>
   );
