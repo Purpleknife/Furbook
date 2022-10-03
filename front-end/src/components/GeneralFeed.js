@@ -26,6 +26,8 @@ const GeneralFeed = (props) => {
           content={post.content} 
           creator={post.creator}
           image_url={post.image_url}
+          creator_name={post.users_first + ' ' + post.users_last}
+          creator_image={post.users_image}
         />
       )
     });

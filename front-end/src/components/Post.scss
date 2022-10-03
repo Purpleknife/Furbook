@@ -1,0 +1,35 @@
+@import '../styles/variables';
+
+.post-body {
+  margin: 25px 0px;
+  padding: 10px;
+  width: 700px;
+  border: 2px solid black;
+  border-radius: 25px;
+}
+
+.post-body:hover {
+  box-shadow: 5px 5px #888888;
+}
+
+.post-body > img {
+  max-height: 400px;
+}
+
+.post-title {
+  display: flex;
+  flex-flow: row;
+  max-height: 50px;
+  max-width: 700px;
+  background-color: $primary-color;
+  border-radius: 15px;
+}
+
+.post-title > img {
+  max-height: 50px;
+  border-radius: 15px 0 0 15px;
+}
+
+.post-title > h4 {
+  margin: 8px 10px;
+}

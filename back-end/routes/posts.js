@@ -9,18 +9,24 @@ module.exports = (db) => {
   // Show user general feed / Load all user’s posts + friends’ posts + comments under each post
   router.get('/', (req, res) => {
 
-    const user = req.session.user_id || 1
+    const user = req.session.user_id || 1;
 
     const queryString = `
-    SELECT * 
-    FROM posts
-    WHERE creator = $1
+    SELECT DISTINCT posts.*, sender, receiver, users.image_url as users_image, users.first_name as users_first, users.last_name as users_last
+    FROM friendships
+    JOIN users ON users.id IN (sender, receiver)
+    JOIN posts ON posts.creator = users.id
+    WHERE NOT users.id = $1
+    AND sender = $1
+    OR receiver = $1
+    AND status = true
+    ORDER BY posts.id DESC
     `;
 
     const queryParams = [user];
     
     db.query(queryString, queryParams).then(data => {
-      console.log(data.rows);
+      console.log("In db query posts:", data.rows);
       res.json(data.rows);
     });
   });

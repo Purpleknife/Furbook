@@ -2,15 +2,23 @@ import './Post.scss'
 
 const Post = (props) => {
 
-  
+  console.log("Post props:", props)
 
   return ( 
-    <div className="mt-4 mx-4">
-      <h4>Username: {props.creator}</h4>
+    <div className="post-body">
+      <div className='post-title'>
+        <img src={props.creator_image} alt='Creators profile' />
+        <h4>Username: {props.creator_name}</h4>
+      </div>
       <p>{props.content}</p>
-      <img className="img-thumbnail" src={props.image_url} alt='Post Image' />
-      <p>Likes</p>
-      <p>Comments</p>
+      <img className="" src={props.image_url} alt='Pic' />
+      <div className='post-like-comment'>
+        <p>Likes</p>
+        <p>Comments</p>
+      </div>
+      <div className='post-footer'>
+
+      </div>
     </div>
   );
 }
