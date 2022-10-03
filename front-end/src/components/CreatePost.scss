@@ -1,0 +1,43 @@
+@import '../styles/variables';
+
+.create-post__container {
+  margin: 25px 0 15px 0;
+  padding: 15px 15px 15px 15px;
+  width: 700px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  border-radius: 25px;
+  font-size: 1.2rem;
+  background-color: white;
+
+  input {
+    width: 100%;
+    margin-bottom: 15px;
+    padding: 5px;
+    border: 2px solid $secondary-color;
+    outline: none;
+    border-radius: 15px;
+
+    &::placeholder {
+      // color: $secondary-color;
+    }
+  }
+}
+
+.create-post__buttons {
+  display: flex;
+  flex-flow: row;
+  justify-content: space-between;
+
+  button {
+    border-radius: 25px;
+    padding: 7px 25px;
+    border: none;
+    outline: none;
+    background-color: $primary-color;
+  }
+
+  button:hover {
+    // background-color: $primary-color;
+    transform: scale(1.08);
+  }
+}

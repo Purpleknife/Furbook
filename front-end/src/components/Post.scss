@@ -2,10 +2,13 @@
 
 .post-body {
   margin: 25px 0px;
-  padding: 10px 10px 0px 10px;
+  padding: 10px 10px 10px 10px;
   width: 700px;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   border-radius: 25px;
+  font-family: $secondary-font;
+  font-size: 1.2rem;
+  background-color: white;
 
   &:hover {
     transform: scale(1.01);
@@ -17,10 +20,10 @@
     object-fit: cover;
     border-radius: 10px;
   }
+}
   
-  p {
-    padding-top: 10px;
-  }
+.post-text {
+  padding-top: 13px;
 }
 
 .post-title {
@@ -28,7 +31,7 @@
   flex-flow: row;
   height: 50px;
   max-width: 700px;
-  background-color: $primary-color;
+  background-color: $secondary-color;
   border-radius: 50px;
 
   img {
@@ -39,17 +42,16 @@
   }
   
   h4 {
-    margin: 10px 0 0 10px;
+    margin: 11px 0 0 10px;
   }
 }
 
 .post-like-comment {
   display: flex;
   padding-top: 10px;
-  align-items: center;
 
   i {
-    padding: 10px 10px 20px 0;
+    padding: 10px 10px 10px 0;
   }
 
   // 
@@ -57,7 +59,8 @@
     scale: 1.1;
 
     &:hover {
-      color: red;
+      // color: rgb(255, 64, 0);
+      color: $primary-color;
     }
   }
 
@@ -65,7 +68,8 @@
     scale: 1.1;
 
     &:hover {
-      color: blue;
+      // color: rgb(0, 115, 255);
+      color: $primary-color;
     }
   }
 

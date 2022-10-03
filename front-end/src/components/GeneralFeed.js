@@ -3,6 +3,7 @@ import axios from 'axios';
 import './GeneralFeed.scss';
 
 import Post from './Post';
+import CreatePost from './CreatePost';
 
 const GeneralFeed = (props) => {
 
@@ -47,6 +48,9 @@ const GeneralFeed = (props) => {
 
   return (
     <section className='main-container'>
+      <div className='create-post-container'>
+        <CreatePost />
+      </div>
       <div className='feed-container'>
         {postList}
       </div>

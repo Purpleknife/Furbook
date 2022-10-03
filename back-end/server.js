@@ -23,6 +23,7 @@ app.use(methodOverride('_method'));
 app.use(express.static('public'));
 
 // Separated Routes for each Resource
+const apiPostsRoutes = require('./routes/api_posts');
 const usersRoutes = require('./routes/users');
 const friendshipsRoutes = require('./routes/friendships');
 const messagesRoutes = require('./routes/messages');
@@ -31,6 +32,7 @@ const conversationsRoutes = require('./routes/conversations');
 const db = require('./db/connection');
 
 // Mount all resource routes
+app.use('/api/posts', apiPostsRoutes)
 app.use('/messages', messagesRoutes);
 app.use('/conversations', conversationsRoutes);
 app.use('/friendships', friendshipsRoutes(db));

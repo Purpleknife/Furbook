@@ -32,13 +32,24 @@ module.exports = (db) => {
     const queryParams = [user];
     
     db.query(queryString, queryParams).then(data => {
-      console.log("In db query posts:", data.rows);
+      // console.log("In db query posts:", data.rows);
       res.json(data.rows);
     });
   });
 
   // POST /posts
   // Add new post
+  router.post('/', (req, res) => {
+
+    image_url = req.body.value || '';
+    console.log("From POST /posts", req)
+
+    queryParams = [];
+    queryString = `
+    INSERT INTO posts (creator, content, image_url)
+    VALUES ($1, $2, $3)
+    `;
+  });
 
   // PUT /posts/:post_id
   // Edit a post
