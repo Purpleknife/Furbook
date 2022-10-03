@@ -12,7 +12,12 @@ module.exports = (db) => {
     const user = req.session.user_id || 1;
 
     const queryString = `
-    SELECT DISTINCT posts.*, sender, receiver, users.image_url as users_image, users.first_name as users_first, users.last_name as users_last
+    SELECT DISTINCT posts.*, 
+                    sender, 
+                    receiver, 
+                    users.image_url as users_image, 
+                    users.first_name as users_first, 
+                    users.last_name as users_last
     FROM friendships
     JOIN users ON users.id IN (sender, receiver)
     JOIN posts ON posts.creator = users.id
