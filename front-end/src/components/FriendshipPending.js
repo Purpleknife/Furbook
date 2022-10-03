@@ -4,7 +4,7 @@ import './Friend.scss';
 
 const FriendshipPending = (props) => {
   return (
-      <main className="friend-card">
+      <main className="friend-card pending">
         <div className="friend-info">
           <img className="friend-picture"
             src={props.picture}
@@ -12,8 +12,8 @@ const FriendshipPending = (props) => {
           <p>{props.first_name} {props.last_name}</p>
         </div>
         <div className="friend-actions">
-          <button class="btn"><i class="fa-solid fa-messages"></i>Accept</button>
-          <button class="btn"><i class="fa-solid fa-xmark"></i>Decline</button>
+          <button className="btn accept">Accept</button>
+          <button className="btn decline">Decline</button>
         </div>
       </main>
   );

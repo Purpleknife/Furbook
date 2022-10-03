@@ -55,9 +55,9 @@ const Friendships = () => {
 
   return (
     <main>
-      <section className='pending'>
+      <section className='friends'>
         <h2>Friend Requests</h2>
-        <section className='pending-list'>
+        <section className='friends-list'>
           {pendingFriendItem}
         </section>
       </section>

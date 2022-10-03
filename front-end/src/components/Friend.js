@@ -11,8 +11,8 @@ const Friend = (props) => {
           <p>{props.first_name} {props.last_name}</p>
         </div>
         <div className="friend-actions">
-          <button class="btn"><i class="fa-solid fa-messages"></i> Message</button>
-          <button class="btn"><i class="fa-solid fa-xmark"></i> Remove</button>
+          <button className="btn"><i className="fa-solid fa-messages"></i> Message</button>
+          <button className="btn"><i className="fa-solid fa-xmark"></i> Remove</button>
         </div>
       </main>
   );
