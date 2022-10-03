@@ -7,6 +7,12 @@
   margin-left: 40em;
   padding-top: 2em;
 
+  .edit {
+    display: inline-block;
+    padding-left: 5em;
+    cursor: pointer;
+  }
+
   .profile-card {
     padding-top: 1em;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
@@ -104,6 +110,12 @@
   .posts-container {
     margin-top: 5em;
     margin-left: 15em;
+  }
+
+  .input-field {
+    width: 100%;
+    padding: 3px;
+    border: 1px solid #dfdfdf;
   }
   
 }

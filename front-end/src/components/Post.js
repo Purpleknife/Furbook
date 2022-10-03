@@ -13,8 +13,8 @@ const Post = (props) => {
       <p>{props.content}</p>
       <img className="post-image" src={props.image_url} alt='Pic' />
       <div className='post-like-comment'>
-        <i class="fa-solid fa-paw"></i>
-        <i class="fa-solid fa-comments"></i>
+        <i className="fa-solid fa-paw"></i>
+        <i className="fa-solid fa-comments"></i>
       </div>
       <div className='post-footer'>
         {/* Comments will go here. Needs logged in users img and a textarea */}
