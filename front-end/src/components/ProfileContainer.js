@@ -10,10 +10,10 @@ const ProfileContainer = (props) => {
     editing: false
     //editedItem: ''
   });
-  const [inputName, setInputName] = useState('');
-  const [inputRelation, setInputRelation] = useState('');
-  const [inputBirthday, setInputBirthday] = useState('');
-  const [inputLocation, setInputLocation] = useState('');
+  const [inputName, setInputName] = useState(props.user.first_name + ' ' + props.user.last_name);
+  const [inputRelation, setInputRelation] = useState(props.user.relationship_status);
+  const [inputBirthday, setInputBirthday] = useState(props.user.birthday.slice(0, 10));
+  const [inputLocation, setInputLocation] = useState(props.user.location);
 
   const edit = () => {
     setEditInput({
@@ -31,37 +31,36 @@ const ProfileContainer = (props) => {
     editMode.display = "none";
   };
 
-  // const setUpdate = (updatedInput) => {
-  //   setValue(updatedInput);
-  // }
-
-
-  // const onChange = (e) => {
-  //   setUpdate(e.target.value);
-  // };
-
   const onKeyDown = (event) => {
-    console.log('event key', event.key);
+    //console.log('event key', event.key);
     if (event.key === "Enter") {
-      setEditInput({ editing: false })
+      setEditInput({ editing: false });
+      console.log('this is the onKeyDown fct');
+      editProfile();
     }
   };
 
-  // const editProfile = async() => {
-  //   await axios.put('/users/1')
-  //     .then((res) => {
-  //       console.log("axios.post data: ", res.data);
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //     });
-  // };
+  const editProfile = async() => {
+    console.log('this is the editProfile fct');
+    const names = inputName.split(' ');
+    await axios.put('/users/1', { 
+      first_name: names[0],
+      last_name: names[1],
+      relationship_status: inputRelation,
+      birthday: inputBirthday,
+      location: inputLocation
+     })
+      .then((res) => {
+        console.log("axios.put data: ", res.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   // useEffect(() => {
-  //   editProfile();
+    
   // }, []);
-
-
 
   const postsList = props.posts.map(post => {
     return (
