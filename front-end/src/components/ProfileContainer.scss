@@ -13,6 +13,11 @@
     display: flex;
     align-items: center;
     background-color: $secondary-color;
+    border-radius: 10px;
+
+    &:hover {
+      transform: scale(1.03);
+    }
   }
 
   .profile-image {
