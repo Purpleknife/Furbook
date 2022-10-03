@@ -8,7 +8,7 @@ const Post = (props) => {
     <div className="post-body">
       <div className='post-title'>
         <img src={props.creator_image} alt='Creators profile' />
-        <h4>Username: {props.creator_name}</h4>
+        <h4>{props.creator_name}</h4>
       </div>
       <p>{props.content}</p>
       <img className="" src={props.image_url} alt='Pic' />
