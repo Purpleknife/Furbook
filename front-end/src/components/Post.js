@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import Dropdown from 'react-bootstrap/Dropdown';
 import axios from 'axios';
@@ -42,8 +42,6 @@ const Post = (props) => {
         console.log("axios.put post data: ", res.data[0]);
           //props.setPosts([res.data[0]]); //updates but removes older posts.
           props.setPosts(prev => [...prev, res.data[0]]); //updates but creates duplicate.
-
-        
       })
       .catch((error) => {
         console.log(error);
@@ -59,6 +57,10 @@ const Post = (props) => {
         console.log(error);
       });
   };
+
+  // useEffect(() => {
+  //   editPost();
+  // }, [props.posts])
 
   return ( 
     <div className="post-body">

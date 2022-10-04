@@ -24,7 +24,7 @@ const App = () => {
 
   useEffect(() => {
     getUserPosts();
-  }, []);
+  }, [profilePosts]);
 
   return (
     <React.StrictMode>
