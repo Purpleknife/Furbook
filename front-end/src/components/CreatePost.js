@@ -30,19 +30,19 @@ const CreatePost = (props) => {
           placeholder='Write a new post...'
         />
       </form>
-        <div className='create-post__buttons'>
-          <button 
-            className='create-post__button'
-          >
-            Add File
-          </button>
-          <button 
-            className='create-post__button'
-            onClick={handleClick}
-          >
-            Post
-          </button>
-        </div>
+      <div className='create-post__buttons'>
+        <button 
+          className='create-post__button'
+        >
+          Add File
+        </button>
+        <button 
+          className='create-post__button'
+          onClick={handleClick}
+        >
+          Post
+        </button>
+      </div>
     </div>
   );
 }
