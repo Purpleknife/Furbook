@@ -56,14 +56,15 @@ const ProfileContainer = (props) => {
       });
   };
 
-  // useEffect(() => {
-  //   editProfile();
-  // }, []);
+  useEffect(() => {
+    document.title = 'Profile';
+  }, []);
 
   const postsList = props.posts.map(post => {
     return (
       <Post
         key={post.id}
+        userID={props.user.id}
         content={post.content} 
         creator={post.creator}
         image_url={post.image_url}

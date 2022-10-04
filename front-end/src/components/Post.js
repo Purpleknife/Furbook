@@ -61,10 +61,10 @@ const Post = (props) => {
       <div className='post-title'>
         <img src={props.creator_image} alt='Creators profile' />
         <h4>{props.creator_name}</h4>
-        <div className="edit-delete">
+        {props.userID === props.creator && <div className="edit-delete">
           <i style={viewMode} id="edit" onClick={edit} className="fa-solid fa-pen-to-square"></i>&nbsp; 
           <i id="delete" className="fa-solid fa-trash"></i>
-        </div>
+        </div>}
       </div>
       <p><span style={viewMode} className="post-content">{inputContent ? inputContent : props.content}</span>
       <input 
