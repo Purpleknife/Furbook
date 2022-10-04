@@ -70,7 +70,7 @@ const Post = (props) => {
             </Dropdown.Toggle>
 
             <Dropdown.Menu className="dropdown-menu">
-              <Dropdown.Item id="edit"><i style={viewMode} onClick={edit} className="fa-solid fa-pen-to-square"></i> Edit</Dropdown.Item>
+              <Dropdown.Item id="edit" style={viewMode} onClick={edit}><i className="fa-solid fa-pen-to-square"></i> Edit</Dropdown.Item>
               <Dropdown.Item id="delete"><i  className="fa-solid fa-trash"></i> Delete</Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
