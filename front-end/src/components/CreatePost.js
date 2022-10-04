@@ -8,7 +8,8 @@ const CreatePost = (props) => {
 
   const [value, setValue] = useState('')
 
-  const handleClick = async () => {
+  const handleClick = async (e) => {
+    e.preventDefault();
     await axios.post('/posts', {content: value})
       .then(res => {
 
