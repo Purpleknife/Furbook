@@ -11,11 +11,19 @@ const CreatePost = (props) => {
   const handleClick = async () => {
     await axios.post('/posts', {content: value})
       .then(res => {
-        console.log("create post:", res.data[0]);
-        console.log("post:", props.posts);
+
         setValue('');
-        props.setPosts([...props.posts, res.data[0]]);
-        console.log("post after:", props.posts);
+
+        const newPost = {
+          ...res.data[0], 
+          users_first: props.user.first_name, 
+          users_last: props.user.last_name,
+          users_image: props.user.image_url
+        };
+        let oldPosts = [...props.posts];
+        oldPosts.unshift(newPost);
+
+        props.setPosts(oldPosts);
       })
       .catch(err => console.log(err));
   }
@@ -30,19 +38,19 @@ const CreatePost = (props) => {
           placeholder='Write a new post...'
         />
       </form>
-        <div className='create-post__buttons'>
-          <button 
-            className='create-post__button'
-          >
-            Add File
-          </button>
-          <button 
-            className='create-post__button'
-            onClick={handleClick}
-          >
-            Post
-          </button>
-        </div>
+      <div className='create-post__buttons'>
+        <button 
+          className='create-post__button'
+        >
+          Add File
+        </button>
+        <button 
+          className='create-post__button'
+          onClick={handleClick}
+        >
+          Post
+        </button>
+      </div>
     </div>
   );
 }
