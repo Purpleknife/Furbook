@@ -15,7 +15,7 @@ const SideNav = (props) => {
 
   return (
     <div className="sidebar">
-      <Link to="/" style={{ textDecoration: 'none' }}>
+      <Link to="/posts" style={{ textDecoration: 'none' }}>
           <img
               className="side-logo"
               src='images/side-logo.png'

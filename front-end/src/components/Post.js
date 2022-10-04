@@ -26,7 +26,35 @@ const Post = (props) => {
     editMode.display = "none";
   };
 
-  // console.log("Post props:", props)
+  const onKeyDown = (event) => {
+    if (event.key === "Enter") {
+      setEditInput({ editing: false });
+      //editPost();
+    }
+  };
+
+  // const editPost = async() => {
+ //   await axios.put(`/posts/${props.post.id}`, { 
+  //     content: inputContent
+  //    })
+  //     .then((res) => {
+  //       console.log("axios.put data: ", res.data);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     });
+  // };
+  // const deletePost = async() => {
+  //   await axios.delete(`/posts/${props.post.id}`, { 
+  //     content: inputContent
+  //    })
+  //     .then((res) => {
+  //       console.log("axios.delete data: ", res.data);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     });
+  // };
 
   return ( 
     <div className="post-body">
@@ -47,7 +75,19 @@ const Post = (props) => {
           </Dropdown>
         </div>}
       </div>
-      <p className='post-text'>{props.content}</p>
+      <p><span style={viewMode} className="post-content">{inputContent ? inputContent : props.content}</span>
+      <input 
+        className="input-field-post"
+        type="text"
+        style={editMode}
+        placeholder={props.content}
+        value={inputContent}
+        onChange = {(event) => {
+          setInputContent(event.target.value)}
+        }
+        onKeyDown={onKeyDown}
+      />
+      </p>
       {props.image_url && <img className="post-image" src={props.image_url} alt='Pic' />}
       <div className='post-like-comment'>
         <i className="fa-solid fa-paw"></i>
