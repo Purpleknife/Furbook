@@ -59,9 +59,9 @@ const ProfileContainer = (props) => {
 
   useEffect(() => {
     document.title = `${props.user.first_name}'s Profile`;
-  }, []);
+  });
 
-  const postsList = props.posts.map(post => {
+  const postsList = props.profilePosts.map(post => {
     return (
       <Post
         key={post.id}
@@ -71,6 +71,9 @@ const ProfileContainer = (props) => {
         image_url={post.image_url}
         creator_name={props.user.first_name + ' ' + props.user.last_name}
         creator_image={props.user.image_url}
+        postID={post.id}
+        setPosts={props.setProfilePosts}
+        posts={props.profilePosts}
       />
 
     )
@@ -97,6 +100,7 @@ const ProfileContainer = (props) => {
       <div className="profile-card">
       
         <img
+            alt="profile"
             className="profile-image"
             src={props.user.image_url}
         />

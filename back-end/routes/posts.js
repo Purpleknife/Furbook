@@ -55,6 +55,28 @@ module.exports = (db) => {
 
   // PUT /posts/:post_id
   // Edit a post
+  router.put('/:id', (req, res) => {
+    const id = req.params.id;
+    const content = req.body.content;
+
+    const queryParams = [id, content];
+    const queryString = `
+      UPDATE posts
+      SET content = $2
+      WHERE id = $1
+      RETURNING *;
+      `;
+    console.log('Edit route for posts is here!')
+    db.query(queryString, queryParams)
+    .then(data => {
+      console.log('2 Edit route for posts is here!')
+      console.log('data.rows', data.rows);
+      res.json(data.rows);
+    })
+    .catch(error => {
+      console.log(error.message);
+    });
+  });
 
   // POST /posts/:post_id/likes
   // Like a post

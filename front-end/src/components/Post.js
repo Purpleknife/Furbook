@@ -29,21 +29,27 @@ const Post = (props) => {
   const onKeyDown = (event) => {
     if (event.key === "Enter") {
       setEditInput({ editing: false });
-      //editPost();
+      editPost();
     }
   };
+  console.log('props.post.id', props.postID);
+  
+  const editPost = async() => {
+   await axios.put(`/posts/${props.postID}`, { 
+      content: inputContent
+     })
+      .then((res) => {
+        console.log("axios.put post data: ", res.data[0]);
+          //props.setPosts([res.data[0]]); updates but removes other posts.
+          props.setPosts(prev => [...prev, res.data[0]]); //updates but creates duplicate.
 
-  // const editPost = async() => {
- //   await axios.put(`/posts/${props.post.id}`, { 
-  //     content: inputContent
-  //    })
-  //     .then((res) => {
-  //       console.log("axios.put data: ", res.data);
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //     });
-  // };
+        
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   // const deletePost = async() => {
   //   await axios.delete(`/posts/${props.post.id}`, { 
   //     content: inputContent
