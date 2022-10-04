@@ -33,7 +33,6 @@ const GeneralFeed = (props) => {
       )
     });
     setPostList(generatedList);
-    console.log("Set postList");
   }
 
   useEffect(() => {
@@ -44,7 +43,6 @@ const GeneralFeed = (props) => {
   useEffect(() => {
     if (posts) {
       generatePosts();
-      console.log("Ran generatePosts");
     }
   }, [posts])
 
@@ -54,7 +52,6 @@ const GeneralFeed = (props) => {
         <CreatePost posts={posts} setPosts={setPosts} user={props.user} />
       </div>
       <div className='feed-container'>
-        {console.log("Postlist from generalfeed return", postList)}
         {postList}
       </div>
     </section>
