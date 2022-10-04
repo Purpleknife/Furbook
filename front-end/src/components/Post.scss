@@ -26,7 +26,7 @@
 .edit-delete {
   display: flex;
   margin-left: 27em;
-  padding-top: 1em;
+  padding-top: 0.5em;
   cursor: pointer;
   color: grey;
 
@@ -37,6 +37,8 @@
   #delete:hover {
     color: red;
   }
+
+  
 }
 
 .input-field-post {

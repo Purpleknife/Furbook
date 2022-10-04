@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 
+import Dropdown from 'react-bootstrap/Dropdown';
 import axios from 'axios';
 
 import './Post.scss'
@@ -61,9 +62,18 @@ const Post = (props) => {
       <div className='post-title'>
         <img src={props.creator_image} alt='Creators profile' />
         <h4>{props.creator_name}</h4>
-        {props.userID === props.creator && <div className="edit-delete">
-          <i style={viewMode} id="edit" onClick={edit} className="fa-solid fa-pen-to-square"></i>&nbsp; 
-          <i id="delete" className="fa-solid fa-trash"></i>
+        {props.userID === props.creator && 
+        <div className="edit-delete">
+          <Dropdown>
+            <Dropdown.Toggle variant="transparent" id="dropdown-basic">
+              <i class="fa-solid fa-ellipsis"></i>
+            </Dropdown.Toggle>
+
+            <Dropdown.Menu className="dropdown-menu">
+              <Dropdown.Item id="edit"><i style={viewMode} onClick={edit} className="fa-solid fa-pen-to-square"></i> Edit</Dropdown.Item>
+              <Dropdown.Item id="delete"><i  className="fa-solid fa-trash"></i> Delete</Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown>
         </div>}
       </div>
       <p><span style={viewMode} className="post-content">{inputContent ? inputContent : props.content}</span>
