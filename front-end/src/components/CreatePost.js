@@ -10,17 +10,51 @@ const CreatePost = (props) => {
     content: '',
     image_url: ''
   })
-  const [addingPhoto, setAddingPhoto] = useState(false);
+  // const [addingPhoto, setAddingPhoto] = useState(false);
 
-  const toggleAddFile = () => {
-    setAddingPhoto(!addingPhoto);
-  }
+  // const toggleAddFile = () => {
+  //   setAddingPhoto(!addingPhoto);
+  // }
 
   const handleChange = (e) => {
     setValue({
       ...value,
       [e.target.name]: e.target.value
     })
+  }
+
+  const [image, setImage] = useState('');
+  
+  const uploadImage = async() => {
+    const upload_preset = process.env.REACT_APP_UPLOAD_PRESET;
+    const cloud_name = process.env.REACT_APP_CLOUDNAME;
+
+    //console.log('upload reset', process.env.REACT_APP_UPLOAD_PRESET);
+
+    const files = document.querySelector(".uploadInput").files;
+    const formData = new FormData();
+
+    formData.append('file', files[0]);
+    formData.append('upload_preset', upload_preset);
+    //data.append('cloud_name', cloud_name);
+      fetch(`https://api.cloudinary.com/v1_1/${cloud_name}/image/upload`, {
+        method: 'POST',
+        body: formData
+      })
+      .then(res => 
+        //console.log('res here', res)
+        res.json())
+      .then(res => {        
+        setValue({
+          ...value,
+          image_url: res.secure_url
+        })
+        console.log('it worked!!!');
+      })
+      .catch(error => {
+        console.log('Upload error', error);
+      })
+
   }
 
   const handleClick = async (e) => {
@@ -58,22 +92,31 @@ const CreatePost = (props) => {
           onChange={handleChange}
           placeholder='Write a new post...'
         />
-        {addingPhoto && (
+        {/* {addingPhoto && (
         <input 
           type='text'
           name='image_url'
           value={value.image_url} 
-          onChange={handleChange}
+          //onChange={handleChange}
           placeholder='Image url...'
         />
-        )}
+        )} */}
       </form>
       <div className='create-post__buttons'>
-        <button 
+
+
+        {/* <button 
           className='create-post__button'
-          onClick={toggleAddFile}
+          //onClick={toggleAddFile}
+          onChange={(e) => setImage(e.target.files[0])}
         >
+          Add picture
           {addingPhoto ? 'Cancel picture' : 'Add picture'}
+        </button> */}
+
+        <input type="file" className="uploadInput"></input>
+        <button className='upload' onClick={uploadImage}>
+          <i className="fa-solid fa-upload"></i>
         </button>
         <button 
           className='create-post__button'
@@ -81,6 +124,7 @@ const CreatePost = (props) => {
         >
           Post
         </button>
+        {/* <img src={image} alt="upload-test"/> */}
       </div>
     </div>
   );
