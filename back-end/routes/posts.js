@@ -48,7 +48,7 @@ module.exports = (db) => {
     `;
 
     db.query(queryString, queryParams).then(data => {
-      console.log("I'm in posts", data);
+      console.log("I'm in posts", req.body.image_url);
       res.json(data.rows);
     });
   });
