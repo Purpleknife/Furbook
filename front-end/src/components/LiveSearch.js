@@ -11,6 +11,7 @@ const LiveSearch = () => {
   const [showResults, setShowResults] = useState(false);
   const navigate = useNavigate();
 
+  // Axios call to query results in the database
   useEffect(() => {
     if (term) {
       console.log("SEARCH TERM :", term)
@@ -26,6 +27,7 @@ const LiveSearch = () => {
     }
   }, [term]);
 
+  // Set ShowResults state to only show results container if there are existing results
   useEffect(() => {
     if (results.length > 0 && !showResults) {
       setShowResults(true);
@@ -41,6 +43,7 @@ const LiveSearch = () => {
     navigate(`/users/${friend_id}`);
   };
 
+  
   return (
     <main>
       <div className='livesearch'>

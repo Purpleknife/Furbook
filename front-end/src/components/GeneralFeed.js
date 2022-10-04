@@ -63,7 +63,7 @@ const GeneralFeed = (props) => {
 
   return (
     <section className='main-container'>
-      <div>
+      <div className="top-navbar">
         <LiveSearch />
       </div>
       <div className='create-post-container'>

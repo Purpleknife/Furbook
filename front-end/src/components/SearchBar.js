@@ -1,13 +1,12 @@
 import { useEffect, useState, useCallback } from 'react'
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
-import InputGroup from 'react-bootstrap/InputGroup';
 import './SearchBar.scss';
 
 const SearchBar = (props) => {
-
+  // user input
   const [value, setValue] = useState("");
 
+  // Prevent server overload by creating a 400ms timeout 
+  // when user input changes.
   const useDebounce = (input, ms) => {
     const [debounced, setDebounced] = useState("");
   
@@ -19,8 +18,11 @@ const SearchBar = (props) => {
     return debounced;
   };
 
+  // term = user input after being debounced
   const term = useDebounce(value, 400);
 
+  // When term is changed, call onSearch, 
+  // which then triggers the Axios call in the LiveSearch component.
   const onSearch = useCallback(props.onSearch, [term]);
 
   useEffect(() => {
