@@ -50,6 +50,7 @@ const ProfileContainer = (props) => {
      })
       .then((res) => {
         console.log("axios.put data: ", res.data);
+        props.setUser(res.data[0]);
       })
       .catch((error) => {
         console.log(error);
@@ -58,9 +59,9 @@ const ProfileContainer = (props) => {
 
   useEffect(() => {
     document.title = `${props.user.first_name}'s Profile`;
-  }, []);
+  });
 
-  const postsList = props.posts.map(post => {
+  const postsList = props.profilePosts.map(post => {
     return (
       <Post
         key={post.id}
@@ -70,10 +71,15 @@ const ProfileContainer = (props) => {
         image_url={post.image_url}
         creator_name={props.user.first_name + ' ' + props.user.last_name}
         creator_image={props.user.image_url}
+        postID={post.id}
+        setPosts={props.setProfilePosts}
+        posts={props.profilePosts}
+        refetch={props.refetch}
       />
 
     )
   });
+  
 
   // // SEND FRIEND REQUEST === CURRENTLY HARDCODED / NOT FULLY WORKING
   // const sendFriendRequest = () => {
@@ -96,6 +102,7 @@ const ProfileContainer = (props) => {
       <div className="profile-card">
       
         <img
+            alt="profile"
             className="profile-image"
             src={props.user.image_url}
         />

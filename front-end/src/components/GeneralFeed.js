@@ -10,6 +10,7 @@ const GeneralFeed = (props) => {
 
   const [posts, setPosts] = useState([]);
   const [postList, setPostList] = useState([])
+  const [refetch, setRefetch] = useState(true);
 
   const fetchPosts = async () => {
     await axios.get('/posts')
@@ -18,6 +19,12 @@ const GeneralFeed = (props) => {
       })
       .catch(err => console.log(err));
   }
+
+  const updateRefetch = () => {
+    setRefetch(true);
+    console.log('props refetch here', props.refetch);
+    props.refetch();
+  };
 
   // generate list of post components
   const generatePosts = async () => {
@@ -30,6 +37,10 @@ const GeneralFeed = (props) => {
           image_url={post.image_url}
           creator_name={post.users_first + ' ' + post.users_last}
           creator_image={post.users_image}
+          setPosts={setPosts}
+          userID={props.user.id}
+          postID={post.id}
+          refetch={updateRefetch}
         />
       )
     });
@@ -37,8 +48,11 @@ const GeneralFeed = (props) => {
   }
 
   useEffect(() => {
-    fetchPosts()
-  }, []);
+    if (refetch) {
+      fetchPosts();
+      setRefetch(false);
+    }
+  }, [refetch]); //to fix refresh issue, add posts.
 
   // Only generate posts when posts is changed
   useEffect(() => {
@@ -53,7 +67,7 @@ const GeneralFeed = (props) => {
         <LiveSearch />
       </div>
       <div className='create-post-container'>
-        <CreatePost posts={posts} setPosts={setPosts} user={props.user} />
+        <CreatePost refetch={updateRefetch} posts={posts} setPosts={setPosts} user={props.user} />
       </div>
       <div className='feed-container'>
         {postList}

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import Dropdown from 'react-bootstrap/Dropdown';
 import axios from 'axios';
@@ -29,32 +29,38 @@ const Post = (props) => {
   const onKeyDown = (event) => {
     if (event.key === "Enter") {
       setEditInput({ editing: false });
-      //editPost();
+      editPost();
     }
   };
+  //console.log('props.post.id', props.postID);
+  
+  const editPost = async() => {
+   await axios.put(`/posts/${props.postID}`, { 
+      content: inputContent
+     })
+      .then((res) => {
+        console.log("axios.put post data: ", res.data[0]);
+          //props.setPosts([res.data[0]]); //updates but removes older posts.
+          //props.setPosts(prev => [...prev, res.data[0]]); //updates but creates duplicate.
+          props.refetch();
+          
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
-  // const editPost = async() => {
- //   await axios.put(`/posts/${props.post.id}`, { 
-  //     content: inputContent
-  //    })
-  //     .then((res) => {
-  //       console.log("axios.put data: ", res.data);
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //     });
-  // };
-  // const deletePost = async() => {
-  //   await axios.delete(`/posts/${props.post.id}`, { 
-  //     content: inputContent
-  //    })
-  //     .then((res) => {
-  //       console.log("axios.delete data: ", res.data);
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //     });
-  // };
+  const deletePost = async() => {
+    await axios.delete(`/posts/${props.postID}`)
+      .then((res) => {
+        console.log("axios.delete data: ", res.data);
+        props.refetch();
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
 
   return ( 
     <div className="post-body">
@@ -70,7 +76,7 @@ const Post = (props) => {
 
             <Dropdown.Menu className="dropdown-menu">
               <Dropdown.Item id="edit" style={viewMode} onClick={edit}><i className="fa-solid fa-pen-to-square"></i> Edit</Dropdown.Item>
-              <Dropdown.Item id="delete"><i  className="fa-solid fa-trash"></i> Delete</Dropdown.Item>
+              <Dropdown.Item id="delete" onClick={deletePost}><i  className="fa-solid fa-trash"></i> Delete</Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
         </div>}

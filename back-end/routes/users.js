@@ -24,7 +24,9 @@ module.exports = (db) => {
     const queryString = `
       SELECT users.*, posts.* FROM posts
       JOIN users ON users.id = creator
-      WHERE creator = $1;`
+      WHERE creator = $1
+      ORDER BY posts.id DESC
+      ;`
     const queryParams = [req.session.user_id || 1];
 
     db.query(queryString, queryParams)
