@@ -25,8 +25,8 @@ const FriendshipPending = (props) => {
           <p>{props.first_name} {props.last_name}</p>
         </div>
         <div className="friend-actions">
-          <button className="btn accept" onClick={acceptFriendship}>Accept</button>
-          <button className="btn decline" onClick={declineFriendship}>Decline</button>
+          <button className="btn accept" onClick={acceptFriendship}><i class="fa-solid fa-user-plus"></i><br></br><span>   Accept</span></button>
+          <button className="btn decline" onClick={declineFriendship}><i className="fa-solid fa-xmark"></i><br></br><span>   Decline</span></button>
         </div>
       </main>
   );

@@ -40,7 +40,7 @@
 
 .friend-actions {
   display: flex;
-  gap: 15px;
+  gap: 1.5vw;
 
   button {
     border-radius: 4px;
@@ -49,13 +49,17 @@
     background-color: $primary-color;
     color: black;
     text-align: center;
-    padding: 10px;
     box-shadow: #fff 4px 4px 0 0,#000 4px 4px 0 1px;
+    height: 8vh;
     cursor: pointer;
 
     &:hover {
       background-color: black;
       color: white;
     }
+  }
+
+  span {
+    font-size: 80%;
   }
 }
