@@ -4,6 +4,7 @@ import './GeneralFeed.scss';
 
 import Post from './Post';
 import CreatePost from './CreatePost';
+import LiveSearch from './LiveSearch';
 
 const GeneralFeed = (props) => {
 
@@ -62,6 +63,9 @@ const GeneralFeed = (props) => {
 
   return (
     <section className='main-container'>
+      <div className="top-navbar">
+        <LiveSearch />
+      </div>
       <div className='create-post-container'>
         <CreatePost refetch={updateRefetch} posts={posts} setPosts={setPosts} user={props.user} />
       </div>
