@@ -12,10 +12,10 @@ module.exports = (db) => {
     const user = req.session.user_id;
 
     const queryString = `
-    SELECT DISTINCT posts.*,
-                    users.image_url as users_image, 
-                    users.first_name as users_first, 
-                    users.last_name as users_last
+    SELECT posts.*,
+          users.image_url as users_image, 
+          users.first_name as users_first, 
+          users.last_name as users_last
     FROM posts
     JOIN users ON users.id = posts.creator                
     WHERE creator IN (SELECT DISTINCT users.id
@@ -48,7 +48,6 @@ module.exports = (db) => {
     `;
 
     db.query(queryString, queryParams).then(data => {
-      console.log("I'm in posts", data);
       res.json(data.rows);
     });
   });
