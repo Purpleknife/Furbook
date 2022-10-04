@@ -15,24 +15,47 @@ const SideNav = (props) => {
 
   return (
     <div className="sidebar">
-      <img
-          className="side-logo"
-          src='images/side-logo.png'
-      />
-    <p className="side-name">Furbook</p>
+      <Link to="/" style={{ textDecoration: 'none' }}>
+          <img
+              className="side-logo"
+              src='images/side-logo.png'
+              alt="profile"
+          />
+        <p className="side-name">Furbook</p>
+      </Link>
 
-    <div className="side-profile">
-      
-      <img
-          className="side-profile-image"
-          src={props.user.image_url}
+      <Link to="/users" style={{ textDecoration: 'none' }}>
+        <div className="side-profile">
+          <img
+            className="side-profile-image"
+            src={props.user.image_url}
+            alt="profile"
+          />
+          <span className="name">{props.user.first_name} {props.user.last_name}</span>
+        </div>
+      </Link>
+
+
+      <Link to="/friendships" style={{ textDecoration: 'none' }}>
+        <div className="side-friends">
+          <img
+              className="side-friends-image"
+              src='images/friends.jpg'
+              alt="profile"
+          />
+          <p className="other-name">My Friends</p>
+        </div>
+      </Link>
+
+    <div className="side-friends">
+    <img
+          className="side-friends-image"
+          src='images/chats.jpg'
+          alt="profile"
       />
-      <span className="name">{props.user.first_name} {props.user.last_name}</span>
+      <p className="other-name">My Chats</p>
     </div>
 
-    <p className="other-name">My Friends</p>
-
-    <p className="other-name">My Chats</p>
 
     <div className="logout">
       <Link className="logout__btn" to="/" onClick={logout}>Logout</Link>
@@ -41,6 +64,7 @@ const SideNav = (props) => {
     <img
           className="side-footer-image"
           src='images/corgi.png'
+          alt="profile"
       />
       
     </div>

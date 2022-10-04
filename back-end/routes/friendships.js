@@ -10,22 +10,26 @@ module.exports = (db) => {
     JOIN users on users.id IN (sender, receiver)
     WHERE NOT users.id = $1
     AND sender = $1 
-    OR receiver = $1
-    AND status = true;
+    OR receiver = $1;
   `;
 
-  const getPendingFriendships = `
-    SELECT * FROM friendships 
-    JOIN users on users.id IN (sender, receiver)
-    WHERE NOT users.id = $1
-    AND status = false
-    AND sender = $1 
+  const removeFriendship = `
+    DELETE FROM friendships
+    WHERE sender = $1
+    OR receiver = $1;
+  `;
+
+  const acceptFriendship = `
+    UPDATE friendships
+    SET status = true
+    WHERE sender = $1
     OR receiver = $1;
   `;
 
   // Get current user's friends
   router.get('/', (req, res) => {
     const queryParams = [req.session.user_id || 1];
+    console.log("REQ.SESSION.USER_ID :", req.session.user_id);
     const queryString = getFriendships;
     
     db.query(queryString, queryParams)
@@ -37,28 +41,36 @@ module.exports = (db) => {
       });
   });
 
-  // Get current user's pending friends requests
-  router.get('/pending', (req, res) => {
-    const queryParams = [req.session.user_id || 1];
-    const queryString = getPendingFriendships;
-    
-    db.query(queryString, queryParams)
-      .then(data => {
-        res.json(data.rows);
-      })
-      .catch(error => {
-        console.log(error.message);
-      });
-  });
-
-
   // POST /friendships/new
   // Send a friend request
 
 
+  // Accept friendship
+  router.put('/:friend_id', (req, res) => {
+    const queryParams = [req.params.friend_id];
+    console.log("REQ.PARAMS.FRIEND_ID: ", req.params.friend_id);
+    const queryString = acceptFriendship;
 
-  // DELETE /friendships/:friend_id
-  // Delete a friend
+    db.query(queryString, queryParams)
+      .then(() => {
+        console.log("Friendship successfully accepted");
+      })
+  });
+
+
+
+  // Remove friendship
+  router.delete('/:friend_id', (req, res) => {
+    const queryParams = [req.params.friend_id];
+    console.log("REQ.PARAMS.FRIEND_ID: ", req.params.friend_id);
+    const queryString = removeFriendship;
+
+    db.query(queryString, queryParams)
+      .then(() => {
+        console.log("Friendship successfully removed");
+      })
+
+  });
 
   return router;
 }
