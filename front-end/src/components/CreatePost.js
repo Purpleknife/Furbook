@@ -23,7 +23,8 @@ const CreatePost = (props) => {
         let oldPosts = [...props.posts];
         oldPosts.unshift(newPost);
 
-        props.setPosts(oldPosts);
+        //props.setPosts(oldPosts);
+        props.refetch();
       })
       .catch(err => console.log(err));
   }

@@ -41,7 +41,9 @@ const Post = (props) => {
       .then((res) => {
         console.log("axios.put post data: ", res.data[0]);
           //props.setPosts([res.data[0]]); //updates but removes older posts.
-          props.setPosts(prev => [...prev, res.data[0]]); //updates but creates duplicate.
+          //props.setPosts(prev => [...prev, res.data[0]]); //updates but creates duplicate.
+          props.refetch();
+          
       })
       .catch((error) => {
         console.log(error);
@@ -52,6 +54,7 @@ const Post = (props) => {
     await axios.delete(`/posts/${props.postID}`)
       .then((res) => {
         console.log("axios.delete data: ", res.data);
+        props.refetch();
       })
       .catch((error) => {
         console.log(error);

@@ -74,6 +74,7 @@ const ProfileContainer = (props) => {
         postID={post.id}
         setPosts={props.setProfilePosts}
         posts={props.profilePosts}
+        refetch={props.refetch}
       />
 
     )
