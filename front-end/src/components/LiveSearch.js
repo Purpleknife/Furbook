@@ -25,9 +25,9 @@ const LiveSearch = () => {
         <SearchBar onSearch={term => setTerm(term)} />
       </div>
       <div className='results-dropdown'>
-        {results.map(result) => (
+        {results.map((result) => (
           <div className="dropdown-row">{result.first_name} {result.last_name}</div>
-        )}
+        ))}
       </div>
     </main>
   );
