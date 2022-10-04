@@ -20,8 +20,8 @@ const GeneralFeed = (props) => {
   }
 
   // generate list of post components
-  const generatePosts = () => {
-    const generatedList = posts.map(post => {
+  const generatePosts = async () => {
+    const generatedList = await posts.map(post => {
       return (
         <Post
           key={post.id}
@@ -49,12 +49,11 @@ const GeneralFeed = (props) => {
 
   return (
     <section className='main-container'>
-      {console.log("Gen feed posts: ", postList)}
       <div>
         <LiveSearch />
       </div>
       <div className='create-post-container'>
-        <CreatePost posts={posts} setPosts={setPosts} />
+        <CreatePost posts={posts} setPosts={setPosts} user={props.user} />
       </div>
       <div className='feed-container'>
         {postList}
