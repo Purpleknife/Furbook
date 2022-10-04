@@ -6,13 +6,32 @@ import './CreatePost.scss';
 
 const CreatePost = (props) => {
 
-  const [value, setValue] = useState('')
+  const [value, setValue] = useState({
+    content: '',
+    image_url: ''
+  })
+  const [addingPhoto, setAddingPhoto] = useState(false);
 
-  const handleClick = async () => {
-    await axios.post('/posts', {content: value})
+  const toggleAddFile = () => {
+    setAddingPhoto(!addingPhoto);
+  }
+
+  const handleChange = (e) => {
+    setValue({
+      ...value,
+      [e.target.name]: e.target.value
+    })
+  }
+
+  const handleClick = async (e) => {
+    e.preventDefault();
+    await axios.post('/posts', value)
       .then(res => {
 
-        setValue('');
+        setValue({
+          content: '',
+          image_url: ''
+        });
 
         const newPost = {
           ...res.data[0], 
@@ -33,17 +52,28 @@ const CreatePost = (props) => {
     <div className='create-post__container'>
       <form>
         <input 
+          type='text'
           name='content'
-          value={value} 
-          onChange={e => setValue(e.target.value)}
+          value={value.content} 
+          onChange={handleChange}
           placeholder='Write a new post...'
         />
+        {addingPhoto && (
+        <input 
+          type='text'
+          name='image_url'
+          value={value.image_url} 
+          onChange={handleChange}
+          placeholder='Image url...'
+        />
+        )}
       </form>
       <div className='create-post__buttons'>
         <button 
           className='create-post__button'
+          onClick={toggleAddFile}
         >
-          Add File
+          {addingPhoto ? 'Cancel picture' : 'Add picture'}
         </button>
         <button 
           className='create-post__button'
