@@ -10,14 +10,10 @@ module.exports = (db) => {
     const name = req.query.name;
     console.log("Name to search: ", name);
 
-    queryParams = [name];
-    queryString = `
-      SELECT * FROM users
-      WHERE LOWER(first_name) LIKE $1
-      OR LOWER(last_name) LIKE $1;
-    `;
+    queryString = "Select * from users where lower(first_name) like '" + name +"%'"
+    console.log("QUERY STRING VERIFICATION ", queryString);
 
-    db.query(queryString, queryParams)
+    db.query(queryString)
       .then(data => {
         res.json(data.rows);
       });

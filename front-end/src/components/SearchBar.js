@@ -27,9 +27,9 @@ const SearchBar = (props) => {
 
   return (
     <section className="search">
-      <form className="search__form" onSubmit={event => event.preventDefault()}>
+      <form className="search-form" onSubmit={event => event.preventDefault()}>
         <input
-          className="radius"
+          className="search-field"
           spellCheck="false"
           placeholder="Search Users"
           name="search"
@@ -37,6 +37,9 @@ const SearchBar = (props) => {
           value={value}
           onChange={event => setValue(event.target.value)}
         />
+        <button type="submit" className="search-button">
+          <img src="https://www.kindacode.com/wp-content/uploads/2020/12/search.png?ezimgfmt=ng:webp/ngcb5" />
+        </button>
       </form>
     </section>
   );

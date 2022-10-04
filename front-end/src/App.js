@@ -9,6 +9,7 @@ import SideNav from './components/SideNav';
 import ProfileContainer from './components/ProfileContainer';
 import GeneralFeed from './components/GeneralFeed';
 import Friendships from './components/Friendships';
+import LiveSearch from './components/LiveSearch';
 
 const App = () => {
   const [user, setUser] = useState(null);
@@ -37,6 +38,7 @@ const App = () => {
         <Route path="/users" element={<div className="wrapper"><SideNav user={user} setUser={setUser}/><ProfileContainer user={user} posts={posts}/></div>} />
         <Route path="/posts" element={<><SideNav user={user} setUser={setUser}/><GeneralFeed user={user} /></> }/> 
         <Route path='/friendships' element={<Friendships />} />
+        <Route path='/search' element={<LiveSearch />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>
