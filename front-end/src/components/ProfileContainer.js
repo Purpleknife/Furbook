@@ -2,6 +2,7 @@ import React from 'react';
 import './ProfileContainer.scss';
 
 import PostProfile from './PostProfile';
+import Axios from 'axios';
 
 const ProfileContainer = (props) => {
 
@@ -18,6 +19,22 @@ const ProfileContainer = (props) => {
 
     )
   });
+
+  // // SEND FRIEND REQUEST === CURRENTLY HARDCODED / NOT FULLY WORKING
+  // const sendFriendRequest = () => {
+  //   console.log('sendFriendRequest function is called');
+  //   const sender = 1;
+  //   const receiver = 4;
+
+  //   Axios.post('/friendships/new', {sender, receiver})
+  //     .then(() => {
+  //       console.log("Friend request has been sent");
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     });
+  // };
+  // TO IMPLEMENT, add to 'Be Friends" button: onClick={sendFriendRequest}
 
   return (
     <div className="main">
