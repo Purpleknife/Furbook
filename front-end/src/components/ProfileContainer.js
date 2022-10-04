@@ -57,7 +57,7 @@ const ProfileContainer = (props) => {
   };
 
   // useEffect(() => {
-    
+  //   editProfile();
   // }, []);
 
   const postsList = props.posts.map(post => {
@@ -150,6 +150,7 @@ const ProfileContainer = (props) => {
       <div className="posts-container">
         {postsList}
       </div>
+      <br />
     </div>
   );
 }
