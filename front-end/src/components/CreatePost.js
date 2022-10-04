@@ -23,10 +23,6 @@ const CreatePost = (props) => {
     })
   }
 
-  useEffect(() => {
-    console.log(value);
-  }, [value])
-
   const handleClick = async (e) => {
     e.preventDefault();
     await axios.post('/posts', value)
