@@ -11,7 +11,7 @@ const Post = (props) => {
         <h4>{props.creator_name}</h4>
       </div>
       <p className='post-text'>{props.content}</p>
-      <img className="post-image" src={props.image_url} alt='Pic' />
+      {props.image_url && <img className="post-image" src={props.image_url} alt='Pic' />}
       <div className='post-like-comment'>
         <i className="fa-solid fa-paw"></i>
         <i className="fa-solid fa-comments"></i>

@@ -9,30 +9,27 @@ module.exports = (db) => {
   // Show user general feed / Load all user’s posts + friends’ posts + comments under each post
   router.get('/', (req, res) => {
 
-    const user = req.session.user_id || 1;
+    const user = req.session.user_id;
 
     const queryString = `
-    SELECT DISTINCT posts.*, 
-                    sender, 
-                    receiver, 
+    SELECT DISTINCT posts.*,
                     users.image_url as users_image, 
                     users.first_name as users_first, 
                     users.last_name as users_last
-    FROM friendships
-    JOIN users ON users.id IN (sender, receiver)
-    JOIN posts ON posts.creator = users.id
-    JOIN postlikes ON posts.id = post_id
-    WHERE NOT users.id = $1
-    AND sender = $1
-    OR receiver = $1
-    AND status = true
+    FROM posts
+    JOIN users ON users.id = posts.creator                
+    WHERE creator IN (SELECT DISTINCT users.id
+                      FROM friendships
+                      JOIN users ON users.id IN (sender, receiver)
+                      WHERE receiver = $1
+                      OR sender = $1
+                      AND status = true)
     ORDER BY posts.id DESC
     `;
 
     const queryParams = [user];
     
     db.query(queryString, queryParams).then(data => {
-      // console.log("In db query posts:", data.rows);
       res.json(data.rows);
     });
   });
@@ -40,15 +37,20 @@ module.exports = (db) => {
   // POST /posts
   // Add new post
   router.post('/', (req, res) => {
+    
+    image_url = req.body.image_url || '';
 
-    image_url = req.body.value || '';
-    console.log("From POST /posts", req)
-
-    queryParams = [];
+    queryParams = [req.session.user_id, req.body.content, image_url];
     queryString = `
     INSERT INTO posts (creator, content, image_url)
     VALUES ($1, $2, $3)
+    RETURNING *;
     `;
+
+    db.query(queryString, queryParams).then(data => {
+      console.log("I'm in posts", data);
+      res.json(data.rows);
+    });
   });
 
   // PUT /posts/:post_id

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import axios from 'axios';
 
 import './CreatePost.scss';
@@ -9,13 +9,13 @@ const CreatePost = (props) => {
   const [value, setValue] = useState('')
 
   const handleClick = async () => {
-    await axios.post('/posts', value, {
-      headers: {
-        "Content-Type": "multipart/form-data",
-      }
-    })
+    await axios.post('/posts', {content: value})
       .then(res => {
-        console.log('Added:', res);
+        console.log("create post:", res.data[0]);
+        console.log("post:", props.posts);
+        setValue('');
+        props.setPosts([...props.posts, res.data[0]]);
+        console.log("post after:", props.posts);
       })
       .catch(err => console.log(err));
   }

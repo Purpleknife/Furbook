@@ -7,7 +7,7 @@ import CreatePost from './CreatePost';
 
 const GeneralFeed = (props) => {
 
-  const [posts, setPosts] = useState();
+  const [posts, setPosts] = useState([]);
   const [postList, setPostList] = useState([])
 
   const fetchPosts = async () => {
@@ -48,8 +48,9 @@ const GeneralFeed = (props) => {
 
   return (
     <section className='main-container'>
+      {console.log("Gen feed posts: ", postList)}
       <div className='create-post-container'>
-        <CreatePost />
+        <CreatePost posts={posts} setPosts={setPosts} />
       </div>
       <div className='feed-container'>
         {postList}

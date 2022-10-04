@@ -10,6 +10,7 @@ module.exports = (db) => {
 
     db.query(queryString, queryParams)
       .then(data => {
+        req.session.user_id = data.rows[0].id;
         res.json(data.rows);
       })
       .catch(error => {
