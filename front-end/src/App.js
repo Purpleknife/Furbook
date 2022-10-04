@@ -17,7 +17,7 @@ const App = () => {
   const getUserPosts = async() => {
     await axios.get('/users/1')
       .then((res) => {
-        console.log("Posts data: ", {...res.data});
+        //console.log("Posts data: ", {...res.data});
         setposts(res.data);
       })
   };
