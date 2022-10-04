@@ -39,7 +39,7 @@ module.exports = (db) => {
 
   //Edit profile:
   router.put('/users/:id', (req, res) => {
-    const id = [req.session.user_id || 1];
+    const id = 1;
     const first_name = req.body.first_name;
     const last_name = req.body.last_name;
     const relationship_status = req.body.relationship_status;
@@ -57,9 +57,10 @@ module.exports = (db) => {
       WHERE id = $1
       RETURNING *;
       `;
-
+    console.log('Edit route is here!')
     db.query(queryString, queryParams)
     .then(data => {
+      console.log('2 Edit route is here!')
       res.json(data.rows);
     })
     .catch(error => {

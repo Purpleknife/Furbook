@@ -26,6 +26,36 @@
   padding-top: 13px;
 }
 
+.edit-delete {
+  display: flex;
+  margin-left: 27em;
+  padding-top: 0.5em;
+  cursor: pointer;
+  color: grey;
+
+  #edit:hover {
+    color: rgb(57, 138, 165);
+  }
+
+  #delete:hover {
+    color: red;
+  }
+
+  
+}
+
+.input-field-post {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #dfdfdf;
+  font-family: $secondary-font;
+}
+
+.post-content {
+  font-family: $secondary-font;
+  font-size: 1.25em;
+}
+
 .post-title {
   display: flex;
   flex-flow: row;
@@ -33,6 +63,7 @@
   max-width: 700px;
   background-color: $secondary-color;
   border-radius: 50px;
+  font-family: $primary-font;
 
   img {
     max-height: 50px;
@@ -81,8 +112,8 @@
   }
 } 
 
-.post-footer {
-  input {
+// .post-footer {
+//   input {
   
-  }
-}
+//   }
+// }
