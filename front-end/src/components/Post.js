@@ -32,7 +32,7 @@ const Post = (props) => {
       editPost();
     }
   };
-  console.log('props.post.id', props.postID);
+  //console.log('props.post.id', props.postID);
   
   const editPost = async() => {
    await axios.put(`/posts/${props.postID}`, { 
@@ -58,9 +58,6 @@ const Post = (props) => {
       });
   };
 
-  // useEffect(() => {
-  //   editPost();
-  // }, [props.posts])
 
   return ( 
     <div className="post-body">

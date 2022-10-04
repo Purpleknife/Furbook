@@ -40,7 +40,7 @@ const GeneralFeed = (props) => {
 
   useEffect(() => {
     fetchPosts()
-  }, []);
+  }, [posts]);
 
   // Only generate posts when posts is changed
   useEffect(() => {
