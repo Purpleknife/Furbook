@@ -34,7 +34,7 @@ const App = () => {
       {/* <SideNav user={user} setUser={setUser}/> */}
       <Routes>
         <Route path="/" element={<LandingPage setUser={setUser}/>} />
-        <Route path="/users" element={<div className="wrapper"><SideNav user={user} setUser={setUser}/><ProfileContainer user={user} posts={posts}/></div>} />
+        <Route path="/users" element={<div className="wrapper"><SideNav user={user} setUser={setUser}/><ProfileContainer user={user} setUser={setUser} posts={posts}/></div>} />
         <Route path="/posts" element={<><SideNav user={user} setUser={setUser}/><GeneralFeed /></> }/> 
         <Route path='/friendships' element={<Friendships />} />
       </Routes>

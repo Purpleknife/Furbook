@@ -50,6 +50,7 @@ const ProfileContainer = (props) => {
      })
       .then((res) => {
         console.log("axios.put data: ", res.data);
+        props.setUser(res.data[0]);
       })
       .catch((error) => {
         console.log(error);
