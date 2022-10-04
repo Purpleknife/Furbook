@@ -78,6 +78,7 @@ const ProfileContainer = (props) => {
 
     )
   });
+  
 
   // // SEND FRIEND REQUEST === CURRENTLY HARDCODED / NOT FULLY WORKING
   // const sendFriendRequest = () => {

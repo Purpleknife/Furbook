@@ -30,6 +30,8 @@ const GeneralFeed = (props) => {
           creator_name={post.users_first + ' ' + post.users_last}
           creator_image={post.users_image}
           setPosts={setPosts}
+          userID={props.user.id}
+          postID={post.id}
         />
       )
     });

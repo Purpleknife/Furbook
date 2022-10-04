@@ -78,6 +78,27 @@ module.exports = (db) => {
     });
   });
 
+  router.delete('/:id', (req, res) => {
+    const id = req.params.id;
+
+    const queryParams = [id];
+    const queryString = `
+      DELETE FROM posts
+      WHERE id = $1
+      RETURNING *;
+      `;
+    console.log('Delete route for posts is here!')
+    db.query(queryString, queryParams)
+    .then(data => {
+      console.log('2 Delete route for posts is here!')
+      console.log('data.rows', data.rows);
+      res.json(data.rows);
+    })
+    .catch(error => {
+      console.log(error.message);
+    });
+  })
+
   // POST /posts/:post_id/likes
   // Like a post
 

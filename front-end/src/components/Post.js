@@ -40,7 +40,7 @@ const Post = (props) => {
      })
       .then((res) => {
         console.log("axios.put post data: ", res.data[0]);
-          //props.setPosts([res.data[0]]); updates but removes other posts.
+          //props.setPosts([res.data[0]]); //updates but removes older posts.
           props.setPosts(prev => [...prev, res.data[0]]); //updates but creates duplicate.
 
         
@@ -50,17 +50,15 @@ const Post = (props) => {
       });
   };
 
-  // const deletePost = async() => {
-  //   await axios.delete(`/posts/${props.post.id}`, { 
-  //     content: inputContent
-  //    })
-  //     .then((res) => {
-  //       console.log("axios.delete data: ", res.data);
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //     });
-  // };
+  const deletePost = async() => {
+    await axios.delete(`/posts/${props.postID}`)
+      .then((res) => {
+        console.log("axios.delete data: ", res.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   return ( 
     <div className="post-body">
@@ -76,7 +74,7 @@ const Post = (props) => {
 
             <Dropdown.Menu className="dropdown-menu">
               <Dropdown.Item id="edit" style={viewMode} onClick={edit}><i className="fa-solid fa-pen-to-square"></i> Edit</Dropdown.Item>
-              <Dropdown.Item id="delete"><i  className="fa-solid fa-trash"></i> Delete</Dropdown.Item>
+              <Dropdown.Item id="delete" onClick={deletePost}><i  className="fa-solid fa-trash"></i> Delete</Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
         </div>}
