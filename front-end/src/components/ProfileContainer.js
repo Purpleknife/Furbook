@@ -57,7 +57,7 @@ const ProfileContainer = (props) => {
   };
 
   useEffect(() => {
-    document.title = 'Profile';
+    document.title = `${props.user.first_name}'s Profile`;
   }, []);
 
   const postsList = props.posts.map(post => {
