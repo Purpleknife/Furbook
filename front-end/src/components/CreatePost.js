@@ -11,11 +11,20 @@ const CreatePost = (props) => {
   const handleClick = async () => {
     await axios.post('/posts', {content: value})
       .then(res => {
-        console.log("create post:", res.data[0]);
-        console.log("post:", props.posts);
+        console.log('user object', props.user)
+        console.log("Unpacked post data:", {
+          ...res.data[0], 
+          users_first: props.user.first_name, 
+          users_last: props.user.last_name,
+          image_url: props.user.image_url
+        });
         setValue('');
-        props.setPosts([...props.posts, res.data[0]]);
-        console.log("post after:", props.posts);
+        props.setPosts([...props.posts, {
+          ...res.data[0], 
+          users_first: props.user.first_name, 
+          users_last: props.user.last_name,
+          users_image: props.user.image_url
+        }]);
       })
       .catch(err => console.log(err));
   }
