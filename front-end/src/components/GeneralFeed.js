@@ -4,6 +4,7 @@ import './GeneralFeed.scss';
 
 import Post from './Post';
 import CreatePost from './CreatePost';
+import LiveSearch from './LiveSearch';
 
 const GeneralFeed = (props) => {
 
@@ -49,6 +50,9 @@ const GeneralFeed = (props) => {
   return (
     <section className='main-container'>
       {console.log("Gen feed posts: ", postList)}
+      <div>
+        <LiveSearch />
+      </div>
       <div className='create-post-container'>
         <CreatePost posts={posts} setPosts={setPosts} />
       </div>

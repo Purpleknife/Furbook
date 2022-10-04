@@ -28,12 +28,14 @@ const usersRoutes = require('./routes/users');
 const friendshipsRoutes = require('./routes/friendships');
 const messagesRoutes = require('./routes/messages');
 const postsRoutes = require('./routes/posts');
+const searchRoutes = require('./routes/search');
 const conversationsRoutes = require('./routes/conversations');
 const db = require('./db/connection');
 
 // Mount all resource routes
 app.use('/api/posts', apiPostsRoutes)
 app.use('/messages', messagesRoutes);
+app.use('/search', searchRoutes(db));
 app.use('/conversations', conversationsRoutes);
 app.use('/friendships', friendshipsRoutes(db));
 app.use('/posts', postsRoutes(db));
