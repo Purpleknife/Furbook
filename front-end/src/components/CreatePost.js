@@ -37,14 +37,12 @@ const CreatePost = (props) => {
         body: formData
       })
       .then(res => 
-        //console.log('res here', res)
         res.json())
       .then(res => {        
         setValue({
           ...value,
           image_url: res.secure_url
         })
-        console.log('it worked!!!');
       })
       .catch(error => {
         console.log('Upload error', error);
@@ -76,6 +74,13 @@ const CreatePost = (props) => {
       })
       .catch(err => console.log(err));
   }
+
+  // Not working atm
+  const onKeyDown = (event) => {
+    if (event.key === "Enter") {
+      handleClick();
+    }
+  };
   
   return ( 
     <div className='create-post__container'>
@@ -86,6 +91,7 @@ const CreatePost = (props) => {
           value={value.content} 
           onChange={handleChange}
           placeholder='Write a new post...'
+          onKeyDown={onKeyDown}
         />
         {addingPhoto && (
         <input type="file" className="uploadInput"></input>
