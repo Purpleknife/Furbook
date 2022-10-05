@@ -1,18 +1,63 @@
 import React, { useState, useEffect } from 'react';
 import './ProfileContainer.scss';
+import { useParams } from 'react-router-dom';
 
 import axios from 'axios';
 
 import Post from './Post';
 
 const ProfileContainer = (props) => {
+  // Params stores dynamic id's. Like express did with /users/:id. This is coming from Router on App.js
+  const params = useParams();
+  const [firstLoad, setFirstLoad] = useState(true);
+  const [data, setData] = useState([]);
+  const [editable, setEditable] = useState(false);
+  
   const [editInput, setEditInput] = useState({
     editing: false
   });
+  const [userId, setUserId] = useState(null);
   const [inputName, setInputName] = useState(props.user.first_name + ' ' + props.user.last_name);
   const [inputRelation, setInputRelation] = useState(props.user.relationship_status);
   const [inputBirthday, setInputBirthday] = useState(props.user.birthday.slice(0, 10));
   const [inputLocation, setInputLocation] = useState(props.user.location);
+  const [imageUrl, setImageUrl] = useState('');
+
+
+  const fetchUser = async (id) => {
+    await axios.get(`/users/Profile/${id}`)
+      .then(res => {
+        setUserId(res.data[0].users_id);
+        setInputName(`${res.data[0].first_name} ${res.data[0].last_name}`);
+        setInputRelation(res.data[0].relationship_status);
+        setInputBirthday(res.data[0].birthday.slice(0, 10));
+        setInputLocation(res.data[0].location);
+        setImageUrl(res.data[0].users_image_url);
+        setData(res.data);
+
+        if (res.data[0].users_id === props.user.id) {
+          setEditable(true);
+        }
+      })
+      .catch(e => console.log(e));
+
+    await axios.get(`/users/${id}`)
+      .then(res => {
+        setData(res.data);
+      })
+      .catch(e => console.log(e));
+  };
+
+  if (firstLoad){
+    fetchUser(params.id);
+    setFirstLoad(false);
+  }
+
+  useEffect(() => {
+    if (params.id !== userId) {
+      fetchUser(params.id);
+    }
+  }, [params])
 
   const edit = () => {
     setEditInput({
@@ -33,53 +78,75 @@ const ProfileContainer = (props) => {
     //console.log('event key', event.key);
     if (event.key === "Enter") {
       setEditInput({ editing: false });
-      console.log('this is the onKeyDown fct');
       editProfile();
     }
   };
 
   const editProfile = async() => {
-    console.log('this is the editProfile fct');
     const names = inputName.split(' ');
-    await axios.put('/users/1', { 
+    await axios.put(`/users/${data[0].users_id}`, { 
       first_name: names[0],
       last_name: names[1],
       relationship_status: inputRelation,
       birthday: inputBirthday,
       location: inputLocation
-     })
-      .then((res) => {
-        console.log("axios.put data: ", res.data);
-        props.setUser(res.data[0]);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    })
+    .then((res) => {
+      props.setUser(res.data[0]);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
   };
 
   useEffect(() => {
     document.title = `${props.user.first_name}'s Profile`;
-  });
+  }, [data]);
 
-  const postsList = props.profilePosts.map(post => {
+  // New postsList for dynamic profile loading
+  const postsList = data.map(post => {
     return (
       <Post
         key={post.id}
-        userID={props.user.id}
+        userID={post.users_id}
         content={post.content} 
         creator={post.creator}
         image_url={post.image_url}
-        creator_name={props.user.first_name + ' ' + props.user.last_name}
-        creator_image={props.user.image_url}
+        creator_name={inputName}
+        creator_image={post.users_image_url}
         postID={post.id}
         setPosts={props.setProfilePosts}
         posts={props.profilePosts}
         refetch={props.refetch}
       />
-
-    )
+    );
   });
-  
+
+  // useEffect(() => {
+  //   if (props.refetch) {
+  //     fetchUser();
+  //     // props.setRefetch(false);
+  //   }
+  // }, [props.refetch]);
+
+  // Old postsList
+  // const postsList = props.profilePosts.map(post => {
+  //   return (
+  //     <Post
+  //       key={post.id}
+  //       userID={props.user.id}
+  //       content={post.content} 
+  //       creator={post.creator}
+  //       image_url={post.image_url}
+  //       creator_name={props.user.first_name + ' ' + props.user.last_name}
+  //       creator_image={props.user.image_url}
+  //       postID={post.id}
+  //       setPosts={props.setProfilePosts}
+  //       posts={props.profilePosts}
+  //       refetch={props.refetch}
+  //     />
+  //   )
+  // });
 
   // // SEND FRIEND REQUEST === CURRENTLY HARDCODED / NOT FULLY WORKING
   // const sendFriendRequest = () => {
@@ -96,7 +163,7 @@ const ProfileContainer = (props) => {
   //     });
   // };
   // TO IMPLEMENT, add to 'Be Friends" button: onClick={sendFriendRequest}
-
+  
   return (
     <div className="main">
       <div className="profile-card">
@@ -104,30 +171,30 @@ const ProfileContainer = (props) => {
         <img
             alt="profile"
             className="profile-image"
-            src={props.user.image_url}
+            src={imageUrl}
         />
         <div className="profile-info">
-          <p><span className="profile-name" style={viewMode}>{ inputName ? inputName : props.user.first_name + ' ' + props.user.last_name}</span>
+          <p><span className="profile-name" style={viewMode}>{ inputName ? inputName : ''}</span>
             <input 
               className="input-field"
               type="text"
               style={editMode}
-              placeholder={props.user.first_name + ' ' + props.user.last_name}
+              placeholder=''
               value={inputName}
               onChange = {(event) => {
                 setInputName(event.target.value)}
               }
               onKeyDown={onKeyDown}
             />
-            <span style={viewMode} className="edit" onClick={edit}><i className="fa-solid fa-pen-to-square"></i></span>
+            {editable && <span style={viewMode} className="edit" onClick={edit}><i className="fa-solid fa-pen-to-square"></i></span>}
           </p>
 
-          <p><span className="profile-title">Relationship Status:</span><span style={viewMode}> {inputRelation ? inputRelation : props.user.relationship_status}</span>
+          <p><span className="profile-title">Relationship Status:</span><span style={viewMode}> {inputRelation ? inputRelation : ''}</span>
           <input 
               className="input-field"
               type="text"
               style={editMode}
-              placeholder={props.user.relationship_status}
+              placeholder=''
               value={inputRelation}
               onChange = {(event) => {
                 setInputRelation(event.target.value)}
@@ -136,12 +203,12 @@ const ProfileContainer = (props) => {
             />
           </p>
 
-          <p><span className="profile-title">Birthday:</span><span style={viewMode}> {inputBirthday ? inputBirthday : props.user.birthday.slice(0, 10)}</span>
+          <p><span className="profile-title">Birthday:</span><span style={viewMode}> {inputBirthday ? inputBirthday : ''}</span>
           <input 
               className="input-field"
               type="text"
               style={editMode}
-              placeholder={props.user.birthday.slice(0, 10)}
+              placeholder=''
               value={inputBirthday}
               onChange = {(event) => {
                 setInputBirthday(event.target.value)}
@@ -150,12 +217,12 @@ const ProfileContainer = (props) => {
             />
           </p>
 
-          <p><span className="profile-title">Location:</span><span style={viewMode}> {inputLocation ? inputLocation : props.user.location}</span>
+          <p><span className="profile-title">Location:</span><span style={viewMode}> {inputLocation ? inputLocation : ''}</span>
           <input 
               className="input-field"
               type="text"
               style={editMode}
-              placeholder={props.user.location}
+              placeholder=''
               value={inputLocation}
               onChange = {(event) => {
                 setInputLocation(event.target.value)}
@@ -165,8 +232,8 @@ const ProfileContainer = (props) => {
           </p>
 
           <div className="profile__btns">
-          <button className="profile__btn">Wanna chat?</button>&nbsp;
-          <button className="profile__btn">Be friends?</button>
+          {!editable && <button className="profile__btn">Wanna chat?</button>}
+          {!editable && <button className="profile__btn">Be friends?</button>}
           </div>
         </div>
       </div>

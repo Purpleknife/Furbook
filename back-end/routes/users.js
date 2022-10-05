@@ -19,12 +19,37 @@ module.exports = (db) => {
   });
 
 
-  //Profile route:
+  // Grabs only user data on Profile route:
+  router.get('/users/profile/:id', (req, res) => {
+    const queryParams = [req.params.id || 1];
+    const queryString = `
+      SELECT  users.*,
+              users.image_url AS users_image_url,
+              users.id AS users_id
+      FROM users
+      WHERE users.id = $1
+      ;`
+
+    db.query(queryString, queryParams)
+      .then(data => {
+        res.json(data.rows);
+      })
+      .catch(error => {
+        console.log(error.message);
+      });
+  });
+
+
+  // General Profile route:
   router.get('/users/:id', (req, res) => {
     const queryParams = [req.params.id || 1];
     const queryString = `
-      SELECT users.*, posts.* FROM posts
-      JOIN users ON users.id = creator
+      SELECT  users.*,
+              users.image_url AS users_image_url,
+              users.id AS users_id,
+              posts.* 
+      FROM users
+      JOIN posts ON users.id = posts.creator
       WHERE creator = $1
       ORDER BY posts.id DESC
       ;`
@@ -41,7 +66,7 @@ module.exports = (db) => {
 
   //Edit profile:
   router.put('/users/:id', (req, res) => {
-    const id = 1;
+    const id = req.params.id;
     const first_name = req.body.first_name;
     const last_name = req.body.last_name;
     const relationship_status = req.body.relationship_status;
