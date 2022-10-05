@@ -1,8 +1,11 @@
 import React from "react";
 import './FriendshipPending.scss';
 import './Friend.scss';
+import { useNavigate } from 'react-router-dom'
 
 const FriendshipPending = (props) => {
+
+  const navigate = useNavigate();
 
   // ACCEPT FRIENDSHIP
   const acceptFriendship = () => {
@@ -16,11 +19,16 @@ const FriendshipPending = (props) => {
     props.decline(props.id);
   };
 
+  const handleClick = (id) => {
+    navigate(`/users/${id}`);
+  }
+
   return (
       <main className="friend-card pending">
         <div className="friend-info">
           <img className="friend-picture"
             src={props.picture}
+            onClick={() => handleClick(props.id)}
           />
           <p>{props.first_name} {props.last_name}</p>
         </div>

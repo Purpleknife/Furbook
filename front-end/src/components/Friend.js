@@ -13,8 +13,7 @@ const Friend = (props) => {
   };
 
   const handleClick = (id) => {
-    console.log('in friends click with id', id)
-    navigate(id);
+    navigate(`/users/${id}`);
   }
 
   return (
