@@ -26,7 +26,7 @@ const ProfileContainer = (props) => {
   const fetchUser = async (id) => {
     await axios.get(`/users/${id}`)
       .then(res => {
-        console.log(props.user);
+        console.log(res.data[0]);
         setInputName(`${res.data[0].first_name} ${res.data[0].last_name}`);
         setInputRelation(res.data[0].relationship_status);
         setInputBirthday(res.data[0].birthday.slice(0, 10));
@@ -72,20 +72,20 @@ const ProfileContainer = (props) => {
   const editProfile = async() => {
     console.log('this is the editProfile fct');
     const names = inputName.split(' ');
-    await axios.put('/users/1', { 
+    await axios.put(`/users/${data[0].users_id}`, { 
       first_name: names[0],
       last_name: names[1],
       relationship_status: inputRelation,
       birthday: inputBirthday,
       location: inputLocation
-     })
-      .then((res) => {
-        console.log("axios.put data: ", res.data);
-        props.setUser(res.data[0]);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    })
+    .then((res) => {
+      console.log("axios.put data: ", res.data);
+      props.setUser(res.data[0]);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
   };
 
   useEffect(() => {
@@ -97,7 +97,7 @@ const ProfileContainer = (props) => {
     return (
       <Post
         key={post.id}
-        userID={post.user_id}
+        userID={post.users_id}
         content={post.content} 
         creator={post.creator}
         image_url={post.image_url}

@@ -45,7 +45,7 @@ module.exports = (db) => {
 
   //Edit profile:
   router.put('/users/:id', (req, res) => {
-    const id = 1;
+    const id = req.params.id;
     const first_name = req.body.first_name;
     const last_name = req.body.last_name;
     const relationship_status = req.body.relationship_status;
