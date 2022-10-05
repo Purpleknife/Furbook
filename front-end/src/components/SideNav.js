@@ -18,7 +18,7 @@ const SideNav = (props) => {
       <Link to="/posts" style={{ textDecoration: 'none' }}>
           <img
               className="side-logo"
-              src='images/side-logo.png'
+              src='../images/side-logo.png'
               alt="profile"
           />
         <p className="side-name">Furbook</p>
@@ -40,7 +40,7 @@ const SideNav = (props) => {
         <div className="side-friends">
           <img
               className="side-friends-image"
-              src='images/friends.jpg'
+              src='../images/friends.jpg'
               alt="profile"
           />
           <p className="other-name">My Friends</p>
@@ -50,7 +50,7 @@ const SideNav = (props) => {
     <div className="side-friends">
     <img
           className="side-friends-image"
-          src='images/chats.jpg'
+          src='../images/chats.jpg'
           alt="profile"
       />
       <p className="other-name">My Chats</p>
@@ -63,7 +63,7 @@ const SideNav = (props) => {
 
     <img
           className="side-footer-image"
-          src='images/corgi.png'
+          src='../images/corgi.png'
           alt="profile"
       />
       

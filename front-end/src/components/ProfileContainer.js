@@ -26,7 +26,6 @@ const ProfileContainer = (props) => {
   const fetchUser = async (id) => {
     await axios.get(`/users/${id}`)
       .then(res => {
-        console.log(res.data[0]);
         setInputName(`${res.data[0].first_name} ${res.data[0].last_name}`);
         setInputRelation(res.data[0].relationship_status);
         setInputBirthday(res.data[0].birthday.slice(0, 10));
@@ -64,13 +63,11 @@ const ProfileContainer = (props) => {
     //console.log('event key', event.key);
     if (event.key === "Enter") {
       setEditInput({ editing: false });
-      console.log('this is the onKeyDown fct');
       editProfile();
     }
   };
 
   const editProfile = async() => {
-    console.log('this is the editProfile fct');
     const names = inputName.split(' ');
     await axios.put(`/users/${data[0].users_id}`, { 
       first_name: names[0],
@@ -80,7 +77,6 @@ const ProfileContainer = (props) => {
       location: inputLocation
     })
     .then((res) => {
-      console.log("axios.put data: ", res.data);
       props.setUser(res.data[0]);
     })
     .catch((error) => {
@@ -108,7 +104,7 @@ const ProfileContainer = (props) => {
         posts={props.profilePosts}
         refetch={props.refetch}
       />
-    )
+    );
   });
 
   // Old postsList
