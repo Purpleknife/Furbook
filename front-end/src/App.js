@@ -16,7 +16,7 @@ const App = () => {
   const [refetch, setRefetch] = useState(true);
 
   const getUserPosts = async() => {
-    await axios.get('/users/1')
+    await axios.get(`/users/${user.user_id}`)
       .then((res) => {
         //console.log("Posts data: ", {...res.data});
         setProfilePosts(res.data);
@@ -39,9 +39,9 @@ const App = () => {
       {/* <SideNav user={user} setUser={setUser}/> */}
       <Routes>
         <Route path="/" element={<LandingPage setUser={setUser}/>} />
-        <Route path="/users" element={<div className="wrapper"><SideNav user={user} setUser={setUser}/><ProfileContainer user={user} setUser={setUser} profilePosts={profilePosts} setProfilePosts={setProfilePosts} refetch={() => setRefetch(true)}/></div>} />
+        <Route path="/users/:id" element={<div className="wrapper"><SideNav user={user} setUser={setUser}/><ProfileContainer user={user} setUser={setUser} profilePosts={profilePosts} setProfilePosts={setProfilePosts} refetch={() => setRefetch(true)}/></div>} />
         <Route path="/posts" element={<><SideNav user={user} setUser={setUser}/><GeneralFeed user={user} refetch={() => setRefetch(true)}/></> }/> 
-        <Route path='/friendships' element={<Friendships />} />
+        <Route path='/friendships' element={<><SideNav user={user} setUser={setUser}/><Friendships /></>} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>

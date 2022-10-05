@@ -1,10 +1,11 @@
 import React from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './SideNav.scss';
 
 const SideNav = (props) => {
 
+  const navigate = useNavigate
   const logout = () => {
     axios.get('/logout')
       .then((data) => {
@@ -18,13 +19,13 @@ const SideNav = (props) => {
       <Link to="/posts" style={{ textDecoration: 'none' }}>
           <img
               className="side-logo"
-              src='images/side-logo.png'
+              src='../images/side-logo.png'
               alt="profile"
           />
         <p className="side-name">Furbook</p>
       </Link>
 
-      <Link to="/users" style={{ textDecoration: 'none' }}>
+      <Link to={`/users/${props.user.id}`} style={{ textDecoration: 'none' }}>
         <div className="side-profile">
           <img
             className="side-profile-image"
@@ -40,7 +41,7 @@ const SideNav = (props) => {
         <div className="side-friends">
           <img
               className="side-friends-image"
-              src='images/friends.jpg'
+              src='../images/friends.jpg'
               alt="profile"
           />
           <p className="other-name">My Friends</p>
@@ -50,7 +51,7 @@ const SideNav = (props) => {
     <div className="side-friends">
     <img
           className="side-friends-image"
-          src='images/chats.jpg'
+          src='../images/chats.jpg'
           alt="profile"
       />
       <p className="other-name">My Chats</p>
@@ -63,7 +64,7 @@ const SideNav = (props) => {
 
     <img
           className="side-footer-image"
-          src='images/corgi.png'
+          src='../images/corgi.png'
           alt="profile"
       />
       
