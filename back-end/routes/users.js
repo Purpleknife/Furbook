@@ -6,7 +6,7 @@ module.exports = (db) => {
   //Login route:
   router.get('/login/:id', (req, res) => {
     const queryString = `SELECT * FROM users WHERE users.id = $1;`;
-    const queryParams = [req.session.user_id || 1];
+    const queryParams = [req.params.id || 1];
 
     db.query(queryString, queryParams)
       .then(data => {
@@ -21,13 +21,13 @@ module.exports = (db) => {
 
   //Profile route:
   router.get('/users/:id', (req, res) => {
+    const queryParams = [req.params.id || 1];
     const queryString = `
       SELECT users.*, posts.* FROM posts
       JOIN users ON users.id = creator
       WHERE creator = $1
       ORDER BY posts.id DESC
       ;`
-    const queryParams = [req.session.user_id || 1];
 
     db.query(queryString, queryParams)
       .then(data => {
