@@ -11,6 +11,7 @@ const ProfileContainer = (props) => {
   const params = useParams();
   const [firstLoad, setFirstLoad] = useState(true);
   const [data, setData] = useState([]);
+  const [editable, setEditable] = useState(false);
   
   const [editInput, setEditInput] = useState({
     editing: false
@@ -25,13 +26,17 @@ const ProfileContainer = (props) => {
   const fetchUser = async (id) => {
     await axios.get(`/users/${id}`)
       .then(res => {
-        console.log("profile log:", res.data[0]);
+        console.log(props.user);
         setInputName(`${res.data[0].first_name} ${res.data[0].last_name}`);
         setInputRelation(res.data[0].relationship_status);
         setInputBirthday(res.data[0].birthday.slice(0, 10));
         setInputLocation(res.data[0].location);
         setImageUrl(res.data[0].users_image_url);
         setData(res.data);
+
+        if (res.data[0].users_id === props.user.id) {
+          setEditable(true);
+        }
       })
       .catch(e => console.log(e));
   };
@@ -163,7 +168,7 @@ const ProfileContainer = (props) => {
               }
               onKeyDown={onKeyDown}
             />
-            <span style={viewMode} className="edit" onClick={edit}><i className="fa-solid fa-pen-to-square"></i></span>
+            {editable && <span style={viewMode} className="edit" onClick={edit}><i className="fa-solid fa-pen-to-square"></i></span>}
           </p>
 
           <p><span className="profile-title">Relationship Status:</span><span style={viewMode}> {inputRelation ? inputRelation : ''}</span>
