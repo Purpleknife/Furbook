@@ -1,27 +1,101 @@
-const { query } = require('express');
+//const { query } = require('express');
 const express = require('express');
 const router  = express.Router();
 // const db = require('../db/connection');
 
 module.exports = (db) => {
 
-  // /posts/postlikes/:post_id
+  // Fetch the posts's likes:
   router.get('/postlikes/:post_id', (req, res) => {
-    console.log("Querying postlikes for post_id", req.params.post_id)
-    const queryParams = [req.params.post_id || 8];
-    const queryString = `
-    SELECT post_id, user_id 
-    FROM postlikes
-    WHERE post_id = $1;
-    `;
+    //console.log("Querying postlikes for post_id", req.params.post_id)
+    const queryParams = [req.params.post_id];
+    const queryString =    
+    `SELECT posts.id, COUNT(DISTINCT postlikes.id)
+    FROM posts
+    JOIN postlikes ON posts.id = postlikes.post_id
+    WHERE postlikes.post_id = $1
+    GROUP BY posts.id;` ;
+
+    // `SELECT postlikes.*, COUNT(postlikes) as like_count
+    // FROM postlikes
+    // WHERE post_id = 8
+    // GROUP BY post_id, postlikes.id;`
 
     db.query(queryString, queryParams)
       .then(data => {
-        console.log("postlikes data:", data);
+        //console.log("postlikes data:", data);
         res.json(data.rows);
       })
       .catch(e => console.log(e));
   });
+
+
+  // Fetch the posts's comments:
+  router.get('/comments/:post_id', (req, res) => {
+    const queryParams = [req.params.post_id];
+    const queryString =
+    `SELECT posts.id, comments.content, users.first_name, users.last_name, users.image_url
+    FROM users
+    JOIN comments ON users.id = comments.user_id
+    JOIN posts ON posts.id = comments.post_id
+    WHERE comments.post_id = $1;`
+
+    // `SELECT posts.id, comments.content
+    // FROM posts
+    // JOIN comments ON posts.id = comments.post_id
+    // WHERE comments.post_id = $1;` ;
+
+    db.query(queryString, queryParams)
+      .then(data => {
+        //console.log('comments sent:', data.rows);
+        res.json(data.rows);
+      })
+      .catch(e => console.log(e));
+  });
+
+
+  //Add likes on posts:
+  router.post('/postlikes/:post_id', (req, res) => {
+    const post_id = req.body.post_id;
+    const user_id = req.session.user_id;
+
+    const queryParams = [post_id, user_id];
+    const queryString = `
+    INSERT INTO postlikes (post_id, user_id)
+    VALUES ($1, $2)
+    RETURNING *;
+    `;
+
+    db.query(queryString, queryParams)
+      .then(data => {
+        console.log('Likes added:', data.rows);
+        res.json(data.rows);
+      })
+      .catch(e => console.log(e));
+  });
+
+  //Add comments on posts:
+  router.post('/comments/:post_id', (req, res) => {
+    const post_id = req.body.post_id;
+    const user_id = req.session.user_id;
+    const content = req.body.content;
+
+    const queryParams = [post_id, user_id, content];
+    const queryString = `
+    INSERT INTO comments (post_id, user_id, content)
+    VALUES ($1, $2, $3)
+    RETURNING *;
+    `;
+
+    db.query(queryString, queryParams)
+      .then(data => {
+        console.log('Comments added:', data.rows);
+        res.json(data.rows);
+      })
+      .catch(e => console.log(e));
+  });
+
+
 
   // GET /posts
   // Show user general feed / Load all user’s posts + friends’ posts + comments under each post

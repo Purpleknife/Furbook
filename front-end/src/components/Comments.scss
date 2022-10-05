@@ -1,0 +1,16 @@
+@import '../styles/variables';
+
+.comments-container {
+  
+  padding-top: 0.5em;
+  
+  .comment-image {
+      max-height: 50px;
+      width: 50px;
+      object-fit: cover;
+      //border-radius: 50px;
+  }
+
+
+
+}

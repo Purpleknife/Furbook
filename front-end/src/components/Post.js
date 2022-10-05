@@ -3,19 +3,25 @@ import React, { useEffect, useState } from 'react';
 import Dropdown from 'react-bootstrap/Dropdown';
 import axios from 'axios';
 
-import './Post.scss'
+import Comments from './Comments';
+
+import './Post.scss';
 
 const Post = (props) => {
 
-  const [likes, setLikes] = useState({
-    user_likes: false,
-    total_likes: 0
-  })
-  
+  const [likes, setLikes] = useState();
+  const [comments, setComments] = useState(null);
+  const [commentValue, setCommentValue] = useState('');
+  const [totalComments, setTotalComments] = useState();
+
   const [editInput, setEditInput] = useState({
     editing: false
   });
   const [inputContent, setInputContent] = useState(props.content);
+
+  const handleChange = (e) => {
+    setCommentValue(e.target.value);
+  };
 
   const edit = () => {
     setEditInput({
@@ -67,15 +73,65 @@ const Post = (props) => {
       });
   };
 
-  const fetchLikes = async () => {
-    // query db for post_likes where post_id == post
+  const fetchNumberOfLikes = async () => {
     await axios.get(`/posts/postlikes/${props.postID}`)
       .then(res => {
-        console.log("Post axios: response", res);
+        // console.log("Post LIKES:", res.data[0]);
+        // console.log('Number of likes:', res.data[0].count);
+        setLikes(res.data[0].count);
       })
       .catch(e => console.log(e));
-  }
-  fetchLikes();
+  };
+
+  const fetchComments = async () => {
+    await axios.get(`/posts/comments/${props.postID}`)
+      .then(res => {
+        console.log("Post Comments:", res.data);
+
+        const commentsContent = res.data.map((com) => {
+          return (<Comments
+            key={com.content}
+            content = {com.content}
+            commentator = {com.first_name + ' ' + com.last_name}
+            commentator_image = {com.image_url}
+          />)
+        });
+        setComments(commentsContent);
+        setTotalComments(commentsContent.length);
+      })
+      .catch(e => console.log(e));
+  };
+
+  const addLikes = async() => {
+    await axios.post(`/posts/postlikes/${props.postID}`, {
+      post_id: props.postID
+    })
+      .then(res => {
+        console.log("Like added by User:", res.data[0]);
+        fetchNumberOfLikes();
+      })
+      .catch(e => console.log(e));
+  };
+
+  const addComments = async(e) => {
+    e.preventDefault();
+
+    await axios.post(`/posts/comments/${props.postID}`,
+     { post_id: props.postID,
+      content: commentValue}
+    )
+      .then(res => {
+        console.log("Comment added by User:", res.data[0]);
+        fetchComments();
+        setCommentValue({content: ''}); //Clean up state after submit.
+      })
+      .catch(e => console.log(e));
+  };
+
+  useEffect(() => {
+    fetchNumberOfLikes();
+    fetchComments();
+  }, []);
 
   return ( 
     <div className="post-body">
@@ -86,7 +142,7 @@ const Post = (props) => {
         <div className="edit-delete">
           <Dropdown>
             <Dropdown.Toggle variant="transparent" id="dropdown-basic">
-              <i class="fa-solid fa-ellipsis"></i>
+              <i className="fa-solid fa-ellipsis"></i>
             </Dropdown.Toggle>
 
             <Dropdown.Menu className="dropdown-menu">
@@ -111,13 +167,23 @@ const Post = (props) => {
       </p>
       {props.image_url && <img className="post-image" src={props.image_url} alt='Pic' />}
       <div className='post-like-comment'>
-        <i className="fa-solid fa-paw"></i>
-        <i className="fa-solid fa-comments"></i>
+        <span><i className="fa-solid fa-paw" onClick={addLikes}></i>{likes}</span>
+        <span><i className="fa-solid fa-comments"></i>{totalComments}</span>
       </div>
       <div className='post-footer'>
-        {/* Comments will go here. Needs logged in users img and a textarea */}
-        {/* User pic
-        <input placeholder='Write a comment...' /> */}
+        <form>
+          <input
+            className='add-comment'
+            type="text"
+            name='comment'
+            value={commentValue.content}
+            onChange={handleChange}
+            placeholder='Write a comment here...'
+          />
+          <br />
+          <button className="add-comment-btn" onClick={addComments}>Add</button>
+        </form>
+        {comments}
       </div>
     </div>
   );
