@@ -48,15 +48,16 @@ const SideNav = (props) => {
         </div>
       </Link>
 
-    <div className="side-friends">
-    <img
-          className="side-friends-image"
-          src='../images/chats.jpg'
-          alt="profile"
-      />
-      <p className="other-name">My Chats</p>
-    </div>
-
+      <Link to="/chat" style={{ textDecoration: 'none' }}>
+        <div className="side-friends">
+        <img
+              className="side-friends-image"
+              src='../images/chats.jpg'
+              alt="profile"
+          />
+          <p className="other-name">My Chats</p>
+        </div>
+      </Link>
 
     <div className="logout">
       <Link className="logout__btn" to="/" onClick={logout}>Logout</Link>

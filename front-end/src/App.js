@@ -43,7 +43,7 @@ const App = () => {
         <Route path="/users/:id" element={<div className="wrapper"><SideNav user={user} setUser={setUser}/><ProfileContainer user={user} setUser={setUser} profilePosts={profilePosts} setProfilePosts={setProfilePosts} refetch={() => setRefetch(true)}/></div>} />
         <Route path="/posts" element={<><SideNav user={user} setUser={setUser}/><GeneralFeed user={user} refetch={() => setRefetch(true)}/></> }/> 
         <Route path='/friendships' element={<><SideNav user={user} setUser={setUser}/><Friendships /></>} />
-        <Route path='/chat' element={<Chat />} />
+        <Route path='/chat' element={<Chat user={user} setUser={setUser} />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>
