@@ -5,6 +5,24 @@ const router  = express.Router();
 
 module.exports = (db) => {
 
+  // /posts/postlikes/:post_id
+  router.get('/postlikes/:post_id', (req, res) => {
+    console.log("Querying postlikes for post_id", req.params.post_id)
+    const queryParams = [req.params.post_id || 8];
+    const queryString = `
+    SELECT post_id, user_id 
+    FROM postlikes
+    WHERE post_id = $1;
+    `;
+
+    db.query(queryString, queryParams)
+      .then(data => {
+        console.log("postlikes data:", data);
+        res.json(data.rows);
+      })
+      .catch(e => console.log(e));
+  });
+
   // GET /posts
   // Show user general feed / Load all user’s posts + friends’ posts + comments under each post
   router.get('/', (req, res) => {
@@ -12,10 +30,10 @@ module.exports = (db) => {
     const user = req.session.user_id;
 
     const queryString = `
-    SELECT DISTINCT posts.*,
-                    users.image_url as users_image, 
-                    users.first_name as users_first, 
-                    users.last_name as users_last
+    SELECT posts.*,
+          users.image_url as users_image, 
+          users.first_name as users_first, 
+          users.last_name as users_last
     FROM posts
     JOIN users ON users.id = posts.creator                
     WHERE creator IN (SELECT DISTINCT users.id
@@ -48,7 +66,6 @@ module.exports = (db) => {
     `;
 
     db.query(queryString, queryParams).then(data => {
-      console.log("I'm in posts", data);
       res.json(data.rows);
     });
   });

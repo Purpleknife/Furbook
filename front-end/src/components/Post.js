@@ -6,6 +6,12 @@ import axios from 'axios';
 import './Post.scss'
 
 const Post = (props) => {
+
+  const [likes, setLikes] = useState({
+    user_likes: false,
+    total_likes: 0
+  })
+  
   const [editInput, setEditInput] = useState({
     editing: false
   });
@@ -61,6 +67,15 @@ const Post = (props) => {
       });
   };
 
+  const fetchLikes = async () => {
+    // query db for post_likes where post_id == post
+    await axios.get(`/posts/postlikes/${props.postID}`)
+      .then(res => {
+        console.log("Post axios: response", res);
+      })
+      .catch(e => console.log(e));
+  }
+  fetchLikes();
 
   return ( 
     <div className="post-body">
