@@ -67,15 +67,23 @@ const Post = (props) => {
       });
   };
 
-  const fetchLikes = async () => {
+  const fetchNumberOfLikes = async () => {
     // query db for post_likes where post_id == post
     await axios.get(`/posts/postlikes/${props.postID}`)
       .then(res => {
-        console.log("Post axios: response", res);
+        console.log("Post LIKES:", res.data[0]);
+        console.log('Number of likes:', res.data[0].count);
+        setLikes({
+          total_likes: res.data[0].count
+        });
       })
       .catch(e => console.log(e));
   }
-  fetchLikes();
+  //fetchNumberOfLikes();
+
+  useEffect(() => {
+    fetchNumberOfLikes();
+  }, []);
 
   return ( 
     <div className="post-body">
@@ -111,7 +119,7 @@ const Post = (props) => {
       </p>
       {props.image_url && <img className="post-image" src={props.image_url} alt='Pic' />}
       <div className='post-like-comment'>
-        <i className="fa-solid fa-paw"></i>
+        <span><i className="fa-solid fa-paw"></i>{likes.total_likes}</span>
         <i className="fa-solid fa-comments"></i>
       </div>
       <div className='post-footer'>
