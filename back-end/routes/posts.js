@@ -29,6 +29,7 @@ module.exports = (db) => {
       .catch(e => console.log(e));
   });
 
+
   // Fetch the posts's comments:
   router.get('/comments/:post_id', (req, res) => {
     const queryParams = [req.params.post_id];
@@ -46,11 +47,33 @@ module.exports = (db) => {
 
     db.query(queryString, queryParams)
       .then(data => {
-        console.log('comments sent:', data.rows);
+        //console.log('comments sent:', data.rows);
         res.json(data.rows);
       })
       .catch(e => console.log(e));
   });
+
+
+  //Add likes on posts:
+  router.post('/postlikes/:post_id', (req, res) => {
+    const post_id = req.body.post_id;
+    const user_id = req.session.user_id;
+
+    const queryParams = [post_id, user_id];
+    const queryString = `
+    INSERT INTO postlikes (post_id, user_id)
+    VALUES ($1, $2)
+    RETURNING *;
+    `;
+
+    db.query(queryString, queryParams)
+      .then(data => {
+        console.log('Likes added:', data.rows);
+        res.json(data.rows);
+      })
+      .catch(e => console.log(e));
+  });
+
 
 
 

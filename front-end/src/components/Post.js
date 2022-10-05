@@ -100,8 +100,15 @@ const Post = (props) => {
   };
 
   const addLikes = async() => {
-    
-  }
+    await axios.post(`/posts/postlikes/${props.postID}`, {
+      post_id: props.postID
+    })
+      .then(res => {
+        console.log("Like added by User:", res.data[0]);
+        fetchNumberOfLikes();
+      })
+      .catch(e => console.log(e));
+  };
 
   useEffect(() => {
     fetchNumberOfLikes();
@@ -142,14 +149,14 @@ const Post = (props) => {
       </p>
       {props.image_url && <img className="post-image" src={props.image_url} alt='Pic' />}
       <div className='post-like-comment'>
-        <span><i className="fa-solid fa-paw"></i>{likes.total_likes}</span>
-        <span><i className="fa-solid fa-comments"></i>{comments.length}</span>
+        <span><i className="fa-solid fa-paw" onClick={addLikes}></i>{likes.total_likes}</span>
+        <span><i className="fa-solid fa-comments"></i></span>
         
       </div>
       <div className='post-footer'>
+        <input type="text" placeholder='Write a comment here...'/>
+        <button>Add</button>
         {comments}
-        {/* User pic
-        <input placeholder='Write a comment...' /> */}
       </div>
     </div>
   );
