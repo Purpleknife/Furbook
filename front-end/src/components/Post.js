@@ -14,11 +14,18 @@ const Post = (props) => {
     total_likes: 0
   });
   const [comments, setComments] = useState(null);
-  
+  const [commentValue, setCommentValue] = useState('');
+
   const [editInput, setEditInput] = useState({
     editing: false
   });
   const [inputContent, setInputContent] = useState(props.content);
+
+  const handleChange = (e) => {
+    setCommentValue({
+      comments: e.target.value
+    })
+  }
 
   const edit = () => {
     setEditInput({
@@ -110,6 +117,20 @@ const Post = (props) => {
       .catch(e => console.log(e));
   };
 
+  const addPosts = async(e) => {
+    e.preventDefault();
+
+    await axios.post(`/posts/comments/${props.postID}`,
+     { post_id: props.postID,
+      content: commentValue.comments}
+    )
+      .then(res => {
+        console.log("Comment added by User:", res.data[0]);
+        fetchComments();
+      })
+      .catch(e => console.log(e));
+  };
+
   useEffect(() => {
     fetchNumberOfLikes();
     fetchComments();
@@ -154,8 +175,16 @@ const Post = (props) => {
         
       </div>
       <div className='post-footer'>
-        <input type="text" placeholder='Write a comment here...'/>
-        <button>Add</button>
+        <form className='add-comment'>
+          <input 
+            type="text"
+            name='comment'
+            value={commentValue.content}
+            onChange={handleChange}
+            placeholder='Write a comment here...'
+          />
+          <button onClick={addPosts}>Add</button>
+        </form>
         {comments}
       </div>
     </div>

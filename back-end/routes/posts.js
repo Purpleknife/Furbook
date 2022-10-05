@@ -1,4 +1,4 @@
-const { query } = require('express');
+//const { query } = require('express');
 const express = require('express');
 const router  = express.Router();
 // const db = require('../db/connection');
@@ -74,6 +74,26 @@ module.exports = (db) => {
       .catch(e => console.log(e));
   });
 
+  //Add comments on posts:
+  router.post('/comments/:post_id', (req, res) => {
+    const post_id = req.body.post_id;
+    const user_id = req.session.user_id;
+    const content = req.body.content;
+
+    const queryParams = [post_id, user_id, content];
+    const queryString = `
+    INSERT INTO comments (post_id, user_id, content)
+    VALUES ($1, $2, $3)
+    RETURNING *;
+    `;
+
+    db.query(queryString, queryParams)
+      .then(data => {
+        console.log('Comments added:', data.rows);
+        res.json(data.rows);
+      })
+      .catch(e => console.log(e));
+  });
 
 
 
