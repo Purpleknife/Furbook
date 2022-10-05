@@ -16,6 +16,7 @@ const ProfileContainer = (props) => {
   const [editInput, setEditInput] = useState({
     editing: false
   });
+  const [userId, setUserId] = useState(null);
   const [inputName, setInputName] = useState(props.user.first_name + ' ' + props.user.last_name);
   const [inputRelation, setInputRelation] = useState(props.user.relationship_status);
   const [inputBirthday, setInputBirthday] = useState(props.user.birthday.slice(0, 10));
@@ -24,8 +25,9 @@ const ProfileContainer = (props) => {
 
 
   const fetchUser = async (id) => {
-    await axios.get(`/users/${id}`)
+    await axios.get(`/users/Profile/${id}`)
       .then(res => {
+        setUserId(res.data[0].users_id);
         setInputName(`${res.data[0].first_name} ${res.data[0].last_name}`);
         setInputRelation(res.data[0].relationship_status);
         setInputBirthday(res.data[0].birthday.slice(0, 10));
@@ -38,11 +40,24 @@ const ProfileContainer = (props) => {
         }
       })
       .catch(e => console.log(e));
+
+    await axios.get(`/users/${id}`)
+      .then(res => {
+        setData(res.data);
+      })
+      .catch(e => console.log(e));
   };
+
   if (firstLoad){
     fetchUser(params.id);
     setFirstLoad(false);
   }
+
+  useEffect(() => {
+    if (params.id !== userId) {
+      fetchUser(params.id);
+    }
+  }, [params])
 
   const edit = () => {
     setEditInput({
@@ -106,6 +121,13 @@ const ProfileContainer = (props) => {
       />
     );
   });
+
+  // useEffect(() => {
+  //   if (props.refetch) {
+  //     fetchUser();
+  //     // props.setRefetch(false);
+  //   }
+  // }, [props.refetch]);
 
   // Old postsList
   // const postsList = props.profilePosts.map(post => {
@@ -210,8 +232,8 @@ const ProfileContainer = (props) => {
           </p>
 
           <div className="profile__btns">
-          <button className="profile__btn">Wanna chat?</button>&nbsp;
-          <button className="profile__btn">Be friends?</button>
+          {!editable && <button className="profile__btn">Wanna chat?</button>}
+          {!editable && <button className="profile__btn">Be friends?</button>}
           </div>
         </div>
       </div>

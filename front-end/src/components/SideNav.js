@@ -1,10 +1,11 @@
 import React from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './SideNav.scss';
 
 const SideNav = (props) => {
 
+  const navigate = useNavigate
   const logout = () => {
     axios.get('/logout')
       .then((data) => {
