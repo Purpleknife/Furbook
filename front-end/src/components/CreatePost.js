@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import axios from 'axios';
 
 import './CreatePost.scss';
@@ -10,7 +10,7 @@ const CreatePost = (props) => {
     content: '',
     image_url: ''
   })
-  const [addingPhoto, setAddingPhoto] = useState(false);
+   const [addingPhoto, setAddingPhoto] = useState(false);
 
   const toggleAddFile = () => {
     setAddingPhoto(!addingPhoto);
@@ -21,6 +21,35 @@ const CreatePost = (props) => {
       ...value,
       [e.target.name]: e.target.value
     })
+  }
+  
+  const uploadImage = async() => {
+    const upload_preset = process.env.REACT_APP_UPLOAD_PRESET;
+    const cloud_name = process.env.REACT_APP_CLOUDNAME;
+
+    const files = document.querySelector(".uploadInput").files;
+    const formData = new FormData();
+
+    formData.append('file', files[0]);
+    formData.append('upload_preset', upload_preset);
+      fetch(`https://api.cloudinary.com/v1_1/${cloud_name}/image/upload`, {
+        method: 'POST',
+        body: formData
+      })
+      .then(res => 
+        //console.log('res here', res)
+        res.json())
+      .then(res => {        
+        setValue({
+          ...value,
+          image_url: res.secure_url
+        })
+        console.log('it worked!!!');
+      })
+      .catch(error => {
+        console.log('Upload error', error);
+      })
+
   }
 
   const handleClick = async (e) => {
@@ -59,21 +88,23 @@ const CreatePost = (props) => {
           placeholder='Write a new post...'
         />
         {addingPhoto && (
-        <input 
-          type='text'
-          name='image_url'
-          value={value.image_url} 
-          onChange={handleChange}
-          placeholder='Image url...'
-        />
+        <input type="file" className="uploadInput"></input>
         )}
       </form>
       <div className='create-post__buttons'>
+
+
         <button 
           className='create-post__button'
           onClick={toggleAddFile}
         >
+          
           {addingPhoto ? 'Cancel picture' : 'Add picture'}
+        </button>
+
+        
+        <button className='upload' onClick={uploadImage}>
+          <i className="fa-solid fa-upload"></i>
         </button>
         <button 
           className='create-post__button'
@@ -81,6 +112,7 @@ const CreatePost = (props) => {
         >
           Post
         </button>
+        {/* <img src={image} alt="upload-test"/> */}
       </div>
     </div>
   );
