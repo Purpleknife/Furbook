@@ -24,7 +24,7 @@ const SideNav = (props) => {
         <p className="side-name">Furbook</p>
       </Link>
 
-      <Link to="/users" style={{ textDecoration: 'none' }}>
+      <Link to={`/users/${props.user.id}`} style={{ textDecoration: 'none' }}>
         <div className="side-profile">
           <img
             className="side-profile-image"

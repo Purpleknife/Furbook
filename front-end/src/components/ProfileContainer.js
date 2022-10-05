@@ -1,11 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import './ProfileContainer.scss';
+import { useParams } from 'react-router-dom';
 
 import axios from 'axios';
 
 import Post from './Post';
 
 const ProfileContainer = (props) => {
+  // Params stores dynamic id's. Like express did with /users/:id. This is coming from Router on App.js
+  const params = useParams();
+  const [firstLoad, setFirstLoad] = useState(true);
+  const [data, setData] = useState([]);
+  
   const [editInput, setEditInput] = useState({
     editing: false
   });
@@ -13,6 +19,24 @@ const ProfileContainer = (props) => {
   const [inputRelation, setInputRelation] = useState(props.user.relationship_status);
   const [inputBirthday, setInputBirthday] = useState(props.user.birthday.slice(0, 10));
   const [inputLocation, setInputLocation] = useState(props.user.location);
+
+
+  const fetchUser = async (id) => {
+    await axios.get(`/users/${id}`)
+      .then(res => {
+        console.log("profile log:", res.data[0]);
+        setInputName(`${res.data[0].first_name} ${res.data[0].last_name}`);
+        setInputRelation(res.data[0].relationship_status);
+        setInputBirthday(res.data[0].birthday.slice(0, 10));
+        setInputLocation(res.data[0].location);
+        setData(res.data);
+      })
+      .catch(e => console.log(e));
+  };
+  if (firstLoad){
+    fetchUser(params.id);
+    setFirstLoad(false);
+  }
 
   const edit = () => {
     setEditInput({
@@ -61,7 +85,8 @@ const ProfileContainer = (props) => {
     document.title = `${props.user.first_name}'s Profile`;
   });
 
-  const postsList = props.profilePosts.map(post => {
+  // New postsList for dynamic profile loading
+  const postsList = data.map(post => {
     return (
       <Post
         key={post.id}
@@ -76,10 +101,27 @@ const ProfileContainer = (props) => {
         posts={props.profilePosts}
         refetch={props.refetch}
       />
-
     )
   });
-  
+
+  // Old postsList
+  // const postsList = props.profilePosts.map(post => {
+  //   return (
+  //     <Post
+  //       key={post.id}
+  //       userID={props.user.id}
+  //       content={post.content} 
+  //       creator={post.creator}
+  //       image_url={post.image_url}
+  //       creator_name={props.user.first_name + ' ' + props.user.last_name}
+  //       creator_image={props.user.image_url}
+  //       postID={post.id}
+  //       setPosts={props.setProfilePosts}
+  //       posts={props.profilePosts}
+  //       refetch={props.refetch}
+  //     />
+  //   )
+  // });
 
   // // SEND FRIEND REQUEST === CURRENTLY HARDCODED / NOT FULLY WORKING
   // const sendFriendRequest = () => {
@@ -96,7 +138,7 @@ const ProfileContainer = (props) => {
   //     });
   // };
   // TO IMPLEMENT, add to 'Be Friends" button: onClick={sendFriendRequest}
-
+  
   return (
     <div className="main">
       <div className="profile-card">
