@@ -9,6 +9,7 @@ import SideNav from './components/SideNav';
 import ProfileContainer from './components/ProfileContainer';
 import GeneralFeed from './components/GeneralFeed';
 import Friendships from './components/Friendships';
+import Chat from './components/Chat';
 
 const App = () => {
   const [user, setUser] = useState(null);
@@ -42,6 +43,7 @@ const App = () => {
         <Route path="/users" element={<div className="wrapper"><SideNav user={user} setUser={setUser}/><ProfileContainer user={user} setUser={setUser} profilePosts={profilePosts} setProfilePosts={setProfilePosts} refetch={() => setRefetch(true)}/></div>} />
         <Route path="/posts" element={<><SideNav user={user} setUser={setUser}/><GeneralFeed user={user} refetch={() => setRefetch(true)}/></> }/> 
         <Route path='/friendships' element={<Friendships />} />
+        <Route path='/chat' element={<Chat />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>
