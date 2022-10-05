@@ -1,5 +1,6 @@
 import React from 'react';
 import { ChatEngine } from 'react-chat-engine';
+import './Chat.scss';
 
 const Chat = () => {
 	return (
