@@ -1,0 +1,36 @@
+@import "../styles/variables";
+
+.ce-chat-engine {
+  margin-left: 25%;
+}
+
+.ce-wrapper {
+  margin-left: 10px !important;
+  margin-right: 10px !important;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border: 4px solid $primary-color;
+  border-radius: 20px;
+  padding: 5px;
+}
+
+.ce-chat-feed {
+  padding-left: 8px;
+}
+
+.ce-chat-title {
+  width: 98% !important;
+}
+
+.ce-my-message-bubble {
+  color: black !important;
+  background-color: $primary-color !important;
+  }
+
+.ce-their-message-bubble {
+  background-color: #fce8ab !important;
+}
+
+#msg-form-container {
+  width: 97% !important;
+}

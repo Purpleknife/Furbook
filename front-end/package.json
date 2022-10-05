@@ -9,6 +9,7 @@
     "node-sass": "^7.0.3",
     "react": "^16.8.6",
     "react-bootstrap": "^2.5.0",
+    "react-chat-engine": "^1.11.23",
     "react-dom": "^16.14.0",
     "react-router-dom": "^6.4.1",
     "react-scripts": "^5.0.1"
