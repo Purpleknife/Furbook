@@ -9,12 +9,10 @@ import './Post.scss'
 
 const Post = (props) => {
 
-  const [likes, setLikes] = useState({
-    user_likes: false,
-    total_likes: 0
-  });
+  const [likes, setLikes] = useState();
   const [comments, setComments] = useState(null);
   const [commentValue, setCommentValue] = useState('');
+  const [totalComments, setTotalComments] = useState();
 
   const [editInput, setEditInput] = useState({
     editing: false
@@ -82,9 +80,7 @@ const Post = (props) => {
       .then(res => {
         // console.log("Post LIKES:", res.data[0]);
         // console.log('Number of likes:', res.data[0].count);
-        setLikes({
-          total_likes: res.data[0].count
-        });
+        setLikes(res.data[0].count);
       })
       .catch(e => console.log(e));
   };
@@ -96,12 +92,14 @@ const Post = (props) => {
 
         const commentsContent = res.data.map((com) => {
           return (<Comments
+            key={com.content}
             content = {com.content}
             commentator = {com.first_name + ' ' + com.last_name}
             commentator_image = {com.image_url}
           />)
         });
         setComments(commentsContent);
+        setTotalComments(commentsContent.length);
       })
       .catch(e => console.log(e));
   };
@@ -145,7 +143,7 @@ const Post = (props) => {
         <div className="edit-delete">
           <Dropdown>
             <Dropdown.Toggle variant="transparent" id="dropdown-basic">
-              <i class="fa-solid fa-ellipsis"></i>
+              <i className="fa-solid fa-ellipsis"></i>
             </Dropdown.Toggle>
 
             <Dropdown.Menu className="dropdown-menu">
@@ -170,8 +168,8 @@ const Post = (props) => {
       </p>
       {props.image_url && <img className="post-image" src={props.image_url} alt='Pic' />}
       <div className='post-like-comment'>
-        <span><i className="fa-solid fa-paw" onClick={addLikes}></i>{likes.total_likes}</span>
-        <span><i className="fa-solid fa-comments"></i></span>
+        <span><i className="fa-solid fa-paw" onClick={addLikes}></i>{likes}</span>
+        <span><i className="fa-solid fa-comments"></i>{totalComments}</span>
         
       </div>
       <div className='post-footer'>
