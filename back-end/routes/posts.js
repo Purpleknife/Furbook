@@ -7,8 +7,8 @@ module.exports = (db) => {
 
   // Fetch the posts's likes:
   router.get('/postlikes/:post_id', (req, res) => {
-    console.log("Querying postlikes for post_id", req.params.post_id)
-    const queryParams = [req.params.post_id || 8];
+    //console.log("Querying postlikes for post_id", req.params.post_id)
+    const queryParams = [req.params.post_id];
     const queryString =    
     `SELECT posts.id, COUNT(DISTINCT postlikes.id)
     FROM posts
@@ -30,7 +30,29 @@ module.exports = (db) => {
   });
 
   // Fetch the posts's comments:
-  
+  router.get('/comments/:post_id', (req, res) => {
+    const queryParams = [req.params.post_id];
+    const queryString =
+    `SELECT posts.id, comments.content, users.first_name, users.last_name, users.image_url
+    FROM users
+    JOIN comments ON users.id = comments.user_id
+    JOIN posts ON posts.id = comments.post_id
+    WHERE comments.post_id = $1;`
+
+    // `SELECT posts.id, comments.content
+    // FROM posts
+    // JOIN comments ON posts.id = comments.post_id
+    // WHERE comments.post_id = $1;` ;
+
+    db.query(queryString, queryParams)
+      .then(data => {
+        console.log('comments sent:', data.rows);
+        res.json(data.rows);
+      })
+      .catch(e => console.log(e));
+  });
+
+
 
   // GET /posts
   // Show user general feed / Load all user’s posts + friends’ posts + comments under each post

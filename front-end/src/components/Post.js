@@ -3,6 +3,8 @@ import React, { useEffect, useState } from 'react';
 import Dropdown from 'react-bootstrap/Dropdown';
 import axios from 'axios';
 
+import Comments from './Comments';
+
 import './Post.scss'
 
 const Post = (props) => {
@@ -10,7 +12,8 @@ const Post = (props) => {
   const [likes, setLikes] = useState({
     user_likes: false,
     total_likes: 0
-  })
+  });
+  const [comments, setComments] = useState(null);
   
   const [editInput, setEditInput] = useState({
     editing: false
@@ -68,21 +71,41 @@ const Post = (props) => {
   };
 
   const fetchNumberOfLikes = async () => {
-    // query db for post_likes where post_id == post
     await axios.get(`/posts/postlikes/${props.postID}`)
       .then(res => {
-        console.log("Post LIKES:", res.data[0]);
-        console.log('Number of likes:', res.data[0].count);
+        // console.log("Post LIKES:", res.data[0]);
+        // console.log('Number of likes:', res.data[0].count);
         setLikes({
           total_likes: res.data[0].count
         });
       })
       .catch(e => console.log(e));
+  };
+
+  const fetchComments = async () => {
+    await axios.get(`/posts/comments/${props.postID}`)
+      .then(res => {
+        console.log("Post Comments:", res.data);
+
+        const commentsContent = res.data.map((com) => {
+          return (<Comments
+            content = {com.content}
+            commentator = {com.first_name + ' ' + com.last_name}
+            commentator_image = {com.image_url}
+          />)
+        });
+        setComments(commentsContent);
+      })
+      .catch(e => console.log(e));
+  };
+
+  const addLikes = async() => {
+    
   }
-  //fetchNumberOfLikes();
 
   useEffect(() => {
     fetchNumberOfLikes();
+    fetchComments();
   }, []);
 
   return ( 
@@ -120,10 +143,11 @@ const Post = (props) => {
       {props.image_url && <img className="post-image" src={props.image_url} alt='Pic' />}
       <div className='post-like-comment'>
         <span><i className="fa-solid fa-paw"></i>{likes.total_likes}</span>
-        <i className="fa-solid fa-comments"></i>
+        <span><i className="fa-solid fa-comments"></i>{comments.length}</span>
+        
       </div>
       <div className='post-footer'>
-        {/* Comments will go here. Needs logged in users img and a textarea */}
+        {comments}
         {/* User pic
         <input placeholder='Write a comment...' /> */}
       </div>
