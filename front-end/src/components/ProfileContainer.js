@@ -19,6 +19,7 @@ const ProfileContainer = (props) => {
   const [inputRelation, setInputRelation] = useState(props.user.relationship_status);
   const [inputBirthday, setInputBirthday] = useState(props.user.birthday.slice(0, 10));
   const [inputLocation, setInputLocation] = useState(props.user.location);
+  const [imageUrl, setImageUrl] = useState('');
 
 
   const fetchUser = async (id) => {
@@ -29,6 +30,7 @@ const ProfileContainer = (props) => {
         setInputRelation(res.data[0].relationship_status);
         setInputBirthday(res.data[0].birthday.slice(0, 10));
         setInputLocation(res.data[0].location);
+        setImageUrl(res.data[0].users_image_url);
         setData(res.data);
       })
       .catch(e => console.log(e));
@@ -83,19 +85,19 @@ const ProfileContainer = (props) => {
 
   useEffect(() => {
     document.title = `${props.user.first_name}'s Profile`;
-  });
+  }, [data]);
 
   // New postsList for dynamic profile loading
   const postsList = data.map(post => {
     return (
       <Post
         key={post.id}
-        userID={props.user.id}
+        userID={post.user_id}
         content={post.content} 
         creator={post.creator}
         image_url={post.image_url}
-        creator_name={props.user.first_name + ' ' + props.user.last_name}
-        creator_image={props.user.image_url}
+        creator_name={inputName}
+        creator_image={post.users_image_url}
         postID={post.id}
         setPosts={props.setProfilePosts}
         posts={props.profilePosts}
@@ -146,15 +148,15 @@ const ProfileContainer = (props) => {
         <img
             alt="profile"
             className="profile-image"
-            src={props.user.image_url}
+            src={imageUrl}
         />
         <div className="profile-info">
-          <p><span className="profile-name" style={viewMode}>{ inputName ? inputName : props.user.first_name + ' ' + props.user.last_name}</span>
+          <p><span className="profile-name" style={viewMode}>{ inputName ? inputName : ''}</span>
             <input 
               className="input-field"
               type="text"
               style={editMode}
-              placeholder={props.user.first_name + ' ' + props.user.last_name}
+              placeholder=''
               value={inputName}
               onChange = {(event) => {
                 setInputName(event.target.value)}
@@ -164,12 +166,12 @@ const ProfileContainer = (props) => {
             <span style={viewMode} className="edit" onClick={edit}><i className="fa-solid fa-pen-to-square"></i></span>
           </p>
 
-          <p><span className="profile-title">Relationship Status:</span><span style={viewMode}> {inputRelation ? inputRelation : props.user.relationship_status}</span>
+          <p><span className="profile-title">Relationship Status:</span><span style={viewMode}> {inputRelation ? inputRelation : ''}</span>
           <input 
               className="input-field"
               type="text"
               style={editMode}
-              placeholder={props.user.relationship_status}
+              placeholder=''
               value={inputRelation}
               onChange = {(event) => {
                 setInputRelation(event.target.value)}
@@ -178,12 +180,12 @@ const ProfileContainer = (props) => {
             />
           </p>
 
-          <p><span className="profile-title">Birthday:</span><span style={viewMode}> {inputBirthday ? inputBirthday : props.user.birthday.slice(0, 10)}</span>
+          <p><span className="profile-title">Birthday:</span><span style={viewMode}> {inputBirthday ? inputBirthday : ''}</span>
           <input 
               className="input-field"
               type="text"
               style={editMode}
-              placeholder={props.user.birthday.slice(0, 10)}
+              placeholder=''
               value={inputBirthday}
               onChange = {(event) => {
                 setInputBirthday(event.target.value)}
@@ -192,12 +194,12 @@ const ProfileContainer = (props) => {
             />
           </p>
 
-          <p><span className="profile-title">Location:</span><span style={viewMode}> {inputLocation ? inputLocation : props.user.location}</span>
+          <p><span className="profile-title">Location:</span><span style={viewMode}> {inputLocation ? inputLocation : ''}</span>
           <input 
               className="input-field"
               type="text"
               style={editMode}
-              placeholder={props.user.location}
+              placeholder=''
               value={inputLocation}
               onChange = {(event) => {
                 setInputLocation(event.target.value)}

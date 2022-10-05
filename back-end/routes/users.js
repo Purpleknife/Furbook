@@ -23,7 +23,11 @@ module.exports = (db) => {
   router.get('/users/:id', (req, res) => {
     const queryParams = [req.params.id || 1];
     const queryString = `
-      SELECT users.*, posts.* FROM posts
+      SELECT  users.*,
+              users.image_url AS users_image_url,
+              users.id AS users_id,
+              posts.* 
+      FROM posts
       JOIN users ON users.id = creator
       WHERE creator = $1
       ORDER BY posts.id DESC
