@@ -5,7 +5,7 @@ import axios from 'axios';
 
 import Comments from './Comments';
 
-import './Post.scss'
+import './Post.scss';
 
 const Post = (props) => {
 
@@ -20,10 +20,8 @@ const Post = (props) => {
   const [inputContent, setInputContent] = useState(props.content);
 
   const handleChange = (e) => {
-    setCommentValue({
-      comments: e.target.value
-    })
-  }
+    setCommentValue(e.target.value);
+  };
 
   const edit = () => {
     setEditInput({
@@ -115,16 +113,17 @@ const Post = (props) => {
       .catch(e => console.log(e));
   };
 
-  const addPosts = async(e) => {
+  const addComments = async(e) => {
     e.preventDefault();
 
     await axios.post(`/posts/comments/${props.postID}`,
      { post_id: props.postID,
-      content: commentValue.comments}
+      content: commentValue}
     )
       .then(res => {
         console.log("Comment added by User:", res.data[0]);
         fetchComments();
+        setCommentValue({content: ''}); //Clean up state after submit.
       })
       .catch(e => console.log(e));
   };
@@ -170,18 +169,19 @@ const Post = (props) => {
       <div className='post-like-comment'>
         <span><i className="fa-solid fa-paw" onClick={addLikes}></i>{likes}</span>
         <span><i className="fa-solid fa-comments"></i>{totalComments}</span>
-        
       </div>
       <div className='post-footer'>
-        <form className='add-comment'>
-          <input 
+        <form>
+          <input
+            className='add-comment'
             type="text"
             name='comment'
             value={commentValue.content}
             onChange={handleChange}
             placeholder='Write a comment here...'
           />
-          <button onClick={addPosts}>Add</button>
+          <br />
+          <button className="add-comment-btn" onClick={addComments}>Add</button>
         </form>
         {comments}
       </div>
