@@ -134,7 +134,7 @@ const ProfileContainer = (props) => {
     return (
       <Post
         key={post.id}
-        userID={post.users_id}
+        userID={props.user.id}
         content={post.content} 
         creator={post.creator}
         image_url={post.image_url}
