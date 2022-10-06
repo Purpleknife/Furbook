@@ -9,7 +9,7 @@ const cookieSession = require('cookie-session');
 const methodOverride = require('method-override');
 const PORT = 8080;
 
-const socketIo = require('socket.io');
+const {Server} = require('socket.io');
 
 // Express Configuration
 app.use(morgan('dev'));
@@ -41,21 +41,45 @@ app.use('/friendships', friendshipsRoutes(db));
 app.use('/posts', postsRoutes(db));
 app.use('/', usersRoutes(db));
 
-//Implement WebSockets with socket.io
-io.on('connection',(socket)=>{
-  console.log('client connected: ', socket.id)
-  
-  socket.join('clock-room')
-  
-  socket.on('disconnect', (reason)=>{
-    console.log(reason)
-  })
-})
-setInterval(()=>{
-     io.to('clock-room').emit('time', new Date())
-},1000)
 
-app.listen(PORT, () => {
+const http = app.listen(PORT, () => {
   // eslint-disable-next-line no-console
   console.log(`Express seems to be listening on port ${PORT} so that's pretty good 👍`);
+});
+
+
+//Implement WebSockets with socket.io
+// const server = http.createServer(app);
+
+// const io = socketIo(server, {
+//   cors: {
+//     origin: 'http://localhost:3000'
+//   }
+// }) //in case server and client run on different urls
+
+// socketIo(server, {
+//   handlePreflightRequest: (req, res) => {
+//       const headers = {
+//           "Access-Control-Allow-Headers": "Content-Type, Authorization",
+//           "Access-Control-Allow-Origin": req.headers.origin, //or the specific origin you want to give access to,
+//           "Access-Control-Allow-Credentials": true
+//       };
+//       res.writeHead(200, headers);
+//       res.end();
+//   }
+// });
+
+const io = new Server(http);
+
+io.on('connection',(client)=>{
+  console.log('client connected: ', client.id);
+  // client.emit('system', `Welcome ${client.id}`);
+  // client.broadcast.emit('system', `${client.id} has just joined.`);
+  
+  // client.join('clock-room')
+  
+  client.on('disconnect', ()=>{
+    console.log('Disconnecting client: ', client.id)
+    //client.broadcast.emit('system', `${client.id} has just left.`);
+  })
 });

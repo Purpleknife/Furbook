@@ -12,7 +12,8 @@
     "react-chat-engine": "^1.11.23",
     "react-dom": "^16.14.0",
     "react-router-dom": "^6.4.1",
-    "react-scripts": "^5.0.1"
+    "react-scripts": "^5.0.1",
+    "socket.io-client": "^4.5.2"
   },
   "scripts": {
     "start": "react-scripts start",
