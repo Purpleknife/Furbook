@@ -4,7 +4,7 @@ import Friend from './Friend';
 import FriendshipPending from './FriendshipPending';
 import './Friendships.scss';
 
-const Friendships = () => {
+const Friendships = (props) => {
 
   // INITIAL STATE
   const [friends, setFriends] = useState([]);
@@ -31,9 +31,12 @@ const Friendships = () => {
         };
  
         setFriends(confirmedFriendships);
+        props.setFriends(confirmedFriendships);
         setFriendsCounter(confirmedFriendships.length);
         setPending(pendingFriendships);
+        props.setPendingFriends(pendingFriendships)
         setPendingCounter(pendingFriendships.length);
+        props.setPendingCounter(pendingFriendships.length);
       });
   }, [friendsCounter, pendingCounter]);
 

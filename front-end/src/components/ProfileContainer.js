@@ -130,7 +130,6 @@ const ProfileContainer = (props) => {
 
   // New postsList for dynamic profile loading
   const postsList = data.map(post => {
-    console.log('post in ProfileContainer', post);
     return (
       <Post
         key={post.id}

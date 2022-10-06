@@ -6,7 +6,7 @@ import SideNav from './SideNav';
 const Chat = (props) => {
 	return (
     <div>
-      <SideNav user={props.user} setUser={props.setUser}/>
+      <SideNav user={props.user} setUser={props.setUser} pendingCounter={props.pendingCounter} />
       <ChatEngine
         height='95vh'
         projectID='8d68967f-e10d-4bbb-8e1b-d14f5592c345'
