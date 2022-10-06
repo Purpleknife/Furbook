@@ -30,6 +30,7 @@ const FriendshipPending = (props) => {
         <div className="friend-info" onClick={() => handleClick(props.id)}>
           <img className="friend-picture"
             src={props.picture}
+            onClick={() => handleClick(props.id)}
           />
           <p className="pending-name">{props.first_name} {props.last_name}</p>
         </div>

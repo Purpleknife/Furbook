@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import Dropdown from 'react-bootstrap/Dropdown';
 import axios from 'axios';
@@ -8,6 +9,8 @@ import Comments from './Comments';
 import './Post.scss';
 
 const Post = (props) => {
+
+  const navigate = useNavigate();
 
   const [likes, setLikes] = useState();
   const [comments, setComments] = useState(null);
@@ -44,18 +47,13 @@ const Post = (props) => {
       editPost();
     }
   };
-  //console.log('props.post.id', props.postID);
   
   const editPost = async() => {
    await axios.put(`/posts/${props.postID}`, { 
       content: inputContent
      })
       .then((res) => {
-        console.log("axios.put post data: ", res.data[0]);
-          //props.setPosts([res.data[0]]); //updates but removes older posts.
-          //props.setPosts(prev => [...prev, res.data[0]]); //updates but creates duplicate.
-          props.refetch();
-          
+        props.refetch();
       })
       .catch((error) => {
         console.log(error);
@@ -65,7 +63,6 @@ const Post = (props) => {
   const deletePost = async() => {
     await axios.delete(`/posts/${props.postID}`)
       .then((res) => {
-        console.log("axios.delete data: ", res.data);
         props.refetch();
       })
       .catch((error) => {
@@ -76,8 +73,6 @@ const Post = (props) => {
   const fetchNumberOfLikes = async () => {
     await axios.get(`/posts/postlikes/${props.postID}`)
       .then(res => {
-        // console.log("Post LIKES:", res.data[0]);
-        // console.log('Number of likes:', res.data[0].count);
         setLikes(res.data[0].count);
       })
       .catch(e => console.log(e));
@@ -107,7 +102,6 @@ const Post = (props) => {
       post_id: props.postID
     })
       .then(res => {
-        console.log("Like added by User:", res.data[0]);
         fetchNumberOfLikes();
       })
       .catch(e => console.log(e));
@@ -121,7 +115,6 @@ const Post = (props) => {
       content: commentValue}
     )
       .then(res => {
-        console.log("Comment added by User:", res.data[0]);
         fetchComments();
         setCommentValue({content: ''}); //Clean up state after submit.
       })
@@ -133,11 +126,15 @@ const Post = (props) => {
     fetchComments();
   }, []);
 
+  const navigateToProfile = (id) => {
+    navigate(`/users/${id}`)
+  }
+
   return ( 
     <div className="post-body">
       <div className='post-title'>
-        <img src={props.creator_image} alt='Creators profile' />
-        <h4>{props.creator_name}</h4>
+        <img src={props.creator_image} alt='Creators profile' onClick={() => navigateToProfile(props.creator)} />
+        <h4 onClick={() => navigateToProfile(props.creator)} >{props.creator_name}</h4>
         {props.userID === props.creator && 
         <div className="edit-delete">
           <Dropdown>
