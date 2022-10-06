@@ -52,6 +52,7 @@ const Post = (props) => {
     }
   };
   
+  //To edit a post:
   const editPost = async() => {
    await axios.put(`/posts/${props.postID}`, { 
       content: inputContent
@@ -64,6 +65,8 @@ const Post = (props) => {
       });
   };
 
+
+  //To delete a post:
   const deletePost = async() => {
     await axios.delete(`/posts/${props.postID}`)
       .then((res) => {
@@ -74,6 +77,8 @@ const Post = (props) => {
       });
   };
 
+
+  //To get number of likes in a post:
   const fetchNumberOfLikes = async () => {
     await axios.get(`/posts/postlikes/${props.postID}`)
       .then(res => {
@@ -82,7 +87,8 @@ const Post = (props) => {
       .catch(e => console.log(e));
   };
 
-  //console.log('USER HERE:', props.userID);
+
+  //To get the posts liked by the user:
   const fetchUserLikes = async() => {
     await axios.get(`/posts/postlikes/${props.postID}/users/${props.userID}`)
       .then(res => {
@@ -92,6 +98,8 @@ const Post = (props) => {
       .catch(e => console.log(e));
   }
 
+
+  //To get the comments of a post:
   const fetchComments = async () => {
     await axios.get(`/posts/comments/${props.postID}`)
       .then(res => {
@@ -113,6 +121,8 @@ const Post = (props) => {
       .catch(e => console.log(e));
   };
 
+  
+  //To add likes on posts:
   const addLikes = async() => {
     await axios.post(`/posts/postlikes/${props.postID}`, {
       post_id: props.postID
@@ -124,6 +134,8 @@ const Post = (props) => {
       .catch(e => console.log(e));
   };
 
+
+  //To add comments on posts:
   const addComments = async(e) => {
     e.preventDefault();
 
@@ -138,24 +150,13 @@ const Post = (props) => {
       .catch(e => console.log(e));
   };
 
-
-  // const changeColor = () => {
-  //   if (document.getElementById("like_btn").style.color === ("#FF0000")) {
-  //     document.getElementById("like_btn").style.color = ("#000000");
-  //   }
-  //   if (document.getElementById("like_btn").style.color === ("#000000")) {
-  //     document.getElementById("like_btn").style.color = ("#FF0000");
-  //   }    
-  // };
-
   useEffect(() => {
     fetchNumberOfLikes();
     fetchComments();
     fetchUserLikes();
   }, []);
 
-  useEffect(() => {
-    
+  useEffect(() => {    
     if (myLikes) {
       setColor("#FF0000");
       console.log('setting color here');
@@ -164,7 +165,7 @@ const Post = (props) => {
 
   const navigateToProfile = (id) => {
     navigate(`/users/${id}`)
-  }
+  };
 
   return ( 
     <div className="post-body">
