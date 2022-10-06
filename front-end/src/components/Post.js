@@ -136,8 +136,8 @@ const Post = (props) => {
     <div className="post-body">
       <div className='post-title'>
         <img src={props.creator_image} alt='Creators profile' onClick={() => navigateToProfile(props.creator)} />
-        <h4 onClick={() => navigateToProfile(props.creator)} >{props.creator_name}</h4>
-        <p className='date'>{props.date.slice(0, 10)}</p>
+        <h4 onClick={() => navigateToProfile(props.creator)} >{props.creator_name}<p className='date'>{props.date.slice(0, 10)}</p></h4>
+        
         {props.userID === props.creator && 
         <div className="edit-delete">
           <Dropdown>
