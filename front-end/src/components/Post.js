@@ -17,6 +17,10 @@ const Post = (props) => {
   const [commentValue, setCommentValue] = useState('');
   const [totalComments, setTotalComments] = useState();
 
+  const [myLikes, setMyLikes] = useState();
+
+  const [color, setColor] = useState('');
+
   const [editInput, setEditInput] = useState({
     editing: false
   });
@@ -48,6 +52,7 @@ const Post = (props) => {
     }
   };
   
+  //To edit a post:
   const editPost = async() => {
    await axios.put(`/posts/${props.postID}`, { 
       content: inputContent
@@ -60,6 +65,8 @@ const Post = (props) => {
       });
   };
 
+
+  //To delete a post:
   const deletePost = async() => {
     await axios.delete(`/posts/${props.postID}`)
       .then((res) => {
@@ -70,6 +77,8 @@ const Post = (props) => {
       });
   };
 
+
+  //To get number of likes in a post:
   const fetchNumberOfLikes = async () => {
     await axios.get(`/posts/postlikes/${props.postID}`)
       .then(res => {
@@ -78,6 +87,19 @@ const Post = (props) => {
       .catch(e => console.log(e));
   };
 
+
+  //To get the posts liked by the user:
+  const fetchUserLikes = async() => {
+    await axios.get(`/posts/postlikes/${props.postID}/users/${props.userID}`)
+      .then(res => {
+        console.log('DATA HERE', res.data[0])
+        setMyLikes(res.data[0].post_id);
+      })
+      .catch(e => console.log(e));
+  }
+
+
+  //To get the comments of a post:
   const fetchComments = async () => {
     await axios.get(`/posts/comments/${props.postID}`)
       .then(res => {
@@ -99,16 +121,35 @@ const Post = (props) => {
       .catch(e => console.log(e));
   };
 
+  
+  //To add likes on posts:
   const addLikes = async() => {
-    await axios.post(`/posts/postlikes/${props.postID}`, {
-      post_id: props.postID
-    })
+    if (myLikes) {
+      await axios.delete(`/posts/postlikes/${props.postID}`)
       .then(res => {
+        console.log('delete a LIKE', res.data[0])
+        fetchUserLikes();
         fetchNumberOfLikes();
+        setMyLikes('');
       })
       .catch(e => console.log(e));
-  };
+    }
 
+    if (!myLikes) {
+      await axios.post(`/posts/postlikes/${props.postID}`, {
+        post_id: props.postID
+      })
+        .then(res => {
+          fetchUserLikes();
+          fetchNumberOfLikes();
+        })
+        .catch(e => console.log(e));
+
+    }
+  };
+  
+
+  //To add comments on posts:
   const addComments = async(e) => {
     e.preventDefault();
 
@@ -126,13 +167,25 @@ const Post = (props) => {
   useEffect(() => {
     fetchNumberOfLikes();
     fetchComments();
+    fetchUserLikes();
   }, []);
+
+  useEffect(() => {    
+    if (myLikes) {
+      setColor("#FF0000");
+      console.log('setting color to red here');
+    }
+    if (!myLikes) {
+      setColor("#000000");
+      console.log('setting color to black here');
+    }
+  }, [myLikes])
 
   const navigateToProfile = (id) => {
     navigate(`/users/${id}`)
-  }
+  };
 
-  return ( 
+  return (
     <div className="post-body">
       <div className='post-title'>
         <img src={props.creator_image} alt='Creators profile' onClick={() => navigateToProfile(props.creator)} />
@@ -167,7 +220,13 @@ const Post = (props) => {
       </p>
       {props.image_url && <img className="post-image" src={props.image_url} alt='Pic' />}
       <div className='post-like-comment'>
-        <span><i className="fa-solid fa-paw" onClick={addLikes}></i>{likes}</span>
+        
+        {/* {myLikes 
+        ? <span id="like_btn" onClick={addLikes} style={ {color: `${color}`}}><i className="fa-solid fa-paw"></i>{likes}</span>
+        : <span id="like_btn" onClick={removeLikes} style={ {color: `${color}`}}><i className="fa-solid fa-paw"></i>{likes}</span> } */}
+
+        <span id="like_btn" onClick={addLikes} style={ {color: `${color}`}}><i className="fa-solid fa-paw"></i>{likes}</span>
+
         <span><i className="fa-solid fa-comments"></i>{totalComments}</span>
       </div>
       <div className='post-footer'>

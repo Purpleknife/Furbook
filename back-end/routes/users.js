@@ -3,6 +3,22 @@ const router  = express.Router();
 //const db = require('../db/connection');
 
 module.exports = (db) => { 
+
+  //Grab ALL users from db:
+  router.get('/users', (req, res) => {
+    const queryString = `SELECT * FROM users;`;
+
+    db.query(queryString)
+      .then(data => {
+        console.log('ALL USERS FROM DB:', data.rows);
+        res.json(data.rows);
+      })
+      .catch(error => {
+        console.log(error.message);
+      });
+  });
+
+
   //Login route:
   router.get('/login/:id', (req, res) => {
     const queryString = `SELECT * FROM users WHERE users.id = $1;`;

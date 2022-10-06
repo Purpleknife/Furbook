@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 
+import Button from 'react-bootstrap/Button';
+import Login from './Login';
 
 import './LandingPage.scss';
 import axios from 'axios';
@@ -18,7 +20,11 @@ const LandingPage = (props) => {
       })
     
   };
+  const [show, setShow] = useState(false);
 
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+  
   return (
 
     <div className="landing-page">
@@ -35,7 +41,13 @@ const LandingPage = (props) => {
         <p>Make friends, find true love or <i>maybe just gossip about your human?</i></p>
         <p>If yes, <span id='logo'>Furbook</span> is the place for you!</p>
 
-        <button className="login__btn" onClick={login}>Login</button>
+        <button className="login__btn" onClick={login}>Login</button> &nbsp;
+
+        <Button className="login__btn" onClick={handleShow}>
+          Dynamic Login
+        </Button>
+        <Login user={props.user} setUser={props.setUser} handleClose={handleClose} show={show}/>
+
 
       </div>
 
