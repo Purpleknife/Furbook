@@ -1,6 +1,7 @@
 import React from "react";
-import './Friend.scss';
+import axios from 'axios';
 import { useNavigate } from 'react-router-dom'
+import './Friend.scss';
 
 const Friend = (props) => {
 
@@ -19,6 +20,28 @@ const Friend = (props) => {
     navigate(`/users/${friend_id}`);
   };
 
+  // CREATE A NEW CHAT CONVO AND REDIRECT TO CHAT PAGE
+  const startMessage = () => {
+    const config = {
+      headers:{
+        "Project-ID": "8d68967f-e10d-4bbb-8e1b-d14f5592c345",
+        "User-Name": "Cindy",
+        "User-Secret": "cindyclawford"
+      }
+    };
+    const chatDetails = {
+      usernames: ['Cindy', props.first_name],
+      is_direct_chat: true
+    };
+ 
+    axios.put('https://api.chatengine.io/chats/', chatDetails, config)
+      .then(res => {
+        console.log("Chat successfully started", res)
+        navigate('/chat');
+      })
+      .catch(e => console.log("startMessage Axios request Error :", e));
+  };
+
   return (
       <main className="friend-card">
         <div className="friend-info" onClick={() => handleClick(props.id)}>
@@ -29,7 +52,7 @@ const Friend = (props) => {
           <p className="friend-date">Friends since: {date_added}</p>
         </div>
         <div className="friend-actions">
-          <button className="btn"><i className="fa-solid fa-message"></i><br></br><span>Message</span></button>
+          <button className="btn" onClick={startMessage}><i className="fa-solid fa-message"></i><br></br><span>Message</span></button>
           <button className="btn" onClick={destroy}><i className="fa-solid fa-xmark"></i><br></br><span>Remove</span></button>
         </div>
       </main>
