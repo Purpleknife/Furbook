@@ -26,35 +26,28 @@ const App = () => {
   //       setProfilePosts(res.data);
   //     })
   // };
-
+  
+  // API CALL
   useEffect(() => {
-    console.log("Pending counter app.js:", pendingCounter)
-  
-  }, [pendingCounter])
-  
-
-  // const fetchFriends = async () => {
-  //   await axios.get('/')
-  //     .then(res => {
-
-  //       const tempCounter = 0;
-  //       const friendsList = [];
+    axios.get('/friendships')
+      .then((res) => {
+        // Separate confirmed friendships from pending friendships
+        const confirmedFriendships = [];
+        const pendingFriendships = [];
         
-  //       for (const friendship of res.data) {
-  //         if (friendship.status === false) {
-  //           tempCounter++;
-  //         };
-  //         friendsList.push(friendship);
-  //       };
-
-  //       setFriends(friendsList);
-  //       setPendingCounter(tempCounter);
-  //     })
-  // }
-
-  // useEffect(() => {
-  //   fetchFriends();
-  // }, [user])
+        for (const friendship of res.data) {
+          if (friendship.status === true) {
+            confirmedFriendships.push(friendship);
+          } else {
+            pendingFriendships.push(friendship);
+          };
+        };
+ 
+        setFriends(confirmedFriendships);
+        setPendingFriends(pendingFriendships)
+        setPendingCounter(pendingFriendships.length);
+      });
+  }, [user]);
 
   useEffect(() => {
     if (refetch) {
@@ -71,7 +64,7 @@ const App = () => {
       {/* <SideNav user={user} setUser={setUser}/> */}
       <Routes>
         <Route path="/" element={<LandingPage setUser={setUser}/>} />
-        <Route path="/users/:id" element={<div className="wrapper"><SideNav user={user} setUser={setUser} pendingCounter={pendingCounter} /><ProfileContainer user={user} setUser={setUser} refetch={() => setRefetch(true)}/></div>} />
+        <Route path="/users/:id" element={<div className="wrapper"><SideNav user={user} setUser={setUser} pendingCounter={pendingCounter} /><ProfileContainer user={user} setUser={setUser} pendingFriends={pendingFriends} friends={friends} refetch={() => setRefetch(true)}/></div>} />
         <Route path="/posts" element={<><SideNav user={user} setUser={setUser} pendingCounter={pendingCounter} /><GeneralFeed user={user} refetch={() => setRefetch(true)}/></> }/> 
         <Route path='/friendships' element={<><SideNav user={user} setUser={setUser} pendingCounter={pendingCounter} /><Friendships setFriends={setFriends} setPendingFriends={setPendingFriends} setPendingCounter={setPendingCounter} /></>} />
         <Route path='/chat' element={<Chat user={user} setUser={setUser} pendingCounter={pendingCounter}  />} />

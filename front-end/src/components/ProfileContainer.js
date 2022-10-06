@@ -12,6 +12,7 @@ const ProfileContainer = (props) => {
   const [firstLoad, setFirstLoad] = useState(true);
   const [data, setData] = useState([]);
   const [editable, setEditable] = useState(false);
+  const [friendButton, setFriendButton] = useState('');
   
   const [editInput, setEditInput] = useState({
     editing: false
@@ -26,7 +27,8 @@ const ProfileContainer = (props) => {
   const navigate = useNavigate();
 
 
-  const fetchUser = async (id) => {
+  const fetchUser = async (id) => { 
+
     await axios.get(`/users/Profile/${id}`)
       .then(res => {
         setUserId(res.data[0].users_id);
@@ -35,7 +37,28 @@ const ProfileContainer = (props) => {
         setInputBirthday(res.data[0].birthday.slice(0, 10));
         setInputLocation(res.data[0].location);
         setImageUrl(res.data[0].users_image_url);
-        
+
+        let friendFound = false;
+
+        for (const friend of props.friends) {
+          if (friend.receiver === res.data[0].users_id || friend.sender === res.data[0].users_id) {
+            console.log("Setting friend to blank");
+            friendFound = true;
+            break;
+          }
+        }
+
+        if (!friendFound) {
+          setFriendButton('Add friend?');
+        }
+
+        for (const friend of props.pendingFriends) {
+          if (friend.receiver === res.data[0].users_id || friend.sender === res.data[0].users_id) {
+            console.log("Setting friend to pending");
+            setFriendButton('Request pending');
+            break;
+          }
+        }
 
         if (res.data[0].users_id === props.user.id) {
           setEditable(true);
@@ -59,7 +82,7 @@ const ProfileContainer = (props) => {
     if (params.id !== userId) {
       fetchUser(params.id);
     }
-  }, [params])
+  }, [params.id])
 
   const edit = () => {
     setEditInput({
@@ -145,7 +168,7 @@ const ProfileContainer = (props) => {
       />
     );
   });
-  console.log('profilePosts:', props.profilePosts);
+
 
 
   // Old postsList
@@ -252,7 +275,7 @@ const ProfileContainer = (props) => {
 
           <div className="profile__btns">
           {!editable && <button className="profile__btn" onClick={startMessage}>Wanna chat?</button>}
-          {!editable && <button className="profile__btn">Be friends?</button>}
+          {!editable && friendButton && <button className="profile__btn">{friendButton}</button>}{/* Be friends? */}
           </div>
         </div>
       </div>

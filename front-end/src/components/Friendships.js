@@ -16,8 +16,6 @@ const Friendships = (props) => {
   useEffect(() => {
     axios.get('/friendships')
       .then((res) => {
-        console.log("AXIOS FRIENDS DATA: ", res)
-
         // Separate confirmed friendships from pending friendships
         const confirmedFriendships = [];
         const pendingFriendships = [];
@@ -43,8 +41,7 @@ const Friendships = (props) => {
   // ACCEPT FRIENDSHIP
   const accept = (friend_id) => {
     axios.put(`/friendships/${friend_id}`);
-    console.log("Axios request to accept friendship");
-
+    
     // Add new friend to the friends state
     let newFriend = {};
     for (const friend of pending) {
@@ -123,7 +120,7 @@ const Friendships = (props) => {
   return (
     <main className="friendships-container">
       <section className='friends'>
-        <h2>Friend Requests ({pendingCounter})</h2>
+        {<h2>Friend Requests ({pendingCounter})</h2>}
         <section className='friends-list'>
           {pendingFriendItem}
         </section>
