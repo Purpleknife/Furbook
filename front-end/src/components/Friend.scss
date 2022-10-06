@@ -28,12 +28,19 @@
     cursor: pointer;
   }
 
-  p {
+  .friend-name {
     margin-top: 12px;
+    margin-bottom: 0.1rem;
     text-align: center;
     cursor: pointer;
     font-size: large;
     font-weight: bold;
+  }
+
+  .friend-date {
+    font-size: small;
+    color: grey;
+    font-style: italic;
   }
 }
 

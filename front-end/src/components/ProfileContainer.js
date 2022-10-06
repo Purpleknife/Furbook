@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './ProfileContainer.scss';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 
 import axios from 'axios';
 
@@ -22,6 +22,8 @@ const ProfileContainer = (props) => {
   const [inputBirthday, setInputBirthday] = useState(props.user.birthday.slice(0, 10));
   const [inputLocation, setInputLocation] = useState(props.user.location);
   const [imageUrl, setImageUrl] = useState('');
+
+  const navigate = useNavigate();
 
 
   const fetchUser = async (id) => {
@@ -102,6 +104,29 @@ const ProfileContainer = (props) => {
   useEffect(() => {
     document.title = `${props.user.first_name}'s Profile`;
   }, [data]);
+
+  // CREATE A NEW CHAT CONVO AND REDIRECT TO CHAT PAGE
+  const startMessage = () => {
+    const config = {
+      headers:{
+        "Project-ID": "8d68967f-e10d-4bbb-8e1b-d14f5592c345",
+        "User-Name": "Cindy",
+        "User-Secret": "cindyclawford"
+      }
+    };
+    const friendUsername = inputName.split(" ")[0];
+    const chatDetails = {
+      usernames: ['Cindy', friendUsername],
+      is_direct_chat: true
+    };
+ 
+    axios.put('https://api.chatengine.io/chats/', chatDetails, config)
+      .then(res => {
+        console.log("Chat successfully started", res)
+        navigate('/chat');
+      })
+      .catch(e => console.log("startMessage Axios request Error :", e));
+  };
 
   // New postsList for dynamic profile loading
   const postsList = data.map(post => {
@@ -227,7 +252,7 @@ const ProfileContainer = (props) => {
           </p>
 
           <div className="profile__btns">
-          {!editable && <button className="profile__btn">Wanna chat?</button>}
+          {!editable && <button className="profile__btn" onClick={startMessage}>Wanna chat?</button>}
           {!editable && <button className="profile__btn">Be friends?</button>}
           </div>
         </div>

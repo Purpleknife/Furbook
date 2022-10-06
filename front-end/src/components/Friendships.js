@@ -95,6 +95,7 @@ const Friendships = () => {
         first_name={pendingFriend.first_name}
         last_name={pendingFriend.last_name}
         picture={pendingFriend.image_url}
+        date_added={pendingFriend.date_added}
         accept={accept}
         decline={decline}
       />
@@ -110,13 +111,14 @@ const Friendships = () => {
         first_name={friend.first_name}
         last_name={friend.last_name}
         picture={friend.image_url}
+        date_added={friend.date_added}
         unfriend={unfriend}
       />
     )
   });
 
   return (
-    <main>
+    <main className="friendships-container">
       <section className='friends'>
         <h2>Friend Requests ({pendingCounter})</h2>
         <section className='friends-list'>
