@@ -23,6 +23,7 @@ const App = () => {
   //       setProfilePosts(res.data);
   //     })
   // };
+  //const [socket, setSocket] = useState();
 
   useEffect(() => {
     const socket = io('/');
