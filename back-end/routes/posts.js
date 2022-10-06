@@ -82,8 +82,8 @@ module.exports = (db) => {
 
     const queryParams = [post_id, user_id, content];
     const queryString = `
-    INSERT INTO comments (post_id, user_id, content)
-    VALUES ($1, $2, $3)
+    INSERT INTO comments (post_id, user_id, content, date_added)
+    VALUES ($1, $2, $3, Now())
     RETURNING *;
     `;
 
