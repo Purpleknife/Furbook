@@ -33,7 +33,7 @@ const ProfileContainer = (props) => {
         setInputBirthday(res.data[0].birthday.slice(0, 10));
         setInputLocation(res.data[0].location);
         setImageUrl(res.data[0].users_image_url);
-        setData(res.data);
+        
 
         if (res.data[0].users_id === props.user.id) {
           setEditable(true);
@@ -116,13 +116,12 @@ const ProfileContainer = (props) => {
         creator_name={inputName}
         creator_image={post.users_image_url}
         postID={post.id}
-        setPosts={props.setProfilePosts}
-        posts={props.profilePosts}
         refetch={props.refetch}
-        // date={props.profilePosts.date_posted}
+        date={post.date_posted}
       />
     );
   });
+  console.log('profilePosts:', props.profilePosts);
 
 
   // Old postsList
