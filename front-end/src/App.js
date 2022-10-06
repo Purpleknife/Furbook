@@ -39,7 +39,7 @@ const App = () => {
       
       {/* <SideNav user={user} setUser={setUser}/> */}
       <Routes>
-        <Route path="/" element={<LandingPage setUser={setUser}/>} />
+        <Route path="/" element={<LandingPage user={user} setUser={setUser}/>} />
         <Route path="/users/:id" element={<div className="wrapper"><SideNav user={user} setUser={setUser}/><ProfileContainer user={user} setUser={setUser} refetch={() => setRefetch(true)}/></div>} />
         <Route path="/posts" element={<><SideNav user={user} setUser={setUser}/><GeneralFeed user={user} refetch={() => setRefetch(true)}/></> }/> 
         <Route path='/friendships' element={<><SideNav user={user} setUser={setUser}/><Friendships /></>} />
