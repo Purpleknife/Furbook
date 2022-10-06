@@ -4,5 +4,6 @@ CREATE TABLE posts (
   id SERIAL PRIMARY KEY NOT NULL,
   creator INTEGER REFERENCES users(id) ON DELETE CASCADE,
   content TEXT NOT NULL,
-  image_url VARCHAR(255)
+  image_url VARCHAR(255),
+  date_posted DATE NOT NULL
 );
