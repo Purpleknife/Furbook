@@ -134,8 +134,8 @@ module.exports = (db) => {
 
     queryParams = [req.session.user_id, req.body.content, image_url];
     queryString = `
-    INSERT INTO posts (creator, content, image_url)
-    VALUES ($1, $2, $3)
+    INSERT INTO posts (creator, content, image_url, date_posted)
+    VALUES ($1, $2, $3, Now())
     RETURNING *;
     `;
 
