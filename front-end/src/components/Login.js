@@ -32,7 +32,6 @@ const Login = (props) => {
 
               axios.get(`/login/${userID}`)
                 .then((res) => {
-                  console.log("User data: ", {...res.data[0]});
                   props.setUser(res.data[0]);
                   navigate('/posts');
                 })
@@ -44,7 +43,6 @@ const Login = (props) => {
           if (!findUser) {
             alert('Please register!');
           }
-        console.log('FUNCTION findUser', findUser);
       })
       .catch(e => console.log(e));
 
