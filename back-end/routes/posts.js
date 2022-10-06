@@ -34,7 +34,7 @@ module.exports = (db) => {
   router.get('/comments/:post_id', (req, res) => {
     const queryParams = [req.params.post_id];
     const queryString =
-    `SELECT posts.id, comments.content, users.first_name, users.last_name, users.image_url
+    `SELECT posts.id, comments.content, users.id AS user_id, users.first_name, users.last_name, users.image_url
     FROM users
     JOIN comments ON users.id = comments.user_id
     JOIN posts ON posts.id = comments.post_id

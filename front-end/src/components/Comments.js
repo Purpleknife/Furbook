@@ -13,11 +13,13 @@ const Comments = (props) => {
   // onClick={() => navigateToProfile(creator_user_id)}
   return (
     <div className='comments-container'>
-      <img className='comment-image'
-        src={props.commentator_image}
-        alt="comment-image"
-      />      
-      {props.commentator} <br />
+      <div className='commentator' onClick={() => navigateToProfile(props.commentator_userID)} >
+        <img className='comment-image'
+          src={props.commentator_image}
+          alt="comment-image"
+        />      
+        {props.commentator}
+      </div>
       {props.content}
 
       <hr />

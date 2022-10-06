@@ -3,6 +3,10 @@
 .comments-container {
   
   padding-top: 0.5em;
+
+  .commentator {
+    cursor: pointer;
+  }
   
   .comment-image {
       max-height: 50px;

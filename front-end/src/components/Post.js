@@ -87,6 +87,7 @@ const Post = (props) => {
           return (<Comments
             key={com.content}
             content = {com.content}
+            commentator_userID = {com.user_id}
             commentator = {com.first_name + ' ' + com.last_name}
             commentator_image = {com.image_url}
           />)
