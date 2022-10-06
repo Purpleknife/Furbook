@@ -4,5 +4,6 @@ CREATE TABLE comments (
   id SERIAL PRIMARY KEY NOT NULL,
   post_id INTEGER REFERENCES posts(id) ON DELETE CASCADE,
   user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
-  content TEXT NOT NULL
+  content TEXT NOT NULL,
+  date_added DATE NOT NULL
 );
