@@ -9,6 +9,8 @@ const cookieSession = require('cookie-session');
 const methodOverride = require('method-override');
 const PORT = 8080;
 
+const socketIo = require('socket.io');
+
 // Express Configuration
 app.use(morgan('dev'));
 app.use(express.urlencoded({ extended: true }));
@@ -39,10 +41,19 @@ app.use('/friendships', friendshipsRoutes(db));
 app.use('/posts', postsRoutes(db));
 app.use('/', usersRoutes(db));
 
-// Sample GET route
-// app.get('/api/data', (req, res) => res.json({
-//   message: "Seems to work!",
-// }));
+//Implement WebSockets with socket.io
+io.on('connection',(socket)=>{
+  console.log('client connected: ', socket.id)
+  
+  socket.join('clock-room')
+  
+  socket.on('disconnect', (reason)=>{
+    console.log(reason)
+  })
+})
+setInterval(()=>{
+     io.to('clock-room').emit('time', new Date())
+},1000)
 
 app.listen(PORT, () => {
   // eslint-disable-next-line no-console
