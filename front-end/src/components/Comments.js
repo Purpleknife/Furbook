@@ -18,8 +18,10 @@ const Comments = (props) => {
           src={props.commentator_image}
           alt="comment-image"
         />      
-        {props.commentator}
+        {props.commentator} <br />
+        <span className='date'>{props.date}</span>
       </div>
+      
       {props.content}
 
       <hr />

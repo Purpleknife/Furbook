@@ -90,6 +90,7 @@ const Post = (props) => {
             commentator_userID = {com.user_id}
             commentator = {com.first_name + ' ' + com.last_name}
             commentator_image = {com.image_url}
+            date = {com.date_added.slice(0, 10)}
           />)
         });
         setComments(commentsContent);
@@ -135,7 +136,8 @@ const Post = (props) => {
     <div className="post-body">
       <div className='post-title'>
         <img src={props.creator_image} alt='Creators profile' onClick={() => navigateToProfile(props.creator)} />
-        <h4 onClick={() => navigateToProfile(props.creator)} >{props.creator_name}</h4>
+        <h4 onClick={() => navigateToProfile(props.creator)} >{props.creator_name}<p className='date'>{props.date}</p></h4>
+        
         {props.userID === props.creator && 
         <div className="edit-delete">
           <Dropdown>

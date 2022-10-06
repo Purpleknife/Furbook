@@ -63,11 +63,17 @@
 .post-title {
   display: flex;
   flex-flow: row;
-  height: 50px;
+  height: 60px;
   max-width: 700px;
   background-color: $secondary-color;
   border-radius: 50px;
   font-family: $primary-font;
+
+  .date {
+    color: grey;
+    font-size: 0.6em;
+    font-family: $secondary-font;
+  }
 
   img {
     max-height: 50px;

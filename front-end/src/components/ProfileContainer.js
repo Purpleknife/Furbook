@@ -118,6 +118,7 @@ const ProfileContainer = (props) => {
         setPosts={props.setProfilePosts}
         posts={props.profilePosts}
         refetch={props.refetch}
+        date={post.date_posted.slice(0, 10)}
       />
     );
   });
