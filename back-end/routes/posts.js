@@ -16,11 +16,6 @@ module.exports = (db) => {
     WHERE postlikes.post_id = $1
     GROUP BY posts.id;` ;
 
-    // `SELECT postlikes.*, COUNT(postlikes) as like_count
-    // FROM postlikes
-    // WHERE post_id = 8
-    // GROUP BY post_id, postlikes.id;`
-
     db.query(queryString, queryParams)
       .then(data => {
         //console.log("postlikes data:", data);
@@ -45,7 +40,7 @@ module.exports = (db) => {
 
     db.query(queryString, queryParams)
       .then(data => {
-        console.log("postlikes data for USER:", data);
+        //console.log("postlikes data for USER:", data);
         res.json(data.rows);
       })
       .catch(e => console.log(e));
@@ -74,6 +69,29 @@ module.exports = (db) => {
       })
       .catch(e => console.log(e));
   });
+
+
+  //To remove a like from a post:
+  router.delete('/postlikes/:post_id', (req, res) => {
+    const post_id = req.params.post_id;
+    const user_id = req.session.user_id;
+
+    const queryParams = [post_id, user_id];
+    const queryString = `
+      DELETE FROM postlikes
+      WHERE post_id = $1
+      AND user_id = $2
+      RETURNING *;
+      `;
+    db.query(queryString, queryParams)
+    .then(data => {
+      console.log('REMOVE LIKES', data.rows);
+      res.json(data.rows);
+    })
+    .catch(error => {
+      console.log(error.message);
+    });
+  })
 
 
   //Add likes on posts:

@@ -124,16 +124,30 @@ const Post = (props) => {
   
   //To add likes on posts:
   const addLikes = async() => {
-    await axios.post(`/posts/postlikes/${props.postID}`, {
-      post_id: props.postID
-    })
+    if (myLikes) {
+      await axios.delete(`/posts/postlikes/${props.postID}`)
       .then(res => {
+        console.log('delete a LIKE', res.data[0])
         fetchUserLikes();
         fetchNumberOfLikes();
+        setMyLikes('');
       })
       .catch(e => console.log(e));
-  };
+    }
 
+    if (!myLikes) {
+      await axios.post(`/posts/postlikes/${props.postID}`, {
+        post_id: props.postID
+      })
+        .then(res => {
+          fetchUserLikes();
+          fetchNumberOfLikes();
+        })
+        .catch(e => console.log(e));
+
+    }
+  };
+  
 
   //To add comments on posts:
   const addComments = async(e) => {
@@ -159,7 +173,11 @@ const Post = (props) => {
   useEffect(() => {    
     if (myLikes) {
       setColor("#FF0000");
-      console.log('setting color here');
+      console.log('setting color to red here');
+    }
+    if (!myLikes) {
+      setColor("#000000");
+      console.log('setting color to black here');
     }
   }, [myLikes])
 
@@ -167,7 +185,7 @@ const Post = (props) => {
     navigate(`/users/${id}`)
   };
 
-  return ( 
+  return (
     <div className="post-body">
       <div className='post-title'>
         <img src={props.creator_image} alt='Creators profile' onClick={() => navigateToProfile(props.creator)} />
@@ -202,7 +220,13 @@ const Post = (props) => {
       </p>
       {props.image_url && <img className="post-image" src={props.image_url} alt='Pic' />}
       <div className='post-like-comment'>
+        
+        {/* {myLikes 
+        ? <span id="like_btn" onClick={addLikes} style={ {color: `${color}`}}><i className="fa-solid fa-paw"></i>{likes}</span>
+        : <span id="like_btn" onClick={removeLikes} style={ {color: `${color}`}}><i className="fa-solid fa-paw"></i>{likes}</span> } */}
+
         <span id="like_btn" onClick={addLikes} style={ {color: `${color}`}}><i className="fa-solid fa-paw"></i>{likes}</span>
+
         <span><i className="fa-solid fa-comments"></i>{totalComments}</span>
       </div>
       <div className='post-footer'>
