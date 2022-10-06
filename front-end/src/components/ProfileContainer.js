@@ -105,6 +105,7 @@ const ProfileContainer = (props) => {
 
   // New postsList for dynamic profile loading
   const postsList = data.map(post => {
+    console.log('post in ProfileContainer', post);
     return (
       <Post
         key={post.id}
@@ -118,17 +119,11 @@ const ProfileContainer = (props) => {
         setPosts={props.setProfilePosts}
         posts={props.profilePosts}
         refetch={props.refetch}
-        date={post.date_posted.slice(0, 10)}
+        // date={props.profilePosts.date_posted}
       />
     );
   });
 
-  // useEffect(() => {
-  //   if (props.refetch) {
-  //     fetchUser();
-  //     // props.setRefetch(false);
-  //   }
-  // }, [props.refetch]);
 
   // Old postsList
   // const postsList = props.profilePosts.map(post => {

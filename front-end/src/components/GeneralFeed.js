@@ -41,7 +41,7 @@ const GeneralFeed = (props) => {
           userID={props.user.id}
           postID={post.id}
           refetch={updateRefetch}
-          date={post.date_posted.slice(0, 10)}
+          date={post.date_posted}
         />
       )
     });

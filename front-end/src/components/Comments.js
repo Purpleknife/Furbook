@@ -19,7 +19,7 @@ const Comments = (props) => {
           alt="comment-image"
         />      
         {props.commentator} <br />
-        <span className='date'>{props.date}</span>
+        <span className='date'>{props.date.slice(0, 10)}</span>
       </div>
       
       {props.content}

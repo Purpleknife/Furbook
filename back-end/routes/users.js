@@ -56,6 +56,7 @@ module.exports = (db) => {
 
     db.query(queryString, queryParams)
       .then(data => {
+        console.log('testing user:', data.rows);
         res.json(data.rows);
       })
       .catch(error => {

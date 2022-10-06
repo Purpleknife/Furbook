@@ -16,10 +16,10 @@ const App = () => {
   const [profilePosts, setProfilePosts] = useState(null);
   const [refetch, setRefetch] = useState(true);
 
-  const getUserPosts = async() => {
-    await axios.get(`/users/${user.user_id}`)
+  const getUserPosts = async() => { //this route doesn't work !!!
+    await axios.get(`/users/${user.users_id}`)
       .then((res) => {
-        //console.log("Posts data: ", {...res.data});
+        console.log("Posts data profilePosts: ", res.data);
         setProfilePosts(res.data);
       })
   };
