@@ -30,6 +30,28 @@ module.exports = (db) => {
   });
 
 
+  //Fecth user's likes:
+  router.get('/postlikes/:post_id/users/:user_id', (req, res) => {
+    //console.log("Querying postlikes for post_id", req.params.post_id)
+    const user_id = req.params.user_id;
+    const post_id = req.params.post_id;
+
+    const queryParams = [user_id, post_id];
+    const queryString =    
+    `SELECT postlikes.post_id AS post_id
+    FROM postlikes
+    WHERE postlikes.user_id = $1
+    AND postlikes.post_id = $2;`;
+
+    db.query(queryString, queryParams)
+      .then(data => {
+        console.log("postlikes data for USER:", data);
+        res.json(data.rows);
+      })
+      .catch(e => console.log(e));
+  });
+
+
   // Fetch the posts's comments:
   router.get('/comments/:post_id', (req, res) => {
     const queryParams = [req.params.post_id];

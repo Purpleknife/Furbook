@@ -17,6 +17,10 @@ const Post = (props) => {
   const [commentValue, setCommentValue] = useState('');
   const [totalComments, setTotalComments] = useState();
 
+  const [myLikes, setMyLikes] = useState();
+
+  const [color, setColor] = useState('');
+
   const [editInput, setEditInput] = useState({
     editing: false
   });
@@ -78,6 +82,16 @@ const Post = (props) => {
       .catch(e => console.log(e));
   };
 
+  //console.log('USER HERE:', props.userID);
+  const fetchUserLikes = async() => {
+    await axios.get(`/posts/postlikes/${props.postID}/users/${props.userID}`)
+      .then(res => {
+        console.log('DATA HERE', res.data[0])
+        setMyLikes(res.data[0].post_id);
+      })
+      .catch(e => console.log(e));
+  }
+
   const fetchComments = async () => {
     await axios.get(`/posts/comments/${props.postID}`)
       .then(res => {
@@ -104,6 +118,7 @@ const Post = (props) => {
       post_id: props.postID
     })
       .then(res => {
+        fetchUserLikes();
         fetchNumberOfLikes();
       })
       .catch(e => console.log(e));
@@ -123,10 +138,29 @@ const Post = (props) => {
       .catch(e => console.log(e));
   };
 
+
+  // const changeColor = () => {
+  //   if (document.getElementById("like_btn").style.color === ("#FF0000")) {
+  //     document.getElementById("like_btn").style.color = ("#000000");
+  //   }
+  //   if (document.getElementById("like_btn").style.color === ("#000000")) {
+  //     document.getElementById("like_btn").style.color = ("#FF0000");
+  //   }    
+  // };
+
   useEffect(() => {
     fetchNumberOfLikes();
     fetchComments();
+    fetchUserLikes();
   }, []);
+
+  useEffect(() => {
+    
+    if (myLikes) {
+      setColor("#FF0000");
+      console.log('setting color here');
+    }
+  }, [myLikes])
 
   const navigateToProfile = (id) => {
     navigate(`/users/${id}`)
@@ -167,7 +201,7 @@ const Post = (props) => {
       </p>
       {props.image_url && <img className="post-image" src={props.image_url} alt='Pic' />}
       <div className='post-like-comment'>
-        <span><i className="fa-solid fa-paw" onClick={addLikes}></i>{likes}</span>
+        <span id="like_btn" onClick={addLikes} style={ {color: `${color}`}}><i className="fa-solid fa-paw"></i>{likes}</span>
         <span><i className="fa-solid fa-comments"></i>{totalComments}</span>
       </div>
       <div className='post-footer'>
