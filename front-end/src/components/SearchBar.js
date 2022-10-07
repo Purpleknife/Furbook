@@ -36,7 +36,7 @@ const SearchBar = (props) => {
         <input
           className="search-field"
           spellCheck="false"
-          placeholder="Search Users"
+          placeholder="Search for new friends..."
           name="search"
           type="text"
           value={value}
