@@ -44,7 +44,7 @@ const LandingPage = (props) => {
         <button className="login__btn" onClick={login}>Login</button> &nbsp;
 
         <Button className="login__btn" onClick={handleShow}>
-          Dynamic Login
+          Register
         </Button>
         <Login user={props.user} setUser={props.setUser} handleClose={handleClose} show={show}/>
 
