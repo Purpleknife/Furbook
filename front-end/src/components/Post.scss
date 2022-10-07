@@ -8,14 +8,14 @@
   margin: 25px 0px;
   padding: 10px 10px 10px 10px;
   width: 700px;
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  box-shadow: rgba(0, 0, 0, 0.10) 0px 5px 15px;
   border-radius: 25px;
   font-family: $secondary-font;
   font-size: 1.2rem;
   background-color: white;
 
   &:hover {
-    transform: scale(1.01);
+    transform: scale(1.0018);
   }
 
   .post-image {

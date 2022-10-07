@@ -4,7 +4,7 @@
   margin: 25px 0 15px 0;
   padding: 15px 15px 15px 15px;
   width: 700px;
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 5px 15px;
   border-radius: 25px;
   font-size: 1.2rem;
   background-color: white;
@@ -41,8 +41,7 @@
   }
 
   button:hover {
-    // background-color: $primary-color;
-    transform: scale(1.08);
+    background-color: $tertiary-color;
   }
 }
 

@@ -7,7 +7,6 @@ module.exports = (db) => {
   // Get current user's friends
   router.get('/', (req, res) => {
     const queryParams = [req.session.user_id || 1];
-    console.log("REQ.SESSION.USER_ID :", req.session.user_id);
     
     const queryString = `
       SELECT * FROM friendships 
@@ -29,11 +28,10 @@ module.exports = (db) => {
 
   // Send a friend request
   router.post('/new', (req, res) => {
-    const sender = [req.body.sender];
-    const receiver = [req.body.receiver];
+    const sender = Number([req.body.sender]);
+    const receiver = Number([req.body.receiver]);
     
     const queryParams = [sender, receiver];
-    console.log("SERVER SEND FRIEND REQUEST QUERY PARAMS :", queryParams)
     
     const queryString = `
       INSERT INTO friendships (sender, receiver, status, date_added)
@@ -42,7 +40,7 @@ module.exports = (db) => {
 
     db.query(queryString, queryParams)
       .then(() => {
-        console.log("Friend request successfully created");
+        res.json("Friend request successfully created");
       });
 
   });
@@ -51,7 +49,6 @@ module.exports = (db) => {
   // Accept friendship
   router.put('/:friend_id', (req, res) => {
     const queryParams = [req.params.friend_id];
-    console.log("REQ.PARAMS.FRIEND_ID: ", req.params.friend_id);
     
     const queryString = `
       UPDATE friendships
@@ -71,7 +68,6 @@ module.exports = (db) => {
   // Remove friendship
   router.delete('/:friend_id', (req, res) => {
     const queryParams = [req.params.friend_id];
-    console.log("REQ.PARAMS.FRIEND_ID: ", req.params.friend_id);
     
     const queryString = `
       DELETE FROM friendships

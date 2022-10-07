@@ -46,15 +46,16 @@ const App = () => {
         setFriends(confirmedFriendships);
         setPendingFriends(pendingFriendships)
         setPendingCounter(pendingFriendships.length);
+        setRefetch(false);
       });
-  }, [user]);
+  }, [user, refetch]);
 
-  useEffect(() => {
-    if (refetch) {
-      //getUserPosts();
-      setRefetch(false);
-    }
-  }, [refetch]); //to fix refresh issue, add posts.
+  // useEffect(() => {
+  //   if (refetch) {
+  //     //getUserPosts();
+  //     setRefetch(false);
+  //   }
+  // }, [refetch]); //to fix refresh issue, add posts.
 
   return (
     <React.StrictMode>
@@ -64,7 +65,7 @@ const App = () => {
       {/* <SideNav user={user} setUser={setUser}/> */}
       <Routes>
         <Route path="/" element={<LandingPage setUser={setUser}/>} />
-        <Route path="/users/:id" element={<div className="wrapper"><SideNav user={user} setUser={setUser} pendingCounter={pendingCounter} /><ProfileContainer user={user} setUser={setUser} pendingFriends={pendingFriends} friends={friends} refetch={() => setRefetch(true)}/></div>} />
+        <Route path="/users/:id" element={<div className="wrapper"><SideNav user={user} setUser={setUser} pendingCounter={pendingCounter} /><ProfileContainer user={user} setUser={setUser} pendingFriends={pendingFriends} pendingCounter={pendingCounter} setPendingCounter={setPendingCounter} friends={friends} refetch={() => setRefetch(true)}/></div>} />
         <Route path="/posts" element={<><SideNav user={user} setUser={setUser} pendingCounter={pendingCounter} /><GeneralFeed user={user} refetch={() => setRefetch(true)}/></> }/> 
         <Route path='/friendships' element={<><SideNav user={user} setUser={setUser} pendingCounter={pendingCounter} /><Friendships setFriends={setFriends} setPendingFriends={setPendingFriends} setPendingCounter={setPendingCounter} /></>} />
         <Route path='/chat' element={<Chat user={user} setUser={setUser} pendingCounter={pendingCounter}  />} />

@@ -169,41 +169,24 @@ const ProfileContainer = (props) => {
     );
   });
 
-
-
-  // Old postsList
-  // const postsList = props.profilePosts.map(post => {
-  //   return (
-  //     <Post
-  //       key={post.id}
-  //       userID={props.user.id}
-  //       content={post.content} 
-  //       creator={post.creator}
-  //       image_url={post.image_url}
-  //       creator_name={props.user.first_name + ' ' + props.user.last_name}
-  //       creator_image={props.user.image_url}
-  //       postID={post.id}
-  //       setPosts={props.setProfilePosts}
-  //       posts={props.profilePosts}
-  //       refetch={props.refetch}
-  //     />
-  //   )
-  // });
-
   // // SEND FRIEND REQUEST === CURRENTLY HARDCODED / NOT FULLY WORKING
-  // const sendFriendRequest = () => {
-  //   console.log('sendFriendRequest function is called');
-  //   const sender = 1;
-  //   const receiver = 4;
+  const sendFriendRequest = () => {
+    console.log('sendFriendRequest function is called');
+    console.log('sender', props.user.id);
+    console.log('receiver', userId);
+    const sender = props.user.id;
+    const receiver = userId;
 
-  //   Axios.post('/friendships/new', {sender, receiver})
-  //     .then(() => {
-  //       console.log("Friend request has been sent");
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //     });
-  // };
+    axios.post('/friendships/new', {sender, receiver})
+      .then(() => {
+        console.log("Friend request has been sent");
+        props.setPendingCounter(prev => prev + 1);
+        setFriendButton('Request pending');
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
   // TO IMPLEMENT, add to 'Be Friends" button: onClick={sendFriendRequest}
   
   return (
@@ -275,7 +258,7 @@ const ProfileContainer = (props) => {
 
           <div className="profile__btns">
           {!editable && <button className="profile__btn" onClick={startMessage}>Wanna chat?</button>}
-          {!editable && friendButton && <button className="profile__btn">{friendButton}</button>}{/* Be friends? */}
+          {!editable && friendButton && <button className="profile__btn" onClick={sendFriendRequest}>{friendButton}</button>}{/* Be friends? */}
           </div>
         </div>
       </div>
