@@ -22,7 +22,7 @@ module.exports = (db) => {
   //Login route:
   router.get('/login/:id', (req, res) => {
     const queryString = `SELECT * FROM users WHERE users.id = $1;`;
-    const queryParams = [req.params.id || 1];
+    const queryParams = [req.session.user_id || req.params.id];
 
     db.query(queryString, queryParams)
       .then(data => {
@@ -116,7 +116,7 @@ module.exports = (db) => {
   //Logout route:
   router.get('/logout', (req, res) => {
     req.session = null;
-    console.log('User logged out.')
+    console.log('User logged out.', req.session.user_id)
     //return res.redirect('/');
   });
 
