@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route} from 'react-router-dom';
 import './App.css';
 
-import io from 'socket.io-client';
+//import io from 'socket.io-client';
 
 import LandingPage from './components/LandingPage';
 import SideNav from './components/SideNav';
@@ -23,17 +23,23 @@ const App = () => {
   //       setProfilePosts(res.data);
   //     })
   // };
-  //const [socket, setSocket] = useState();
 
-  useEffect(() => {
-    const socket = io('/');
-    socket.on('connect', event => {
-      console.log('Connected from React with socket.io!');
-    });
 
-    //disconnect to avoid memory leaks
-    return () => socket.disconnect();
-  });
+  // useEffect(() => {
+  //   const socket = io('http://localhost:8080');
+  //   socket.on('connect', () => {
+  //     console.log('Connected from React with socket.io!');
+  //     socket.emit('test', 'hello');
+  //       socket.on('passed', (arg) => {
+  //         console.log('passed again!!');
+  //       })
+  //   });
+
+
+  //   //disconnect to avoid memory leaks
+  //   return () => socket.disconnect();
+  // }, []);
+
 
   useEffect(() => {
     console.log('testing in here', refetch);

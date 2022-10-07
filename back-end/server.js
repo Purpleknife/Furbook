@@ -9,7 +9,9 @@ const cookieSession = require('cookie-session');
 const methodOverride = require('method-override');
 const PORT = 8080;
 
-const {Server} = require('socket.io');
+//const {Server} = require('socket.io');
+// const socketIo = require('socket.io');
+// const http = require('http');
 
 // Express Configuration
 app.use(morgan('dev'));
@@ -41,13 +43,6 @@ app.use('/friendships', friendshipsRoutes(db));
 app.use('/posts', postsRoutes(db));
 app.use('/', usersRoutes(db));
 
-
-const http = app.listen(PORT, () => {
-  // eslint-disable-next-line no-console
-  console.log(`Express seems to be listening on port ${PORT} so that's pretty good 👍`);
-});
-
-
 //Implement WebSockets with socket.io
 // const server = http.createServer(app);
 
@@ -69,17 +64,30 @@ const http = app.listen(PORT, () => {
 //   }
 // });
 
-const io = new Server(http);
+//const io = new Server(http);
 
-io.on('connection',(client)=>{
-  console.log('client connected: ', client.id);
-  // client.emit('system', `Welcome ${client.id}`);
-  // client.broadcast.emit('system', `${client.id} has just joined.`);
+//const clients = {};
+
+// io.on('connection',(client)=>{
+//   console.log('client connected: ', client.id);
+//   client.emit('system', `Welcome ${client.id}`);
+//   client.broadcast.emit('system', `${client.id} has just joined.`);
   
-  // client.join('clock-room')
+//   client.join('clock-room');
+
+//   client.on('test', (arg) => {
+//     console.log('test passed!!', arg);
+//     client.emit('passed', arg);
+//   })
   
-  client.on('disconnect', ()=>{
-    console.log('Disconnecting client: ', client.id)
-    //client.broadcast.emit('system', `${client.id} has just left.`);
-  })
+//   client.on('disconnect', ()=> {
+//     console.log('Disconnecting client: ', client.id)
+//     client.broadcast.emit('system', `${client.id} has just left.`);
+//   })
+// });
+
+
+app.listen(PORT, () => {
+  // eslint-disable-next-line no-console
+  console.log(`Express seems to be listening on port ${PORT} so that's pretty good 👍`);
 });
