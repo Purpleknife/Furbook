@@ -191,7 +191,7 @@ const Post = (props) => {
       <div className='post-title'>
         <img src={props.creator_image} alt='Creators profile' onClick={() => navigateToProfile(props.creator)} />
 
-        <span className='creator' onClick={() => navigateToProfile(props.creator)} >{props.creator_name}<p className='date'><i class="fa-solid fa-pen"></i> {props.date.slice(0, 10)}</p></span>
+        <span className='creator' onClick={() => navigateToProfile(props.creator)} >{props.creator_name}</span>
         
         {props.userID === props.creator && 
         <div className="edit-delete">
@@ -225,8 +225,10 @@ const Post = (props) => {
 
       <div className='image-container'>
       {props.image_url && <img className="post-image" src={props.image_url} alt='Pic' />}
+      <span className='date'>Posted on: {props.date.slice(0, 10)}</span>
       </div>
-
+      
+      
       <div className='post-like-comment'>
         <span 
           id="like_btn" 
@@ -257,7 +259,7 @@ const Post = (props) => {
             onChange={handleChange}
             placeholder='Write a comment here...'
           />
-          &nbsp;
+          &nbsp;&nbsp;
           <button className="add-comment-btn" onClick={addComments}>Add</button>
         </form>
       </div>
