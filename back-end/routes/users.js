@@ -10,7 +10,6 @@ module.exports = (db) => {
 
     db.query(queryString)
       .then(data => {
-        console.log('ALL USERS FROM DB:', data.rows);
         res.json(data.rows);
       })
       .catch(error => {
@@ -72,7 +71,6 @@ module.exports = (db) => {
 
     db.query(queryString, queryParams)
       .then(data => {
-        console.log('testing user:', data.rows);
         res.json(data.rows);
       })
       .catch(error => {
@@ -101,10 +99,9 @@ module.exports = (db) => {
       WHERE id = $1
       RETURNING *;
       `;
-    console.log('Edit route is here!')
+      
     db.query(queryString, queryParams)
     .then(data => {
-      console.log('2 Edit route is here!')
       res.json(data.rows);
     })
     .catch(error => {
@@ -116,8 +113,7 @@ module.exports = (db) => {
   //Logout route:
   router.get('/logout', (req, res) => {
     req.session = null;
-    console.log('User logged out.', req.session.user_id)
-    //return res.redirect('/');
+    return res.json('You\'re logged out!');
   });
 
   return router;

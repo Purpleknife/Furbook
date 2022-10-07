@@ -44,7 +44,7 @@ const SideNav = (props) => {
               src='../images/friends.jpg'
               alt="profile"
           />
-          <p className="other-name">My Friends{console.log("pendingcounter prop:", props.pendingCounter)} ({props.pendingCounter ? props.pendingCounter : 0})</p>
+          <p className="other-name">My Friends({props.pendingCounter ? props.pendingCounter + ' Pending' : 0})</p>
         </div>
       </Link>
 

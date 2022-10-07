@@ -2,18 +2,20 @@
 
 .sidebar {
   padding: 15px;
-  background-color: $secondary-color;
-  width: 25%;
+  background-color: white;
+  width: 500px;
   height: 100vh;
   position: fixed;
   display: flexbox;
   align-items: center;
   justify-content: center;
   z-index: 9999;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   //text-decoration: none !important;
 
   .side-logo {
     margin-left: 8em;
+    border-radius: 75px;
   }
 
   .side-name {

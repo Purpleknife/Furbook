@@ -55,6 +55,8 @@ const CreatePost = (props) => {
     await axios.post('/posts', value)
       .then(res => {
 
+        setAddingPhoto(false);
+
         setValue({
           content: '',
           image_url: ''
@@ -78,6 +80,7 @@ const CreatePost = (props) => {
   // Not working atm
   const onKeyDown = (event) => {
     if (event.key === "Enter") {
+      event.preventDefault();
       handleClick();
     }
   };
@@ -109,9 +112,9 @@ const CreatePost = (props) => {
         </button>
 
         
-        <button className='upload' onClick={uploadImage}>
+        {addingPhoto && (<button className='upload' onClick={uploadImage}>
           <i className="fa-solid fa-upload"></i>
-        </button>
+        </button>)}
         <button 
           className='create-post__button'
           onClick={handleClick}

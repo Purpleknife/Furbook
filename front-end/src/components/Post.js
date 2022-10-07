@@ -168,7 +168,7 @@ const Post = (props) => {
     fetchNumberOfLikes();
     fetchComments();
     fetchUserLikes();
-  }, []);
+  }, [props.refetch]);
 
   useEffect(() => {    
     if (myLikes) {

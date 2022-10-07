@@ -4,9 +4,9 @@
   display: flex;
   flex-flow: column;
   align-items: center;
-  background-color: white;
   color: $other-color;
   background-color: $secondary-color;
+  padding-left: 400px;
 }
 
 .feed-container {
@@ -16,8 +16,6 @@
 }
 
 .top-navbar {
-  background-color: #ffcd32;
-    margin-left: 25%;
-    width: 75%;
-    height: 7vh;
+  width: 700px;
+  height: 7vh;
 }

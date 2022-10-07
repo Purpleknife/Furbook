@@ -82,7 +82,7 @@ const ProfileContainer = (props) => {
     if (params.id !== userId) {
       fetchUser(params.id);
     }
-  }, [params.id])
+  }, [params.id, props.refetch])
 
   const edit = () => {
     setEditInput({
