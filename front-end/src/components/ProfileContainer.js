@@ -165,6 +165,7 @@ const ProfileContainer = (props) => {
         postID={post.id}
         refetch={props.refetch}
         date={post.date_posted}
+        user_image={imageUrl}
       />
     );
   });

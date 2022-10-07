@@ -53,11 +53,13 @@ const LandingPage = (props) => {
 
       <div className="footer">
         <img
+          alt='dog'
           className="dog"
           src='images/dog.png'
         />
 
         <img
+          alt='cat'
           className="cat"
           src='images/cat.png'
         />

@@ -12,19 +12,27 @@ const Comments = (props) => {
   }
   // onClick={() => navigateToProfile(creator_user_id)}
   return (
-    <div className='comments-container'>
-      <div className='commentator' onClick={() => navigateToProfile(props.commentator_userID)} >
-        <img className='comment-image'
-          src={props.commentator_image}
-          alt="comment-image"
-        />      
-        {props.commentator} <br />
-        <span className='date'>{props.date.slice(0, 10)}</span>
-      </div>
-      
-      {props.content}
+    <div className='all-comments'>
+      <div className='comments-container'>
+        
+        <div className='commentator'  >
+          <img
+            onClick={() => navigateToProfile(props.commentator_userID)}
+            className='comment-image'
+            src={props.commentator_image}
+            alt="comment-image"
+          />
+          &nbsp;
+          <div className='commentator-info'>
+            <span className='name' onClick={() => navigateToProfile(props.commentator_userID)}>{props.commentator}</span>
 
-      <hr />
+              <p>{props.content}</p>
+          </div>
+          <p className='date'><i class="fa-solid fa-pen"></i> {props.date.slice(0, 10)}</p>
+          
+
+        </div>
+      </div>
     </div>
   );
 }

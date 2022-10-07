@@ -187,14 +187,16 @@ const Post = (props) => {
 
   return (
     <div className="post-body">
+
       <div className='post-title'>
         <img src={props.creator_image} alt='Creators profile' onClick={() => navigateToProfile(props.creator)} />
-        <h4 onClick={() => navigateToProfile(props.creator)} >{props.creator_name}<p className='date'>{props.date.slice(0, 10)}</p></h4>
+
+        <span className='creator' onClick={() => navigateToProfile(props.creator)} >{props.creator_name}<p className='date'><i class="fa-solid fa-pen"></i> {props.date.slice(0, 10)}</p></span>
         
         {props.userID === props.creator && 
         <div className="edit-delete">
           <Dropdown>
-            <Dropdown.Toggle variant="transparent" id="dropdown-basic">
+            <Dropdown.Toggle variant="transparent">
               <i className="fa-solid fa-ellipsis"></i>
             </Dropdown.Toggle>
 
@@ -205,45 +207,65 @@ const Post = (props) => {
           </Dropdown>
         </div>}
       </div>
-      <p><span style={viewMode} className="post-content">{inputContent ? inputContent : props.content}</span>
-      <input 
-        className="input-field-post"
-        type="text"
-        style={editMode}
-        placeholder={props.content}
-        value={inputContent}
-        onChange = {(event) => {
-          setInputContent(event.target.value)}
-        }
-        onKeyDown={onKeyDown}
-      />
-      </p>
-      {props.image_url && <img className="post-image" src={props.image_url} alt='Pic' />}
-      <div className='post-like-comment'>
-        
-        {/* {myLikes 
-        ? <span id="like_btn" onClick={addLikes} style={ {color: `${color}`}}><i className="fa-solid fa-paw"></i>{likes}</span>
-        : <span id="like_btn" onClick={removeLikes} style={ {color: `${color}`}}><i className="fa-solid fa-paw"></i>{likes}</span> } */}
 
-        <span id="like_btn" onClick={addLikes} style={ {color: `${color}`}}><i className="fa-solid fa-paw"></i>{likes}</span>
+      <div className='content'>
+        <span style={viewMode} className="post-content">{inputContent ? inputContent : props.content}</span>
+        <input 
+          className="input-field-post"
+          type="text"
+          style={editMode}
+          placeholder={props.content}
+          value={inputContent}
+          onChange = {(event) => {
+            setInputContent(event.target.value)}
+          }
+          onKeyDown={onKeyDown}
+        />
+      </div>
+
+      <div className='image-container'>
+      {props.image_url && <img className="post-image" src={props.image_url} alt='Pic' />}
+      </div>
+
+      <div className='post-like-comment'>
+        <span 
+          id="like_btn" 
+          onClick={addLikes}
+          style={ {color: `${color}`}}>
+        <i className="fa-solid fa-paw"></i>
+        {/* <img 
+          alt='like'
+          src='images/paw-heart.png'
+        /> */}
+        {likes}
+      </span>
 
         <span><i className="fa-solid fa-comments"></i>{totalComments}</span>
       </div>
-      <div className='post-footer'>
+
+      <div className='post-comment'>
+      <img
+        alt='creator-image'
+        src={props.user_image}
+      />
         <form>
           <input
-            className='add-comment'
+            className='input-comment'
             type="text"
             name='comment'
             value={commentValue.content}
             onChange={handleChange}
             placeholder='Write a comment here...'
           />
-          <br />
+          &nbsp;
           <button className="add-comment-btn" onClick={addComments}>Add</button>
         </form>
+      </div>
+
+      <div className='comments'>
         {comments}
       </div>
+
     </div>
   );
 }

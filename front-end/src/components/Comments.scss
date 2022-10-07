@@ -1,24 +1,65 @@
 @import '../styles/variables';
 
+
+// .all-comments {
+//   padding-bottom: 0.5em;
+// }
 .comments-container {
-  
-  padding-top: 0.5em;
+  display: flexbox;
+  padding-top: 1em;
+  padding-left: 1em;
+  padding-right: 1em;
 
   .commentator {
     cursor: pointer;
+    //display: inline-block;
+    //margin: auto;
+    white-space: nowrap;
+    display: inline-block;
+  }
+
+  .commentator-info {
+    display: inline-block;
+    justify-content: center;
+    align-items: center;
+    background-color: $secondary-color;
+    width: 80vh;
+    border-radius: 10px;
+    padding-right: 1em;
+    padding-left: 0.5em;
+    padding-top: 0.5em;
+  }
+
+  .name {
+    font-weight: bold;
   }
   
   .comment-image {
-      max-height: 50px;
-      width: 50px;
-      object-fit: cover;
-      //border-radius: 50px;
+    height: 50px;
+    width: 50px;
+    object-fit: cover;
+    border-radius: 50px;
+    cursor: pointer;
+    display: inline-flexbox;
+    justify-content: flex-start;
+    align-content: flex-start;
+    top: 0;
+    margin-bottom: 7%;
+  }
+
+  img {
+    top: 0;
+    
   }
 
   .date {
     color: grey;
     font-size: 0.6em;
     font-family: $secondary-font;
+    //margin-left: 5em;
+    float: right;
+    margin-top: -20px;
+
   }
 
 
