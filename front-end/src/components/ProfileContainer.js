@@ -55,7 +55,7 @@ const ProfileContainer = (props) => {
         for (const friend of props.pendingFriends) {
           if (friend.receiver === res.data[0].users_id || friend.sender === res.data[0].users_id) {
             console.log("Setting friend to pending");
-            setFriendButton('Request pending');
+            setFriendButton('Pending');
             break;
           }
         }
@@ -172,17 +172,13 @@ const ProfileContainer = (props) => {
 
   // // SEND FRIEND REQUEST === CURRENTLY HARDCODED / NOT FULLY WORKING
   const sendFriendRequest = () => {
-    console.log('sendFriendRequest function is called');
-    console.log('sender', props.user.id);
-    console.log('receiver', userId);
     const sender = props.user.id;
     const receiver = userId;
 
     axios.post('/friendships/new', {sender, receiver})
       .then(() => {
-        console.log("Friend request has been sent");
         props.setPendingCounter(prev => prev + 1);
-        setFriendButton('Request pending');
+        setFriendButton('Pending');
       })
       .catch((error) => {
         console.log(error);
@@ -194,12 +190,13 @@ const ProfileContainer = (props) => {
     <div className="main">
       <div className="profile-card">
       
-        <img
-            alt="profile"
-            className="profile-image"
-            src={imageUrl}
-        />
-        <div className="profile-info">
+        <div className='profile-image__container'>
+          <img
+              alt="profile"
+              className="profile-image"
+              src={imageUrl}
+          />
+          {editable && <span style={viewMode} className="edit" onClick={edit}><i className="fa-solid fa-pen-to-square"></i></span>}
           <p><span className="profile-name" style={viewMode}>{ inputName ? inputName : ''}</span>
             <input 
               className="input-field"
@@ -212,11 +209,13 @@ const ProfileContainer = (props) => {
               }
               onKeyDown={onKeyDown}
             />
-            {editable && <span style={viewMode} className="edit" onClick={edit}><i className="fa-solid fa-pen-to-square"></i></span>}
+            
           </p>
 
-          <p><span className="profile-title">Relationship Status:</span><span style={viewMode}> {inputRelation ? inputRelation : ''}</span>
-          <input 
+        </div>
+        <div className="profile-info">
+          <p><span className="profile-title">Relationship Status: </span><span style={viewMode}> {inputRelation ? inputRelation : ''}</span>
+            <input 
               className="input-field"
               type="text"
               style={editMode}
@@ -228,7 +227,6 @@ const ProfileContainer = (props) => {
               onKeyDown={onKeyDown}
             />
           </p>
-
           <p><span className="profile-title">Birthday:</span><span style={viewMode}> {inputBirthday ? inputBirthday : ''}</span>
           <input 
               className="input-field"
@@ -256,11 +254,11 @@ const ProfileContainer = (props) => {
               onKeyDown={onKeyDown}
             />
           </p>
+        </div>
 
-          <div className="profile__btns">
-          {!editable && <button className="profile__btn" onClick={startMessage}>Wanna chat?</button>}
-          {!editable && friendButton && <button className="profile__btn" onClick={sendFriendRequest}>{friendButton}</button>}{/* Be friends? */}
-          </div>
+        <div className="profile__btns">
+          {!editable && <button className="profile__btn" onClick={startMessage}><i className="fa-solid fa-message"></i> Message</button>}
+          {!editable && friendButton && <button className="profile__btn" onClick={sendFriendRequest}><i class="fa-solid fa-spinner"></i> {friendButton}</button>}{/* Be friends? */}
         </div>
       </div>
 
