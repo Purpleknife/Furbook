@@ -4,6 +4,8 @@
   //display: -webkit-inline-flex;
   display: block;
   width: 100%;
+  margin-bottom: 1em;
+  margin-top: 1em;
 
   .friend-picture {
     //margin-bottom: -10em;
@@ -22,6 +24,7 @@
 
     .friend-name {
       font-weight: bold;
+      cursor: pointer;
     }
 
     .friend-date {
@@ -37,10 +40,22 @@
   .friend-btn {
     float: right;
     margin-top: 1em;
+    font-family: $secondary-font;
 
     .message {
       border: none;
       background-color: $secondary-color;
+      height: 2.5em;
+      border-radius: 9px;
+      font-weight: bold;
+    }
+
+    .remove {
+      border: none;
+      background-color: $secondary-color;
+      height: 2.5em;
+      border-radius: 9px;
+      font-weight: bold;
     }
     
   }

@@ -4,6 +4,7 @@ import Friend from './Friend';
 import FriendshipPending from './FriendshipPending';
 import './Friendships.scss';
 
+import { useAccordionButton } from 'react-bootstrap/AccordionButton';
 import Accordion from 'react-bootstrap/Accordion';
 
 const Friendships = (props) => {
@@ -118,6 +119,7 @@ const Friendships = (props) => {
       />
     )
   });
+
 
   return (
     <div className="friendships-container">

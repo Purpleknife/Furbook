@@ -51,7 +51,7 @@ const Friend = (props) => {
           />
 
           <div className="info">
-            <span className="friend-name">{props.first_name} {props.last_name}</span><br />
+            <span className="friend-name" onClick={() => handleClick(props.id)}>{props.first_name} {props.last_name}</span><br />
             <p className="friend-date">Friends since: {date_added}</p>
           </div>
 

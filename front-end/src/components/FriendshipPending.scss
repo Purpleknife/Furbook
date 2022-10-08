@@ -3,6 +3,8 @@
 
 .friend-card-pending {
   display: block;
+  margin-bottom: 1em;
+  margin-top: 1em;
 
   .friend-info {
     display: -webkit-inline-flex;
@@ -13,6 +15,14 @@
     height: 90px;
     object-fit: cover;
     border-radius: 50%;
+    cursor: pointer;
+  }
+
+  .name {
+    margin-left: 1em;
+    margin-top: 2em;
+    font-family: $secondary-font;
+    font-weight: bold;
     cursor: pointer;
   }
 }
@@ -31,11 +41,23 @@
 // }
 
 .friend-pending-btn {
-  float: right;  
+  float: right;
+  margin-top: 2em;
 
-  button {
-    text-decoration: none;
-    all: unset;
+  .accept {
+    border: none;
+    background-color: $secondary-color;
+    height: 2.5em;
+    border-radius: 9px;
+    font-weight: bold;
+  }
+
+  .decline {
+    border: none;
+    background-color: $secondary-color;
+    height: 2.5em;
+    border-radius: 9px;
+    font-weight: bold;
   }
 }
 // button.accept {

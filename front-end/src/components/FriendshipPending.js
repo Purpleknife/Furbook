@@ -34,13 +34,13 @@ const FriendshipPending = (props) => {
             onClick={() => handleClick(props.id)}
           />
           <div className="name">
-            <p>{props.first_name} {props.last_name}</p>
+            <p onClick={() => handleClick(props.id)}>{props.first_name} {props.last_name}</p>
           </div>
         </div>
 
         <div className="friend-pending-btn">
-          <button onClick={acceptFriendship}><i className="fa-solid fa-user-plus"></i> Accept</button> &nbsp;&nbsp;
-          <button onClick={declineFriendship}><i className="fa-solid fa-xmark"></i> Decline</button>
+          <button className="accept" onClick={acceptFriendship}><i className="fa-solid fa-user-plus"></i> Accept</button> &nbsp;&nbsp;
+          <button className="decline" onClick={declineFriendship}><i className="fa-solid fa-xmark"></i> Decline</button>
         </div>
 
       </div>
