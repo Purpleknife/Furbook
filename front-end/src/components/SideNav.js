@@ -43,7 +43,7 @@ const SideNav = (props) => {
         <div className="side-friends">
           <img
               className="side-friends-image"
-              src='../images/friends.jpg'
+              src='../images/icon-friends.png'
               alt="profile"
           />
           <p className="other-name">My Friends({props.pendingCounter ? props.pendingCounter + ' Pending' : 0})</p>
@@ -54,12 +54,30 @@ const SideNav = (props) => {
         <div className="side-friends">
         <img
               className="side-friends-image"
-              src='../images/chats.jpg'
+              src='../images/icon-chat.png'
               alt="profile"
           />
           <p className="other-name">My Chats</p>
         </div>
       </Link>
+
+    {/* <img
+      className="fun"
+      src='../images/peekaboo.png'
+      alt="peekaboo"
+    /> */}
+
+    {/* <img
+      className="fun"
+      src='../images/peekaboo2.png'
+      alt="peekaboo"
+    /> */}
+
+    <img
+      className="fun"
+      src='../images/peekaboo3.png'
+      alt="peekaboo"
+    />
 
     <div className="logout">
       <Link className="logout__btn" to="/" onClick={logout}>Logout</Link>
