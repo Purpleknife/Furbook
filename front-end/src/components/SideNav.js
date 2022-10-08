@@ -5,7 +5,7 @@ import './SideNav.scss';
 
 const SideNav = (props) => {
 
-  const navigate = useNavigate
+  const navigate = useNavigate();
   const logout = () => {
     axios.get('/logout')
       .then((data) => {
@@ -17,12 +17,14 @@ const SideNav = (props) => {
   return (
     <div className="sidebar">
       <Link to="/posts" style={{ textDecoration: 'none' }}>
+        <div className="logo-section">
           <img
-              className="side-logo"
-              src='../images/side-logo.png'
-              alt="profile"
+            className="side-logo"
+            src='../images/side-logo.png'
+            alt="profile"
           />
-        <p className="side-name">Furbook</p>
+          <p className="side-name">Furbook</p>
+        </div>
       </Link>
 
       <Link to={`/users/${props.user.id}`} style={{ textDecoration: 'none' }}>
@@ -63,11 +65,11 @@ const SideNav = (props) => {
       <Link className="logout__btn" to="/" onClick={logout}>Logout</Link>
     </div>
 
-    <img
+    {/* <img
           className="side-footer-image"
           src='../images/corgi.png'
           alt="profile"
-      />
+      /> */}
       
     </div>
   );
