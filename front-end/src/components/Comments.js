@@ -28,7 +28,7 @@ const Comments = (props) => {
 
               <p>{props.content}</p>
           </div>
-          <p className='date'><i class="fa-solid fa-pen"></i> {props.date.slice(0, 10)}</p>
+          <p className='date'><i className="fa-solid fa-pen"></i> {props.date.slice(0, 10)}</p>
           
 
         </div>

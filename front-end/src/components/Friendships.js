@@ -4,7 +4,6 @@ import Friend from './Friend';
 import FriendshipPending from './FriendshipPending';
 import './Friendships.scss';
 
-import { useAccordionButton } from 'react-bootstrap/AccordionButton';
 import Accordion from 'react-bootstrap/Accordion';
 
 const Friendships = (props) => {
@@ -120,20 +119,19 @@ const Friendships = (props) => {
     )
   });
 
-
   return (
     <div className="friendships-container">
     <Accordion defaultActiveKey={['0', '1']} alwaysOpen>
       <Accordion.Item eventKey="0">
         <Accordion.Header><span className='friend-title'><i class="fa-solid fa-user-group"></i> Pending requests ({pendingCounter})</span></Accordion.Header>
         <Accordion.Body>
-        <p className='friends-pending-list'>
+        <div className='friends-pending-list'>
           {pendingFriendItem}
-        </p>
+        </div>
         </Accordion.Body>
       </Accordion.Item>
       <Accordion.Item eventKey="1">
-        <Accordion.Header><span className='friend-title'><i class="fa-solid fa-users"></i> Friends ({friendsCounter})</span></Accordion.Header>
+        <Accordion.Header><span className='friend-title'><i className="fa-solid fa-users"></i> Friends ({friendsCounter})</span></Accordion.Header>
         <Accordion.Body>
 
         <div className='friends-list'>
