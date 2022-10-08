@@ -13,6 +13,13 @@
     flex-flow: column;
     align-items: center;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    
+    background: linear-gradient(
+      to bottom right, 
+      $tertiary-color 15%, 
+      white 15%,
+      white 100%
+      );
   }
 
   .profile-image__container {
@@ -52,7 +59,7 @@
     }
     
     p {
-      padding-right: 25px;
+      padding-right: 45px;
     }
   }
 
