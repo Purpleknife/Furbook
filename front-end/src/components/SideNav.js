@@ -20,10 +20,10 @@ const SideNav = (props) => {
         <div className="logo-section">
           <img
             className="side-logo"
-            src='../images/side-logo.png'
+            src='../images/logo.png'
             alt="profile"
           />
-          <p className="side-name">Furbook</p>
+          <span className="side-name">Furbook</span>
         </div>
       </Link>
 
@@ -34,50 +34,45 @@ const SideNav = (props) => {
             src={props.user.image_url}
             alt="profile"
           />
+          <div className='profile-name'>
+          <span className='hey'>Hey,</span>
           <span className="name">{props.user.first_name} {props.user.last_name}</span>
+          </div>
         </div>
       </Link>
 
 
       <Link to="/friendships" style={{ textDecoration: 'none' }}>
         <div className="side-friends">
-          <img
-              className="side-friends-image"
-              src='../images/icon-friends.png'
-              alt="profile"
-          />
-          <p className="other-name">My Friends({props.pendingCounter ? props.pendingCounter + ' Pending' : 0})</p>
+          <div className='oval'>
+            <img
+                className="side-friends-image"
+                src='../images/icon-friends.png'
+                alt="profile"
+            />
+          </div>
+          <p className="other-name">My Friends ({props.pendingCounter ? props.pendingCounter + ' Pending' : 0})</p>
         </div>
       </Link>
 
       <Link to="/chat" style={{ textDecoration: 'none' }}>
-        <div className="side-friends">
-        <img
-              className="side-friends-image"
+        <div className="side-friends chats">
+          <div className='oval'>
+            <img
+              className="side-friends-image chat-img"
               src='../images/icon-chat.png'
               alt="profile"
-          />
+            />
+          </div>
           <p className="other-name">My Chats</p>
         </div>
       </Link>
 
     {/* <img
       className="fun"
-      src='../images/peekaboo.png'
-      alt="peekaboo"
-    /> */}
-
-    {/* <img
-      className="fun"
-      src='../images/peekaboo2.png'
-      alt="peekaboo"
-    /> */}
-
-    <img
-      className="fun"
       src='../images/peekaboo3.png'
       alt="peekaboo"
-    />
+    /> */}
 
     <div className="logout">
       <Link className="logout__btn" to="/" onClick={logout}>Logout</Link>
