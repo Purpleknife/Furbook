@@ -26,19 +26,24 @@ const FriendshipPending = (props) => {
   };
 
   return (
-      <main className="friend-card pending">
+      <div className="friend-card-pending">
+
         <div className="friend-info" onClick={() => handleClick(props.id)}>
-          <img className="friend-picture"
+          <img className="friend-pending-picture"
             src={props.picture}
             onClick={() => handleClick(props.id)}
           />
-          <p className="pending-name">{props.first_name} {props.last_name}</p>
+          <div className="name">
+            <p>{props.first_name} {props.last_name}</p>
+          </div>
         </div>
-        <div className="friend-actions">
-          <button className="btn accept" onClick={acceptFriendship}><i class="fa-solid fa-user-plus"></i><br></br><span>   Accept</span></button>
-          <button className="btn decline" onClick={declineFriendship}><i className="fa-solid fa-xmark"></i><br></br><span>   Decline</span></button>
+
+        <div className="friend-pending-btn">
+          <button onClick={acceptFriendship}><i className="fa-solid fa-user-plus"></i> Accept</button> &nbsp;&nbsp;
+          <button onClick={declineFriendship}><i className="fa-solid fa-xmark"></i> Decline</button>
         </div>
-      </main>
+
+      </div>
   );
 };
 

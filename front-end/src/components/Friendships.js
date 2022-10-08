@@ -4,6 +4,8 @@ import Friend from './Friend';
 import FriendshipPending from './FriendshipPending';
 import './Friendships.scss';
 
+import Accordion from 'react-bootstrap/Accordion';
+
 const Friendships = (props) => {
 
   // INITIAL STATE
@@ -118,22 +120,53 @@ const Friendships = (props) => {
   });
 
   return (
-    <main className="friendships-container">
-      <section className='friends'>
-        {<h2>Friend Requests ({pendingCounter})</h2>}
-        <section className='friends-list'>
+    <div className="friendships-container">
+    <Accordion defaultActiveKey={['0', '1']} alwaysOpen>
+      <Accordion.Item eventKey="0">
+        <Accordion.Header><span className='friend-title'><i class="fa-solid fa-user-group"></i> Pending requests ({pendingCounter})</span></Accordion.Header>
+        <Accordion.Body>
+        <p className='friends-pending-list'>
           {pendingFriendItem}
-        </section>
-      </section>
-      <section className='friends'>
-        <h2>My Friends ({friendsCounter})</h2>
-        <section className='friends-list'>
+        </p>
+        </Accordion.Body>
+      </Accordion.Item>
+      <Accordion.Item eventKey="1">
+        <Accordion.Header><span className='friend-title'><i class="fa-solid fa-users"></i> Friends ({friendsCounter})</span></Accordion.Header>
+        <Accordion.Body>
+
+        <div className='friends-list'>
           {friendItem}
-        </section>
-      </section>
-      
-    </main>
+        </div>
+
+        </Accordion.Body>
+      </Accordion.Item>
+    </Accordion>
+    </div>
   );
 };
  
 export default Friendships;
+
+
+
+{/* <main className="friendships-container">
+      <br />
+      
+        {<span className='friend-title'>Pending requests ({pendingCounter})</span>}
+
+        <p className='friends-list'>
+  
+          {pendingFriendItem}
+        </p>
+
+      <br />
+      <div className='friends'>
+        <span className='friend-title'>Friends ({friendsCounter})</span>
+        
+        <div className='friends-list'>
+          {friendItem}
+        </div>
+
+      </div>
+      
+    </main> */}
