@@ -108,7 +108,7 @@ const CreatePost = (props) => {
           onClick={toggleAddFile}
         >
           
-          {addingPhoto ? 'Cancel picture' : 'Add picture'}
+          {addingPhoto ? 'Cancel media' : 'Add media'}
         </button>
 
         

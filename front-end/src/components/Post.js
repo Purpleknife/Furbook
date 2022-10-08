@@ -96,16 +96,19 @@ const Post = (props) => {
         setMyLikes(res.data[0].post_id);
       })
       .catch(e => console.log(e));
-  }
+  };
 
+
+ 
 
   //To get the comments of a post:
   const fetchComments = async () => {
     await axios.get(`/posts/comments/${props.postID}`)
       .then(res => {
-        console.log("Post Comments:", res.data);
+        console.log("Post Comments:", res.data[0].comment_id);
 
         const commentsContent = res.data.map((com) => {
+          console.log('com', com)
           return (<Comments
             key={com.content}
             content = {com.content}
@@ -113,6 +116,10 @@ const Post = (props) => {
             commentator = {com.first_name + ' ' + com.last_name}
             commentator_image = {com.image_url}
             date = {com.date_added}
+            comment_id={com.comment_id}
+            postID={props.postID}
+            refetch={fetchComments}
+            current_user={props.userID}
           />)
         });
         setComments(commentsContent);
@@ -164,6 +171,7 @@ const Post = (props) => {
       .catch(e => console.log(e));
   };
 
+
   useEffect(() => {
     fetchNumberOfLikes();
     fetchComments();
@@ -187,14 +195,16 @@ const Post = (props) => {
 
   return (
     <div className="post-body">
+
       <div className='post-title'>
         <img src={props.creator_image} alt='Creators profile' onClick={() => navigateToProfile(props.creator)} />
-        <h4 onClick={() => navigateToProfile(props.creator)} >{props.creator_name}<p className='date'>{props.date.slice(0, 10)}</p></h4>
+
+        <span className='creator' onClick={() => navigateToProfile(props.creator)} >{props.creator_name}</span>
         
         {props.userID === props.creator && 
         <div className="edit-delete">
           <Dropdown>
-            <Dropdown.Toggle variant="transparent" id="dropdown-basic">
+            <Dropdown.Toggle variant="transparent">
               <i className="fa-solid fa-ellipsis"></i>
             </Dropdown.Toggle>
 
@@ -205,56 +215,69 @@ const Post = (props) => {
           </Dropdown>
         </div>}
       </div>
-      <p><span style={viewMode} className="post-content">{inputContent ? inputContent : props.content}</span>
-      <input 
-        className="input-field-post"
-        type="text"
-        style={editMode}
-        placeholder={props.content}
-        value={inputContent}
-        onChange = {(event) => {
-          setInputContent(event.target.value)}
-        }
-        onKeyDown={onKeyDown}
-      />
-      </p>
-      {props.image_url && <img className="post-image" src={props.image_url} alt='Pic' />}
-      <div className='post-like-comment'>
-        
-        {/* {myLikes 
-        ? <span id="like_btn" onClick={addLikes} style={ {color: `${color}`}}><i className="fa-solid fa-paw"></i>{likes}</span>
-        : <span id="like_btn" onClick={removeLikes} style={ {color: `${color}`}}><i className="fa-solid fa-paw"></i>{likes}</span> } */}
 
-        <span id="like_btn" onClick={addLikes} style={ {color: `${color}`}}><i className="fa-solid fa-paw"></i>{likes}</span>
+      <div className='content'>
+        <span style={viewMode} className="post-content">{inputContent ? inputContent : props.content}</span>
+        <input 
+          className="input-field-post"
+          type="text"
+          style={editMode}
+          placeholder={props.content}
+          value={inputContent}
+          onChange = {(event) => {
+            setInputContent(event.target.value)}
+          }
+          onKeyDown={onKeyDown}
+        />
+      </div>
+
+      <div className='image-container'>
+      {props.image_url && <img className="post-image" src={props.image_url} alt='Pic' />}
+      <span className='date'>Posted on: {props.date.slice(0, 10)}</span>
+      </div>
+      
+      
+      <div className='post-like-comment'>
+        <span 
+          id="like_btn" 
+          onClick={addLikes}
+          style={ {color: `${color}`}}>
+        <i className="fa-solid fa-paw"></i>
+        {/* <img 
+          alt='like'
+          src='images/paw-heart.png'
+        /> */}
+        {likes}
+      </span>
 
         <span><i className="fa-solid fa-comments"></i>{totalComments}</span>
       </div>
-      <div className='post-footer'>
+
+      <div className='post-comment'>
+      <img
+        alt='creator-image'
+        src={props.user_image}
+      />
         <form>
           <input
-            className='add-comment'
+            className='input-comment'
             type="text"
             name='comment'
             value={commentValue.content}
             onChange={handleChange}
             placeholder='Write a comment here...'
           />
-          <br />
+          &nbsp;&nbsp;
           <button className="add-comment-btn" onClick={addComments}>Add</button>
         </form>
+      </div>
+
+      <div className='comments'>
         {comments}
       </div>
+
     </div>
   );
 }
  
 export default Post;
-
-// <span className="dropdown-list" onClick={(e) => {e.target.style.display = 'block'}}>
-// <i class="fa-solid fa-ellipsis">
-//   <ul className="dropdown-content" >
-//     <li>Edit</li>
-//     <li>Delete</li>
-//   </ul>
-// </i>
-// </span>

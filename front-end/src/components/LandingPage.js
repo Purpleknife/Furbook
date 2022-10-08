@@ -44,7 +44,7 @@ const LandingPage = (props) => {
         <button className="login__btn" onClick={login}>Login</button> &nbsp;
 
         <Button className="login__btn" onClick={handleShow}>
-          Dynamic Login
+          Register
         </Button>
         <Login user={props.user} setUser={props.setUser} handleClose={handleClose} show={show}/>
 
@@ -53,11 +53,13 @@ const LandingPage = (props) => {
 
       <div className="footer">
         <img
+          alt='dog'
           className="dog"
           src='images/dog.png'
         />
 
         <img
+          alt='cat'
           className="cat"
           src='images/cat.png'
         />

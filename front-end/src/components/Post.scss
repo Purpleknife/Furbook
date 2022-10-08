@@ -5,24 +5,26 @@
 }
 
 .post-body {
-  margin: 25px 0px;
-  padding: 10px 10px 10px 10px;
-  width: 700px;
+  display: flexbox;
+  margin-left: 6em;
+  //padding: 10px 10px 10px 10px;
+  width: 45em;
   box-shadow: rgba(0, 0, 0, 0.10) 0px 5px 15px;
-  border-radius: 25px;
+  //border-radius: 25px;
   font-family: $secondary-font;
   font-size: 1.2rem;
   background-color: white;
+  margin-bottom: 2em;
 
-  &:hover {
-    transform: scale(1.0018);
-  }
+  // &:hover {
+  //   transform: scale(1.0018);
+  // }
 
   .post-image {
-    height: 80vh;
+    height: 100vh;
     width: 100%;
     object-fit: cover;
-    border-radius: 10px;
+    //border-radius: 10px;
   }
 }
   
@@ -31,9 +33,8 @@
 }
 
 .edit-delete {
-  display: flex;
-  margin-left: 22em;
-  padding-top: 0.5em;
+  margin-left: auto;
+  //padding-top: 0.5em;
   cursor: pointer;
   color: grey;
 
@@ -57,99 +58,109 @@
 
 .post-content {
   font-family: $secondary-font;
-  font-size: 1.25em;
+  font-size: 1em;
+  margin-left: 1.5em;
+  //margin-bottom: 1em;
+}
+
+.image-container {
+  margin-top: 1em;
+  margin-bottom: 1em;
+
+  .date {
+    float: right;
+    margin-right: 1em;
+    padding-top: 1em;
+    color: grey !important;
+    font-size: 0.6em !important;
+    font-family: $secondary-font;
+  }
 }
 
 .post-title {
   display: flex;
-  flex-flow: row;
-  height: 60px;
-  max-width: 700px;
-  background-color: $secondary-color;
-  border-radius: 50px;
-  font-family: $primary-font;
+  align-content: center;
+  align-items: center;
+  //flex-flow: row;
+  //height: 60px;
+  //max-width: 700px;
+  //background-color: $secondary-color;
+  //border-radius: 50px;
+  font-family: $secondary-font;
+  padding-top: 0.5em;
+  padding-left: 0.5em;
+  margin-left: 1em;
+  margin-bottom: 1em;
 
-  .date {
-    color: grey;
-    font-size: 0.6em;
-    font-family: $secondary-font;
-  }
+  
 
   img {
-    max-height: 50px;
-    width: 50px;
+    height: 60px;
+    width: 60px;
     object-fit: cover;
     border-radius: 50px;
     cursor: pointer;
   }
   
-  h4 {
-    margin: 11px 0 0 10px;
+  .creator {
+    padding-left: 0.5em;
     cursor: pointer;
-
-    &:hover {
-      text-decoration: underline;
-    }
+    font-weight: bold;
   }
 }
 
 .post-like-comment {
   display: flex;
   padding-top: 10px;
-
-  i {
-    padding: 10px 10px 10px 0;
-  }
-
-  // 
-  .fa-paw {
-    scale: 1.1;
-
-    &:hover {
-      // color: rgb(255, 64, 0);
-      color: $primary-color;
-    }
-  }
-
-  .fa-comments {
-    scale: 1.1;
-
-    &:hover {
-      // color: rgb(0, 115, 255);
-      color: $primary-color;
-    }
-  }
-
-  i {
-    // display: block;
-    // margin-left: auto;
-    // margin-right: 0;
-    text-align: right;
-  }
 } 
 
 .post-like-comment {
-  float: right;
+  //float: right;
+  padding-right: 1em;
 
+  i {
+    padding-right: 0.4em;
+  }
   span {
     padding-left: 1em;
     cursor: pointer;
   }
 }
 
-.post-footer {
-  form {
-    padding-bottom: 2em;
+.post-comment {
+  padding-top: 1em;
+  padding-left: 1em;
+  padding-right: 1em;
+  margin-bottom: 1em;
+  // white-space: nowrap;
+  // display: inline-block;
+  display:-webkit-inline-flex;
+
+  img {
+    height: 50px;
+    width: 50px;
+    object-fit: cover;
+    border-radius: 50px;
+    cursor: pointer;
+    margin-right: 0.5em;
   }
-  .add-comment {
-    width: 100%;
-    padding: 10px;
+
+  .input-comment {
+    width: 73vh;
+    height: 2.5em;
+    padding-left: 0.5em;
+    font-family: $secondary-font;
+    border-radius: 7px;
+    border-color: $primary-color;
+    border-style:solid;
   }
 
   .add-comment-btn {
-    float: right;
+    height: 2.5em;
+    border: none;
+    background-color: $primary-color;
+    border-radius: 7px;
   }
-
 }
 
 .red {
