@@ -1,71 +1,148 @@
 @import "../styles/variables";
 
-.friend-card {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  box-shadow: rgba(0, 0, 0, 0.1) 0px 5px 15px;
-  padding: 20px 20px 20px 20px;
-  border-radius: 20px;
-  width: 20vw;
-
-  &:hover {
-    transform: scale(1.1);
-  }
-}
-
-.friend-info {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.friend-profile {
+  //display: -webkit-inline-flex;
+  display: block;
+  width: 100%;
+  margin-bottom: 1em;
+  margin-top: 1em;
 
   .friend-picture {
-    width: 150px;
-    height: 150px;
+    //margin-bottom: -10em;
+    width: 90px;
+    height: 90px;
     object-fit: cover;
     border-radius: 50%;
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px, rgba(0, 0, 0, 0.04) 0px 10px 10px -5px;
-    cursor: pointer;
-  }
-
-  .friend-name {
-    margin-top: 12px;
-    margin-bottom: 0.1rem;
-    text-align: center;
-    cursor: pointer;
-    font-size: large;
-    font-weight: bold;
-  }
-
-  .friend-date {
-    font-size: small;
-    color: grey;
-    font-style: italic;
-  }
-}
-
-.friend-actions {
-  display: flex;
-  gap: 1.5vw;
-
-  button {
-    border-radius: 4px;
-    border: 1px solid #000;
-    width: 8vw;
-    background-color: $primary-color;
-    color: black;
-    text-align: center;
-    box-shadow: #fff 4px 4px 0 0,#000 4px 4px 0 1px;
-    height: 8vh;
     cursor: pointer;
 
-    &:hover {
-      background-color: black;
-      color: white;
+  }
+
+  .info {
+    margin-left: 1em;
+    margin-top: 1em;
+    font-family: $secondary-font;
+
+    .friend-name {
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .friend-date {
+      color: grey;
+      font-size: small;
     }
   }
 
-  span {
-    font-size: 80%;
+  .friend-details {
+    display: -webkit-inline-flex;
+  }
+
+  .friend-btn {
+    float: right;
+    margin-top: 1em;
+    font-family: $secondary-font;
+
+    .message {
+      border: none;
+      background-color: $secondary-color;
+      height: 2.5em;
+      border-radius: 9px;
+      font-weight: bold;
+    }
+
+    .remove {
+      border: none;
+      background-color: $secondary-color;
+      height: 2.5em;
+      border-radius: 9px;
+      font-weight: bold;
+    }
+    
   }
 }
+
+
+
+
+
+// .friend-card {
+//   //display: -webkit-inline-flex;
+//   display: block;
+//   // flex-direction: column;
+//   // align-items: center;
+//   box-shadow: rgba(0, 0, 0, 0.09) 0px 5px 15px;
+  
+//   padding: 20px 20px 20px 20px;
+//   //border-radius: 20px;
+//   width: 100%;
+
+//   // &:hover {
+//   //   transform: scale(1.1);
+//   // }
+// }
+
+// .friend-info {
+//   // display: flex;
+//   // flex-direction: column;
+//   // align-items: center;
+  
+//   // min-width: 100%;
+//   // margin: auto;
+//   // min-height:10em;
+
+//   .friend-picture {
+//     //margin-bottom: -10em;
+//     width: 90px;
+//     height: 90px;
+//     object-fit: cover;
+//     border-radius: 50%;
+//     box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px, rgba(0, 0, 0, 0.04) 0px 10px 10px -5px;
+//     cursor: pointer;
+//   }
+
+  
+// }
+
+// .friend-name {
+//   margin-top: 12px;
+//   margin-bottom: 0.1rem;
+//   text-align: center;
+//   cursor: pointer;
+//   font-size: large;
+//   font-weight: bold;
+//   font-family: $secondary-font;
+// }
+
+// .friend-date {
+//   font-size: small;
+//   color: grey;
+//   font-style: italic;
+//   font-family: $secondary-font;
+// }
+
+// .friend-actions {
+//   display: flex;
+//   //gap: 1.5vw;
+
+//   button {
+//     font-family: $secondary-font;
+//     border-radius: 4px;
+//     //border: 1px solid #000;
+//     //width: 8vw;
+//     background-color: $primary-color;
+//     color: black;
+//     text-align: center;
+//     //box-shadow: #fff 4px 4px 0 0,#000 4px 4px 0 1px;
+//     //height: 8vh;
+//     cursor: pointer;
+
+//     &:hover {
+//       background-color: $secondary-color;
+//       //color: black
+//     }
+//   }
+
+//   span {
+//     font-size: 80%;
+//   }
+// }

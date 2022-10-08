@@ -1,22 +1,69 @@
 @import "../styles/variables";
 
+
+.friend-card-pending {
+  display: block;
+  margin-bottom: 1em;
+  margin-top: 1em;
+
+  .friend-info {
+    display: -webkit-inline-flex;
+  }
+
+  .friend-pending-picture {
+    width: 90px;
+    height: 90px;
+    object-fit: cover;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+
+  .name {
+    margin-left: 1em;
+    margin-top: 2em;
+    font-family: $secondary-font;
+    font-weight: bold;
+    cursor: pointer;
+  }
+}
 .pending {
+  //margin-top: 0.7rem;
   background-color: #edeaea;
 }
 
-.pending-name {
-  margin-top: 12px;
-  margin-bottom: 0.7rem;
-  text-align: center;
-  cursor: pointer;
-  font-size: large;
-  font-weight: bold;
-}
+// .pending-name {
+//   //margin-top: 12px;
+//   //margin-bottom: 0.7rem;
+//   text-align: left;
+//   cursor: pointer;
+//   font-size: large;
+//   font-weight: bold;
+// }
 
-button.accept {
-  background-color: #59d169;
-}
+.friend-pending-btn {
+  float: right;
+  margin-top: 2em;
 
-button.decline {
-  background-color: red
+  .accept {
+    border: none;
+    background-color: $secondary-color;
+    height: 2.5em;
+    border-radius: 9px;
+    font-weight: bold;
+  }
+
+  .decline {
+    border: none;
+    background-color: $secondary-color;
+    height: 2.5em;
+    border-radius: 9px;
+    font-weight: bold;
+  }
 }
+// button.accept {
+//   background-color: #59d169;
+// }
+
+// button.decline {
+//   background-color: red
+// }
