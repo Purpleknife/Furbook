@@ -189,30 +189,32 @@ const ProfileContainer = (props) => {
   return (
     <div className="main">
       <div className="profile-card">
-      {editable && <span style={viewMode} className="edit" onClick={edit}><i className="fa-solid fa-pen-to-square"></i></span>}
+      
         <div className='profile-image__container'>
           <img
               alt="profile"
               className="profile-image"
               src={imageUrl}
           />
-            <p><span className="profile-name" style={viewMode}>{ inputName ? inputName : ''}</span>
-              <input 
-                className="input-field"
-                type="text"
-                style={editMode}
-                placeholder=''
-                value={inputName}
-                onChange = {(event) => {
-                  setInputName(event.target.value)}
-                }
-                onKeyDown={onKeyDown}
-              />
-              
-            </p>
+          {editable && <span style={viewMode} className="edit" onClick={edit}><i className="fa-solid fa-pen-to-square"></i></span>}
+          <p><span className="profile-name" style={viewMode}>{ inputName ? inputName : ''}</span>
+            <input 
+              className="input-field"
+              type="text"
+              style={editMode}
+              placeholder=''
+              value={inputName}
+              onChange = {(event) => {
+                setInputName(event.target.value)}
+              }
+              onKeyDown={onKeyDown}
+            />
+            
+          </p>
+
         </div>
         <div className="profile-info">
-          <p><span className="profile-title">Relationship Status:</span><span style={viewMode}> {inputRelation ? inputRelation : ''}</span>
+          <p><span className="profile-title">Relationship Status: </span><span style={viewMode}> {inputRelation ? inputRelation : ''}</span>
             <input 
               className="input-field"
               type="text"
@@ -255,8 +257,8 @@ const ProfileContainer = (props) => {
         </div>
 
         <div className="profile__btns">
-          {!editable && <button className="profile__btn" onClick={startMessage}>Message</button>}
-          {!editable && friendButton && <button className="profile__btn" onClick={sendFriendRequest}>{friendButton}</button>}{/* Be friends? */}
+          {!editable && <button className="profile__btn" onClick={startMessage}><i className="fa-solid fa-message"></i> Message</button>}
+          {!editable && friendButton && <button className="profile__btn" onClick={sendFriendRequest}><i class="fa-solid fa-spinner"></i> {friendButton}</button>}{/* Be friends? */}
         </div>
       </div>
 
