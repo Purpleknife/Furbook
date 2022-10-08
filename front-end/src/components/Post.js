@@ -96,16 +96,19 @@ const Post = (props) => {
         setMyLikes(res.data[0].post_id);
       })
       .catch(e => console.log(e));
-  }
+  };
 
+
+ 
 
   //To get the comments of a post:
   const fetchComments = async () => {
     await axios.get(`/posts/comments/${props.postID}`)
       .then(res => {
-        console.log("Post Comments:", res.data);
+        console.log("Post Comments:", res.data[0].comment_id);
 
         const commentsContent = res.data.map((com) => {
+          console.log('com', com)
           return (<Comments
             key={com.content}
             content = {com.content}
@@ -113,6 +116,10 @@ const Post = (props) => {
             commentator = {com.first_name + ' ' + com.last_name}
             commentator_image = {com.image_url}
             date = {com.date_added}
+            comment_id={com.comment_id}
+            postID={props.postID}
+            refetch={fetchComments}
+            current_user={props.userID}
           />)
         });
         setComments(commentsContent);
@@ -163,6 +170,7 @@ const Post = (props) => {
       })
       .catch(e => console.log(e));
   };
+
 
   useEffect(() => {
     fetchNumberOfLikes();

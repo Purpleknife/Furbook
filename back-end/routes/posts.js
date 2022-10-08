@@ -51,7 +51,7 @@ module.exports = (db) => {
   router.get('/comments/:post_id', (req, res) => {
     const queryParams = [req.params.post_id];
     const queryString =
-    `SELECT posts.id, comments.content, comments.date_added, users.id AS user_id, users.first_name, users.last_name, users.image_url
+    `SELECT posts.id, comments.id AS comment_id, comments.content, comments.date_added, users.id AS user_id, users.first_name, users.last_name, users.image_url
     FROM users
     JOIN comments ON users.id = comments.user_id
     JOIN posts ON posts.id = comments.post_id
@@ -209,6 +209,8 @@ module.exports = (db) => {
     });
   });
 
+
+  //To delete a post:
   router.delete('/:id', (req, res) => {
     const id = req.params.id;
 
@@ -230,20 +232,28 @@ module.exports = (db) => {
     });
   })
 
-  // POST /posts/:post_id/likes
-  // Like a post
 
-  // GET /posts/post_id/comments
-  // Load all comments for 1 post
+  //To delete a comment on a post:
+  router.delete('/:post_id/comments/:comment_id', (req, res) => {
+    const post_id = req.params.post_id;
+    const comment_id = req.params.comment_id;
 
-  // POST /posts/:post_id/comments
-  // Comment a post
+    const queryParams = [post_id, comment_id];
+    const queryString = `
+      DELETE FROM comments
+      WHERE post_id = $1
+      AND comments.id = $2
+      RETURNING *;
+      `;
+    db.query(queryString, queryParams)
+    .then(data => {
+      res.json(data.rows);
+    })
+    .catch(error => {
+      console.log(error.message);
+    });
+  });
 
-  // DELETE /posts/:post_id/likes/:like_id
-  // Remove a like
-
-  // DELETE /posts/:post_id/comments/:comment_id
-  // Delete a comment
 
   return router;
 }
