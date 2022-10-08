@@ -281,12 +281,3 @@ const Post = (props) => {
 }
  
 export default Post;
-
-// <span className="dropdown-list" onClick={(e) => {e.target.style.display = 'block'}}>
-// <i class="fa-solid fa-ellipsis">
-//   <ul className="dropdown-content" >
-//     <li>Edit</li>
-//     <li>Delete</li>
-//   </ul>
-// </i>
-// </span>

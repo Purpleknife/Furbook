@@ -7,7 +7,6 @@ module.exports = (db) => {
 
   // Fetch the posts's likes:
   router.get('/postlikes/:post_id', (req, res) => {
-    //console.log("Querying postlikes for post_id", req.params.post_id)
     const queryParams = [req.params.post_id];
     const queryString =    
     `SELECT posts.id, COUNT(DISTINCT postlikes.id)
@@ -18,7 +17,6 @@ module.exports = (db) => {
 
     db.query(queryString, queryParams)
       .then(data => {
-        //console.log("postlikes data:", data);
         res.json(data.rows);
       })
       .catch(e => console.log(e));
@@ -27,7 +25,6 @@ module.exports = (db) => {
 
   //Fecth user's likes:
   router.get('/postlikes/:post_id/users/:user_id', (req, res) => {
-    //console.log("Querying postlikes for post_id", req.params.post_id)
     const user_id = req.params.user_id;
     const post_id = req.params.post_id;
 
@@ -40,7 +37,6 @@ module.exports = (db) => {
 
     db.query(queryString, queryParams)
       .then(data => {
-        //console.log("postlikes data for USER:", data);
         res.json(data.rows);
       })
       .catch(e => console.log(e));
@@ -57,14 +53,8 @@ module.exports = (db) => {
     JOIN posts ON posts.id = comments.post_id
     WHERE comments.post_id = $1;`
 
-    // `SELECT posts.id, comments.content
-    // FROM posts
-    // JOIN comments ON posts.id = comments.post_id
-    // WHERE comments.post_id = $1;` ;
-
     db.query(queryString, queryParams)
       .then(data => {
-        //console.log('comments sent:', data.rows);
         res.json(data.rows);
       })
       .catch(e => console.log(e));
@@ -85,7 +75,6 @@ module.exports = (db) => {
       `;
     db.query(queryString, queryParams)
     .then(data => {
-      console.log('REMOVE LIKES', data.rows);
       res.json(data.rows);
     })
     .catch(error => {
@@ -108,7 +97,6 @@ module.exports = (db) => {
 
     db.query(queryString, queryParams)
       .then(data => {
-        console.log('Likes added:', data.rows);
         res.json(data.rows);
       })
       .catch(e => console.log(e));
@@ -129,7 +117,6 @@ module.exports = (db) => {
 
     db.query(queryString, queryParams)
       .then(data => {
-        console.log('Comments added:', data.rows);
         res.json(data.rows);
       })
       .catch(e => console.log(e));
@@ -197,11 +184,9 @@ module.exports = (db) => {
       WHERE id = $1
       RETURNING *;
       `;
-    console.log('Edit route for posts is here!')
+
     db.query(queryString, queryParams)
     .then(data => {
-      console.log('2 Edit route for posts is here!')
-      console.log('data.rows', data.rows);
       res.json(data.rows);
     })
     .catch(error => {
@@ -220,11 +205,9 @@ module.exports = (db) => {
       WHERE id = $1
       RETURNING *;
       `;
-    console.log('Delete route for posts is here!')
+
     db.query(queryString, queryParams)
     .then(data => {
-      console.log('2 Delete route for posts is here!')
-      console.log('data.rows', data.rows);
       res.json(data.rows);
     })
     .catch(error => {
@@ -245,6 +228,7 @@ module.exports = (db) => {
       AND comments.id = $2
       RETURNING *;
       `;
+
     db.query(queryString, queryParams)
     .then(data => {
       res.json(data.rows);
@@ -257,4 +241,3 @@ module.exports = (db) => {
 
   return router;
 }
-// module.exports = router;
