@@ -43,19 +43,26 @@ const Friend = (props) => {
   };
 
   return (
-      <main className="friend-card">
-        <div className="friend-info" onClick={() => handleClick(props.id)}>
+      <div className="friend-profile">
+        
+        <div className="friend-details" onClick={() => handleClick(props.id)}>
           <img className="friend-picture"
             src={props.picture}
           />
-          <p className="friend-name">{props.first_name} {props.last_name}</p>
-          <p className="friend-date">Friends since: {date_added}</p>
+
+          <div className="info">
+            <span className="friend-name" onClick={() => handleClick(props.id)}>{props.first_name} {props.last_name}</span><br />
+            <p className="friend-date">Friends since: {date_added}</p>
+          </div>
+
         </div>
-        <div className="friend-actions">
-          <button className="btn" onClick={startMessage}><i className="fa-solid fa-message"></i><br></br><span>Message</span></button>
-          <button className="btn" onClick={destroy}><i className="fa-solid fa-xmark"></i><br></br><span>Remove</span></button>
+
+        <div className="friend-btn">
+          <button className="message" onClick={startMessage}><i className="fa-solid fa-message"></i> Message</button> &nbsp;&nbsp;
+          <button className="remove" onClick={destroy}><i className="fa-solid fa-xmark"></i> Remove</button>
         </div>
-      </main>
+
+      </div>
   );
 };
 
