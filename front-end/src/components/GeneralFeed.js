@@ -5,6 +5,7 @@ import './GeneralFeed.scss';
 import Post from './Post';
 import CreatePost from './CreatePost';
 import LiveSearch from './LiveSearch';
+import ScrollButton from './ScrollButton';
 
 const GeneralFeed = (props) => {
 
@@ -64,7 +65,7 @@ const GeneralFeed = (props) => {
   }, [posts])
 
   return (
-    <div className='background'>
+    <main>
     <section className='main-container'>
       <div className="top-navbar">
         <LiveSearch />
@@ -76,7 +77,10 @@ const GeneralFeed = (props) => {
         {postList}
       </div>
     </section>
-    </div>
+      <div>
+        <ScrollButton />
+      </div>
+    </main>
   );
 
 }
