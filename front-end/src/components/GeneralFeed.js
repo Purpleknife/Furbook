@@ -64,6 +64,7 @@ const GeneralFeed = (props) => {
   }, [posts])
 
   return (
+    <div className='background'>
     <section className='main-container'>
       <div className="top-navbar">
         <LiveSearch />
@@ -75,6 +76,7 @@ const GeneralFeed = (props) => {
         {postList}
       </div>
     </section>
+    </div>
   );
 
 }

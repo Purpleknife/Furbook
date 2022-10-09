@@ -4,9 +4,10 @@
   display: flex;
   flex-flow: column;
   align-items: center;
-  color: $other-color;
-  background-color: $secondary-color;
+  // color: $other-color;
+  // background-color: $secondary-color;
   padding-left: 14em;
+  opacity: initial;
 }
 
 .feed-container {
