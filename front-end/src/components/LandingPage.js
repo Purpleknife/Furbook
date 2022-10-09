@@ -40,7 +40,7 @@ const LandingPage = (props) => {
         <p>Do you think sometimes that you should put yourself out there?</p>
         <p>Make friends, find true love or <i>maybe just gossip about your human?</i></p>
         <p>If yes, <span id='logo'>Furbook</span> is the place for you!</p>
-
+        <br />
         <button className="login__btn" onClick={login}>Login</button> &nbsp;
 
         <Button className="login__btn" onClick={handleShow}>

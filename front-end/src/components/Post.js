@@ -12,10 +12,10 @@ const Post = (props) => {
 
   const navigate = useNavigate();
 
-  const [likes, setLikes] = useState();
+  const [likes, setLikes] = useState(0);
   const [comments, setComments] = useState(null);
   const [commentValue, setCommentValue] = useState('');
-  const [totalComments, setTotalComments] = useState();
+  const [totalComments, setTotalComments] = useState(0);
 
   const [myLikes, setMyLikes] = useState();
 
@@ -92,7 +92,6 @@ const Post = (props) => {
   const fetchUserLikes = async() => {
     await axios.get(`/posts/postlikes/${props.postID}/users/${props.userID}`)
       .then(res => {
-        console.log('DATA HERE', res.data[0])
         setMyLikes(res.data[0].post_id);
       })
       .catch(e => console.log(e));
@@ -105,10 +104,8 @@ const Post = (props) => {
   const fetchComments = async () => {
     await axios.get(`/posts/comments/${props.postID}`)
       .then(res => {
-        console.log("Post Comments:", res.data[0].comment_id);
 
         const commentsContent = res.data.map((com) => {
-          console.log('com', com)
           return (<Comments
             key={com.content}
             content = {com.content}
@@ -134,7 +131,6 @@ const Post = (props) => {
     if (myLikes) {
       await axios.delete(`/posts/postlikes/${props.postID}`)
       .then(res => {
-        console.log('delete a LIKE', res.data[0])
         fetchUserLikes();
         fetchNumberOfLikes();
         setMyLikes('');
