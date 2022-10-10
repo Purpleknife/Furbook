@@ -23,8 +23,5 @@ module.exports = (db) => {
   });
 
 
-  // /api/posts/comments/:post_id
-
-
   return router;
 }
