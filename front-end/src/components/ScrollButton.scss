@@ -1,13 +1,47 @@
+@import "../styles/variables";
+
+// .left-sidenav {
+//   background-image: url('../../public/images/left-wave1.svg');
+//   background-repeat: no-repeat;
+//   background-size: cover;
+//   // left: 98%;
+//   // right: 0;
+//   // width: 30%;
+//   height: 100%;
+//   position: fixed;
+//   // align-items: center;
+//   // justify-content: center;
+//   // z-index: 9999;
+//   // box-shadow: rgba(0, 0, 0, 0.1) 0px 5px 15px;
+//   //text-decoration: none !important;
+// }
 
 .scroll-btn {
    position: fixed; 
-   left: 88%;
-   bottom: 0;
-  //  width: 20px;
+   left: 92%;
+   bottom: 2%;
+  //  width: 10em;
   //  font-size: 3rem;
    cursor: pointer;
 
    img {
-    width: 12em;
+    width: 7em;
+    animation: bounce2 2s ease infinite;
    }
+   @keyframes bounce2 {
+    0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+    40% {transform: translateY(-30px);}
+    60% {transform: translateY(-15px);}
+  }
+
+  //  i {
+  //   color: $primary-color;
+  //   font-size: 5em;
+  //   animation: bounce2 2s ease infinite;
+  // }
+  // @keyframes bounce2 {
+  //   0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+  //   40% {transform: translateY(-30px);}
+  //   60% {transform: translateY(-15px);}
+  // }
 }

@@ -27,8 +27,20 @@ const ScrollButton = () => {
   window.addEventListener('scroll', toggleVisible);
   
   return (
+    <div>
+      <div className='left-sidenav'> </div>
     <div className="scroll-btn" onClick={scrollToTop} style={{display: visible ? 'inline' : 'none'}}>
       {/* <i className="fa-solid fa-paw"></i> */}
+      {/* <img
+          className="scroll-img"
+          src='../images/paw3.png'
+          alt="scroll-to-top"
+      /> */}
+      <img
+          className="scroll-img"
+          src='../images/paw7.png'
+          alt="scroll-to-top"
+      />
       {/* <img
           className="scroll-img"
           src='../images/kitten.png'
@@ -39,11 +51,12 @@ const ScrollButton = () => {
           src='../images/puppy-jumping.gif'
           alt="scroll-to-top"
       /> */}
-      <img
+      {/* <img
           className="scroll-img"
           src='../images/cat-popcorn.gif'
           alt="scroll-to-top"
-      />
+      /> */}
+    </div>
     </div>
   );
 }
