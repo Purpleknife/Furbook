@@ -1,10 +1,10 @@
 @import "../styles/variables";
 
 .friendships-container {
-  margin-left: 26em;
-  padding-top: 3em;
+  margin-left: 34em;
+  padding-top: 6em;
   padding-bottom: 5em;
-  margin-right: 2.5em;
+  margin-right: 5em;
 
   .friend-title {
     // margin-top: 2em;
@@ -19,7 +19,7 @@
 }
 
 .accordion-button {
-  background-color: $secondary-color !important;  
+  background-color: $fourth-color !important;  
   //background-image: linear-gradient(30deg, $primary-color, $secondary-color 90%) !important;
   //font-family: $primary-font;
   font-family: $secondary-font;

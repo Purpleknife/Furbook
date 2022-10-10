@@ -99,13 +99,18 @@ const ProfileContainer = (props) => {
     editMode.display = "none";
   };
 
-  const onKeyDown = (event) => {
-    //console.log('event key', event.key);
-    if (event.key === "Enter") {
-      setEditInput({ editing: false });
+  // const onKeyDown = (event) => {
+  //   //console.log('event key', event.key);
+  //   if (event.key === "Enter") {
+  //     setEditInput({ editing: false });
+  //     editProfile();
+  //   }
+  // };
+
+  const editIt = () => {
+    setEditInput({ editing: false });
       editProfile();
-    }
-  };
+  }
 
   const editProfile = async() => {
     const names = inputName.split(' ');
@@ -197,9 +202,11 @@ const ProfileContainer = (props) => {
               src={imageUrl}
           />
           {editable && <span style={viewMode} className="edit" onClick={edit}><i className="fa-solid fa-pen-to-square"></i></span>}
-          <p><span className="profile-name" style={viewMode}>{ inputName ? inputName : ''}</span>
+          {editable && <span style={editMode} className="save" onClick={editIt}><i className="fa-solid fa-floppy-disk"></i></span>}
+          <p>
+            <span className="profile-name" style={viewMode}>{ inputName ? inputName : ''}</span>
             <input 
-              className="input-field"
+              className="input-field input-name"
               type="text"
               style={editMode}
               placeholder=''
@@ -207,9 +214,8 @@ const ProfileContainer = (props) => {
               onChange = {(event) => {
                 setInputName(event.target.value)}
               }
-              onKeyDown={onKeyDown}
+              // onKeyDown={onKeyDown}
             />
-            
           </p>
 
         </div>
@@ -224,7 +230,7 @@ const ProfileContainer = (props) => {
               onChange = {(event) => {
                 setInputRelation(event.target.value)}
               }
-              onKeyDown={onKeyDown}
+              // onKeyDown={onKeyDown}
             />
           </p>
           <p><span className="profile-title">Birthday:</span><span style={viewMode}> {inputBirthday ? inputBirthday : ''}</span>
@@ -237,7 +243,7 @@ const ProfileContainer = (props) => {
               onChange = {(event) => {
                 setInputBirthday(event.target.value)}
               }
-              onKeyDown={onKeyDown}
+              // onKeyDown={onKeyDown}
             />
           </p>
 
@@ -251,7 +257,7 @@ const ProfileContainer = (props) => {
               onChange = {(event) => {
                 setInputLocation(event.target.value)}
               }
-              onKeyDown={onKeyDown}
+              // onKeyDown={onKeyDown}
             />
           </p>
         </div>

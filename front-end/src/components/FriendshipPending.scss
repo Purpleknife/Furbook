@@ -31,39 +31,17 @@
   background-color: #edeaea;
 }
 
-// .pending-name {
-//   //margin-top: 12px;
-//   //margin-bottom: 0.7rem;
-//   text-align: left;
-//   cursor: pointer;
-//   font-size: large;
-//   font-weight: bold;
-// }
 
 .friend-pending-btn {
   float: right;
   margin-top: 2em;
 
-  .accept {
+  .btn {
     border: none;
-    background-color: $secondary-color;
+    background-color: $fourth-color;
     height: 2.5em;
-    border-radius: 9px;
-    font-weight: bold;
-  }
-
-  .decline {
-    border: none;
-    background-color: $secondary-color;
-    height: 2.5em;
-    border-radius: 9px;
-    font-weight: bold;
+    border-radius: 10px;
+    //font-weight: bold;
+    width: 120px;
   }
 }
-// button.accept {
-//   background-color: #59d169;
-// }
-
-// button.decline {
-//   background-color: red
-// }

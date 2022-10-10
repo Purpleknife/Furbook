@@ -58,8 +58,8 @@ const Friend = (props) => {
         </div>
 
         <div className="friend-btn">
-          <button className="message" onClick={startMessage}><i className="fa-solid fa-message"></i> Message</button> &nbsp;&nbsp;
-          <button className="remove" onClick={destroy}><i className="fa-solid fa-xmark"></i> Remove</button>
+          <button className="btn" onClick={startMessage}><i className="fa-solid fa-message"></i> Message</button> &nbsp;&nbsp;
+          <button className="btn" onClick={destroy}><i className="fa-solid fa-xmark"></i> Remove</button>
         </div>
 
       </div>

@@ -45,7 +45,7 @@ const SideNav = (props) => {
               alt="profile"
           />
         </div>
-        {props.pendingCounter ? <span className="pending-badge">{props.pendingCounter}</span> : 0}
+        {props.pendingCounter ? <span className="pending-badge">{props.pendingCounter}</span> : <span className="pending-badge"></span>}
         <p className="other-name friends">My Friends</p>
       </div>
 

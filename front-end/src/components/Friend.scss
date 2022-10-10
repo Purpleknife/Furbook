@@ -42,22 +42,15 @@
     margin-top: 1em;
     font-family: $secondary-font;
 
-    .message {
+    .btn {
+      width: 120px;
       border: none;
-      background-color: $secondary-color;
+      background-color: $fourth-color;
       height: 2.5em;
-      border-radius: 9px;
+      border-radius: 10px;
       font-weight: bold;
     }
 
-    .remove {
-      border: none;
-      background-color: $secondary-color;
-      height: 2.5em;
-      border-radius: 9px;
-      font-weight: bold;
-    }
-    
   }
 }
 

@@ -6,13 +6,14 @@
 
   .profile-card {
     font-family: $secondary-font;
-    width: 54em;
-    margin-left: 65px;
+    width: 64em;
+    margin-left: 25px;
     padding-top: 1em;
     display: flex;
     flex-flow: column;
     align-items: center;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    border-radius: 10px;
     
     background: linear-gradient(
       to bottom right, 
@@ -33,13 +34,27 @@
       object-fit: cover;
       border-radius: 50%;
       margin-bottom: 10px;
+      padding: 4px;
+      // border: 5px solid $primary-color;
+      border: 5px solid $tertiary-color;
+      border: 5px solid $fourth-color;
     }
 
     .edit {
       margin-bottom: 10px;
+      cursor: pointer;
 
       &:hover {
-        color: rgb(57, 138, 165);
+        color: $primary-color;
+      }
+    }
+
+    .save {
+      margin-bottom: 10px;
+      cursor: pointer;
+
+      &:hover {
+        color: $primary-color;
       }
     }
 
@@ -52,6 +67,7 @@
 
   .profile-info {
     display: flex;
+    margin-left: 30px;
 
     .profile-title {
       font-weight: bold;
@@ -73,6 +89,8 @@
       padding: 5px 10px;
       border-radius: 10px;
       background-color: $secondary-color;
+      background-color: $fourth-color;
+      width: 120px;
     }
   }
 }
@@ -240,13 +258,33 @@
 
   .posts-container {
     margin-top: 3em;
-    margin-left: -50px;
+    margin-left: 90px;
   }
 
+  // p {
+  //   display: flex;
+  // }
+  
   .input-field {
-    width: 90%;
+    width: 250px;
     padding: 3px;
-    border: 1px solid #dfdfdf;
+    border: 2px solid #dfdfdf;
+    outline: none;
+    
+    &:focus {
+      border: 2px solid #86b7fe;
+      outline: none;
+      box-shadow: 0 0 0 0.10rem rgb(13 110 253 / 25%);
+      
+    }
+  }
+  
+  .input-name {
+    font-size: 18px;
+    display: flex;
+    width: 157px;
+    text-align: center;
+    padding-left: 0px;
   }
   
 // }

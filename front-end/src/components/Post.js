@@ -45,12 +45,17 @@ const Post = (props) => {
     editMode.display = "none";
   };
 
-  const onKeyDown = (event) => {
-    if (event.key === "Enter") {
-      setEditInput({ editing: false });
-      editPost();
-    }
-  };
+  // const onKeyDown = (event) => {
+  //   if (event.key === "Enter") {
+  //     setEditInput({ editing: false });
+  //     editPost();
+  //   }
+  // };
+
+  const editIt = () => {
+    setEditInput({ editing: false });
+    editPost();
+  }
   
   //To edit a post:
   const editPost = async() => {
@@ -213,6 +218,7 @@ const Post = (props) => {
       </div>
 
       <div className='content'>
+      
         <span style={viewMode} className="post-content">{inputContent ? inputContent : props.content}</span>
         <input 
           className="input-field-post"
@@ -223,8 +229,9 @@ const Post = (props) => {
           onChange = {(event) => {
             setInputContent(event.target.value)}
           }
-          onKeyDown={onKeyDown}
+          // onKeyDown={onKeyDown}
         />
+        <span style={editMode} className="save" onClick={editIt}><i className="fa-solid fa-floppy-disk"></i></span>
       </div>
 
       <div className='image-container'>

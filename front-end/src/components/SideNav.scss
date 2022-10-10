@@ -33,9 +33,10 @@ body {
 
     // //------- stacked
     display: flex;
-    margin-left: -75px;
+    margin-left: -65px;
     flex-direction: column;
     align-items: center;
+    margin-top: 1em;
 
     .side-logo {
       cursor: pointer;
@@ -128,7 +129,7 @@ body {
   .side-friends {
     display: flex;
     align-items: center;
-    width: 72%;
+    width: 90%;
     margin-top: 2em;
     padding-top: 0.2em;
     padding-bottom: 0.3em;
@@ -139,7 +140,7 @@ body {
       // background-color: #0000001e;
       // transform: scale(1.05)
       // background: rgb(255,229,141);
-      background: linear-gradient(90deg, rgba(255,229,141,1) 0%, rgba(255,255,255,0) 90%);   
+      background: linear-gradient(90deg, rgba(255,229,141,1) 0%, rgba(255,255,255,0) 100%);   
       // background: linear-gradient(90deg, rgba(2, 2, 2, 0.123) 0%, rgba(255,255,255,0) 90%);       
     }
   }
@@ -151,8 +152,8 @@ body {
   .oval {
     // // ---- oval
     margin-left: 1.8em;
-    width:40px;
-    height:55px;
+    width:50px;
+    height:65px;
     border-radius:50%;
     background: rgba(255, 255, 255, 0.4);
     -webkit-transform: rotate(70deg);
@@ -166,11 +167,11 @@ body {
 
   .side-friends-image {
     // // ---- oval
-    width: 50px;
-    height: 50px;
+    width: 55px;
+    height: 55px;
     border-radius: 50%;
     padding-right: 10px;
-    // padding-top: 5px;
+    padding-top: 3px;
     padding-bottom: 11px;
     -webkit-transform: rotate(-70deg);
 
@@ -195,9 +196,9 @@ body {
 
   .chat-img {
     // // ---- oval
-    padding-top: 2px;
+    padding-top: 4px;
     padding-left: 4px;
-    padding-bottom: 14px;
+    padding-bottom: 11px;
   }
 
   .other-name {
@@ -225,8 +226,8 @@ body {
     align-items: center;
     // justify-content: center;
     margin-top: auto;
-    margin-bottom: 1.8em;
-    margin-left: 2.5em;
+    margin-bottom: 2.5em;
+    margin-left: 5em;
   }
 
   .logout__btn {

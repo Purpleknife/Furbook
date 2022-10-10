@@ -22,7 +22,7 @@
     display: inline-block;
     justify-content: center;
     align-items: center;
-    background-color: $secondary-color;
+    background-color: rgba(241, 240, 240, 0.849);
     width: 57.6vh;
     border-radius: 10px;
     padding-right: 1em;
@@ -66,6 +66,7 @@
     float: right;
     margin-top: -20px;
     margin-right: 0.5em;
+    padding-top: 0.5em;
 
   }
 

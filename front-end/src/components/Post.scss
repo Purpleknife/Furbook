@@ -4,6 +4,19 @@
   color: red;
 }
 
+.save {
+  float: right;
+  margin-top: 0.5em;
+  margin-right: 0.5em;
+  //background-color: $fourth-color;
+  //color: $fourth-color;
+  cursor: pointer;
+
+  &:hover {
+    color: $primary-color;
+  }
+}
+
 .post-body {
   display: flexbox;
   margin-left: 6em;
@@ -51,11 +64,17 @@
 }
 
 .input-field-post {
-  width: 97%;
+  width: 93%;
   margin: 0 10px;
   padding: 10px;
   border: 1px solid #dfdfdf;
   font-family: $secondary-font;
+
+  &:focus {
+    border: 1.5px solid #86b7fe;
+    outline: none;
+    box-shadow: 0 0 0 0.1rem rgb(13 110 253 / 25%);
+  }
 }
 
 .post-content {
