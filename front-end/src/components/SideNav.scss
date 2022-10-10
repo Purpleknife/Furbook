@@ -1,14 +1,11 @@
 @import "../styles/variables";
 
 body {
-  // background-image: url('../../public/images/blob1.svg'), url('../../public/images/blob4.svg');
-  // background-image: url('../../public/images/main2.svg'), url('../../public/images/main3.svg');
-  // background-image: url('../../public/images/whatsapp-background-image.jpeg');
-  // background-image: linear-gradient(rgba(255,255,255,0.85), rgba(255,255,255,0.97)), url('../../public/images/background1.jpeg');
+  background-image: linear-gradient(rgba(255,255,255,0.85), rgba(255,255,255,0.97)), url('../../public/images/background1.jpeg');
   // background-image: linear-gradient(rgba(255,255,255,0.85), rgba(255,255,255,0.95)), url('../../public/images/background2.jpeg');
   // background-image: linear-gradient(rgba(255,255,255,0.9), rgba(255,255,255,0.97)), url('../../public/images/background5.png');
   // background-image: linear-gradient(rgba(255,255,255,0.85), rgba(255,255,255,0.95)), url('../../public/images/background7.jpeg');
-  background-image: linear-gradient(rgba(255,255,255,0.9), rgba(255,255,255,0.97)), url('../../public/images/background10.png');
+  // background-image: linear-gradient(rgba(255,255,255,0.9), rgba(255,255,255,0.97)), url('../../public/images/background10.png');
   background-attachment: fixed;
 }
 
@@ -41,6 +38,7 @@ body {
     align-items: center;
 
     .side-logo {
+      cursor: pointer;
       // //------- aligned on 1 line
       // width: 8em;
       // height: 4.5em;
@@ -52,6 +50,7 @@ body {
     }
 
     .side-name {
+      cursor: pointer;
       // //------- aligned on 1 line
       // margin-top: 23px;
       // font-family: $primary-font;
@@ -85,7 +84,7 @@ body {
     // //------- stacked
     display: flex;
     align-items: center;
-    width: 17.5em;
+    width: 60%;
     height: 6.5em;
     border-radius:10px;
     background: rgba(255, 255, 255, 0.4);
@@ -95,22 +94,12 @@ body {
     padding-left: 0.8em;
     padding-bottom: 0.5em;
     gap: 0.9em;
+    cursor: pointer;
 
     &:hover {
       // background-color: #0000001e;
-      // transform: scale(1.05)
-      // background: rgb(255,105,75);
-      // background: linear-gradient(90deg, rgba(255,105,75,1) 0%, rgba(255,255,255,0) 70%);
-      // background: rgb(255,255,255);
-      // background: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 70%);
-      // background: rgb(117,117,117);
-      // background: linear-gradient(90deg, rgba(117,117,117,1) 0%, rgba(255,255,255,0) 70%);
-      // background: rgb(255,240,190);
-      // background: linear-gradient(90deg, rgba(255,240,190,1) 0%, rgba(255,255,255,0) 70%);
-      // background: rgb(255,234,166);
-      // background: linear-gradient(90deg, rgba(255,234,166,1) 0%, rgba(255,255,255,0) 75%);
-      // background: rgb(255,229,141);
-      // background: linear-gradient(90deg, rgba(255,229,141,1) 0%, rgba(255,255,255,0) 75%);    
+      background-color: #fae7ac;
+      // background: linear-gradient(90deg, rgba(255,229,141,1) 20%, rgba(255,255,255,0) 99%);   
     }
     
     .side-profile-image {
@@ -120,19 +109,12 @@ body {
       border-radius: 15%;
       padding: 3px;
       border: 2px solid white;
-      cursor: pointer;
       // box-shadow: rgba(0, 0, 0, 0.1) 0px 5px 15px;
     }
 
     .profile-name {
       display: flex;
       flex-direction: column;
-
-      .hey {
-        font-family: $secondary-font;
-        font-size: 1.2em;
-        color: black;
-      }
 
       .name {
         font-family: $secondary-font;
@@ -146,16 +128,19 @@ body {
   .side-friends {
     display: flex;
     align-items: center;
+    width: 72%;
     margin-top: 2em;
     padding-top: 0.2em;
     padding-bottom: 0.3em;
     padding-left: 1.5em;
+    cursor: pointer;
 
     &:hover {
       // background-color: #0000001e;
       // transform: scale(1.05)
-      background: rgb(255,229,141);
-      background: linear-gradient(90deg, rgba(255,229,141,1) 0%, rgba(255,255,255,0) 75%);         
+      // background: rgb(255,229,141);
+      background: linear-gradient(90deg, rgba(255,229,141,1) 0%, rgba(255,255,255,0) 90%);   
+      // background: linear-gradient(90deg, rgba(2, 2, 2, 0.123) 0%, rgba(255,255,255,0) 90%);       
     }
   }
 
@@ -196,6 +181,18 @@ body {
     // padding-left: 6px;
   }
 
+  .pending-badge {
+    background-color: red;
+    border-radius: 50%;
+    font-size: 0.7em;
+    text-align: center;
+    font-family: $secondary-font;
+    color: white;
+    width: 17px;
+    margin-top: -30px;
+    z-index: 9999;
+  }
+
   .chat-img {
     // // ---- oval
     padding-top: 2px;
@@ -204,12 +201,16 @@ body {
   }
 
   .other-name {
-    margin-left: 1.5em;
+    margin-left: 1.9em;
     margin-top: 13px;
     font-size: 1em;
     font-family: $secondary-font;
     font-weight: bold;
     color: black;
+  }
+
+  .friends {
+    margin-left: 0.8em;
   }
 
   .fun {
@@ -231,8 +232,9 @@ body {
   .logout__btn {
     // background-color: $primary-color;
     // background-color: black;
-    background-color: white;
-    border: 0 solid #E5E7EB;
+    // background-color: white;
+    background-color: $tertiary-color;
+    // border: 0 solid #E5E7EB;
     box-sizing: border-box;
     color: #000000;
     // color: white;
@@ -244,18 +246,17 @@ body {
     position: relative;
     text-align: center;
     text-decoration: none #000000 solid;
-    text-decoration-thickness: auto;
+    // text-decoration-thickness: auto;
     width: 40%;
     max-width: 460px;
     position: relative;
-    cursor: pointer;
     transform: rotate(-2deg);
     user-select: none;
     -webkit-user-select: none;
     touch-action: manipulation;
     font-family: $secondary-font;
     padding-left: 2em;
-
+    cursor: pointer;
   }
 
   .logout__btn:focus {

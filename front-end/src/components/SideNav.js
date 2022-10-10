@@ -16,73 +16,65 @@ const SideNav = (props) => {
 
   return (
     <div className="sidebar">
-      <Link to="/posts" style={{ textDecoration: 'none' }}>
-        <div className="logo-section">
-          <img
-            className="side-logo"
-            src='../images/logo.png'
-            alt="profile"
-          />
-          <span className="side-name">Furbook</span>
-        </div>
-      </Link>
-
-      <Link to={`/users/${props.user.id}`} style={{ textDecoration: 'none' }}>
-        <div className="side-profile">
-          <img
-            className="side-profile-image"
-            src={props.user.image_url}
-            alt="profile"
-          />
-          <div className='profile-name'>
-          <span className='hey'>Hey,</span>
-          <span className="name">{props.user.first_name} {props.user.last_name}</span>
-          </div>
-        </div>
-      </Link>
-
-
-      <Link to="/friendships" style={{ textDecoration: 'none' }}>
-        <div className="side-friends">
-          <div className='oval'>
-            <img
-                className="side-friends-image"
-                src='../images/icon-friends.png'
-                alt="profile"
-            />
-          </div>
-          <p className="other-name">My Friends ({props.pendingCounter ? props.pendingCounter + ' Pending' : 0})</p>
-        </div>
-      </Link>
-
-      <Link to="/chat" style={{ textDecoration: 'none' }}>
-        <div className="side-friends chats">
-          <div className='oval'>
-            <img
-              className="side-friends-image chat-img"
-              src='../images/icon-chat.png'
-              alt="profile"
-            />
-          </div>
-          <p className="other-name">My Chats</p>
-        </div>
-      </Link>
-
-    {/* <img
-      className="fun"
-      src='../images/peekaboo3.png'
-      alt="peekaboo"
-    /> */}
-
-    <div className="logout">
-      <Link className="logout__btn" to="/" onClick={logout}>Logout</Link>
-    </div>
-
-    {/* <img
-          className="side-footer-image"
-          src='../images/corgi.png'
+      <div className="logo-section">
+        <img
+          className="side-logo"
+          src='../images/logo.png'
           alt="profile"
+          onClick={() => navigate('/posts')}
+        />
+        <span className="side-name" onClick={() => navigate('/posts')}>Furbook</span>
+      </div>
+
+      <div className="side-profile" onClick={() => navigate(`/users/${props.user.id}`)}>
+        <img
+          className="side-profile-image"
+          src={props.user.image_url}
+          alt="profile"
+        />
+        <div className='profile-name'>
+        <span className="name">{props.user.first_name} {props.user.last_name}</span>
+        </div>
+      </div>
+
+      <div className="side-friends" onClick={() => navigate('/friendships')}>
+        <div className='oval'>
+          <img
+              className="side-friends-image"
+              src='../images/icon-friends.png'
+              alt="profile"
+          />
+        </div>
+        {props.pendingCounter ? <span className="pending-badge">{props.pendingCounter}</span> : 0}
+        <p className="other-name friends">My Friends</p>
+      </div>
+
+      <div className="side-friends chats" onClick={() => navigate('/chat')}>
+        <div className='oval'>
+          <img
+            className="side-friends-image chat-img"
+            src='../images/icon-chat.png'
+            alt="profile"
+          />
+        </div>
+        <p className="other-name">My Chats</p>
+      </div>
+
+      {/* <img
+        className="fun"
+        src='../images/peekaboo3.png'
+        alt="peekaboo"
       /> */}
+
+      <div className="logout">
+        <Link className="logout__btn" to="/" onClick={logout}>Logout</Link>
+      </div>
+
+      {/* <img
+            className="side-footer-image"
+            src='../images/corgi.png'
+            alt="profile"
+        /> */}
       
     </div>
   );
