@@ -33,7 +33,7 @@ body {
 
     // //------- stacked
     display: flex;
-    margin-left: -150px;
+    margin-left: -75px;
     flex-direction: column;
     align-items: center;
 
@@ -84,12 +84,12 @@ body {
     // //------- stacked
     display: flex;
     align-items: center;
-    width: 60%;
-    height: 6.5em;
+    width: 74%;
+    height: 7.7em;
     border-radius:10px;
     background: rgba(255, 255, 255, 0.4);
     margin-top: 2em;
-    margin-left: 1.5em;
+    margin-left: 2em;
     padding-top: 0.5em;
     padding-left: 0.8em;
     padding-bottom: 0.5em;
@@ -103,8 +103,8 @@ body {
     }
     
     .side-profile-image {
-      width: 80px;
-      height: 80px;
+      width: 100px;
+      height: 100px;
       object-fit: cover;
       border-radius: 15%;
       padding: 3px;
@@ -118,7 +118,7 @@ body {
 
       .name {
         font-family: $secondary-font;
-        font-size: 1.2em;
+        font-size: 1.4em;
         font-weight: bolder;
         color: black;
       }
@@ -132,7 +132,7 @@ body {
     margin-top: 2em;
     padding-top: 0.2em;
     padding-bottom: 0.3em;
-    padding-left: 1.5em;
+    padding-left: 1.8em;
     cursor: pointer;
 
     &:hover {
@@ -150,7 +150,7 @@ body {
 
   .oval {
     // // ---- oval
-    margin-left: 1.5em;
+    margin-left: 1.8em;
     width:40px;
     height:55px;
     border-radius:50%;
@@ -203,14 +203,14 @@ body {
   .other-name {
     margin-left: 1.9em;
     margin-top: 13px;
-    font-size: 1em;
+    font-size: 1.3em;
     font-family: $secondary-font;
     font-weight: bold;
     color: black;
   }
 
   .friends {
-    margin-left: 0.8em;
+    margin-left: 1em;
   }
 
   .fun {

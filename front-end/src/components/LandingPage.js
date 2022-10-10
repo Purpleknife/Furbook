@@ -37,8 +37,8 @@ const LandingPage = (props) => {
 
       <div className='slogon'>
         <p>Do you feel like your human doesn't give you enough attention?</p>
-        <p>Do you think sometimes that you should put yourself out there?</p>
-        <p>Make friends, find true love or <i>maybe just gossip about your human?</i></p>
+        <p>Do you sometimes think that you should put yourself out there?</p>
+        <p>Maybe make new friends, find true love or <i>just gossip about your human?</i></p>
         <p>If yes, <span id='logo'>Furbook</span> is the place for you!</p>
         <br />
         <button className="login__btn" onClick={login}>Login</button> &nbsp;
