@@ -35,12 +35,13 @@ module.exports = (db) => {
     
     const queryString = `
       INSERT INTO friendships (sender, receiver, status, date_added)
-      VALUES ($1, $2, false, CURRENT_DATE);
+      VALUES ($1, $2, false, CURRENT_DATE)
+      RETURNING *;
     `;
 
     db.query(queryString, queryParams)
-      .then(() => {
-        res.json("Friend request successfully created");
+      .then((data) => {
+        res.json(data);
       });
 
   });

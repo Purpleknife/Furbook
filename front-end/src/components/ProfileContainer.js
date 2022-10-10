@@ -164,19 +164,41 @@ const ProfileContainer = (props) => {
     );
   });
 
+  console.log("Profilecontainer, props:", props.friends);
   // // SEND FRIEND REQUEST === CURRENTLY HARDCODED / NOT FULLY WORKING
   const sendFriendRequest = () => {
     const sender = props.user.id;
     const receiver = userId;
 
+    // props to work with:
+    // pendingFriends
+    // friends
+
+    /**
+     * user obj:
+     * birthday
+     * date_added
+     * first_name
+     * id
+     * image_url
+     * last_name
+     * location
+     * password
+     * receiver
+     * relationship_status
+     * sender
+     * status: false
+     */
+
     axios.post('/friendships/new', {sender, receiver})
-      .then(() => {
+      .then((res) => {
+        console.log("Profilecontainer, res:", res.data.rows[0]);
         props.setPendingCounter(prev => prev + 1);
         setFriendButton('Pending');
       })
       .catch((error) => {
         console.log(error);
-      });
+    });
   };
   
   return (
