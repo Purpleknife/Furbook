@@ -27,10 +27,6 @@
   height: 90vh !important;
 }
 
-.ce-chat-list {
-  // background-color: rgba(255, 255, 255, 0.8) !important;
-}
-
 #new-chat-plus-button {
   background-color: $fourth-color !important;
 
@@ -39,7 +35,15 @@
   }
 }
 
+.anticon {
+  vertical-align: 0.1em !important;
+}
+
 .ce-chat-list {
+  background-color: transparent !important;
+}
+
+.ce-chat-form-container {
   background-color: transparent !important;
 }
 
@@ -48,11 +52,61 @@
   background-color: rgba(255, 255, 255, 0.6) !important;
 }
 
+.ce-active-chat-card {
+  background-color: rgba(217, 217, 217, 0.6) !important;
+}
+
 .ce-chat-feed-column {
   height: 90vh !important;
 }
 
 .ce-chat-feed{
+  background-color: rgba(255, 255, 255, 0.6) !important;
+  padding-left: 8px;
+}
+
+.ce-chat-title {
+  width: 98% !important;
+  background-color: transparent !important;
+}
+
+.ce-chat-title-container {
+  color: black !important;
+}
+
+.ce-chat-unread-dot {
+  background-color: $fourth-color !important;
+}
+
+#ce-feed-container {
+  background-color: transparent !important;
+}
+
+.ce-my-message-bubble {
+  color: black !important;
+  background-color: $primary-color !important;
+  background-color: $fourth-color !important;
+}
+
+.ce-their-message-bubble {
+  background-color: #fce8ab !important;
+}
+
+#msg-form-container {
+  width: 98% !important;
+  bottom: 3px !important;
+  right: 10px;
+}
+
+#ce-send-message-button {
+  background-color: $fourth-color !important;
+  
+  &:hover {
+    background-color: $primary-color !important;
+  }
+}
+
+.ce-settings {
   background-color: rgba(255, 255, 255, 0.6) !important;
 }
 
@@ -60,31 +114,10 @@
   height: 90vh !important;
 }
 
-.ce-chat-feed {
-  padding-left: 8px;
+.ce-section-title-container {
+  background-color: transparent !important;
 }
 
-.ce-chat-title {
-  width: 98% !important;
-}
-
-.ce-my-message-bubble {
-  color: black !important;
-  background-color: $primary-color !important;
-  }
-
-.ce-their-message-bubble {
-  background-color: #fce8ab !important;
-}
-
-#msg-form-container {
-  width: 97% !important;
-}
-
-#ce-send-message-button {
-  background-color: $fourth-color !important;
-
-  &:hover {
-    background-color: $primary-color !important;
-  }
+#ce-options-drop-down {
+  background-color: transparent !important;
 }
