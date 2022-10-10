@@ -45,13 +45,6 @@ const Post = (props) => {
     editMode.display = "none";
   };
 
-  // const onKeyDown = (event) => {
-  //   if (event.key === "Enter") {
-  //     setEditInput({ editing: false });
-  //     editPost();
-  //   }
-  // };
-
   const editIt = () => {
     setEditInput({ editing: false });
     editPost();
@@ -102,9 +95,6 @@ const Post = (props) => {
       .catch(e => console.log(e));
   };
 
-
- 
-
   //To get the comments of a post:
   const fetchComments = async () => {
     await axios.get(`/posts/comments/${props.postID}`)
@@ -129,7 +119,6 @@ const Post = (props) => {
       })
       .catch(e => console.log(e));
   };
-
   
   //To add likes on posts:
   const addLikes = async() => {
@@ -155,7 +144,6 @@ const Post = (props) => {
 
     }
   };
-  
 
   //To add comments on posts:
   const addComments = async(e) => {
@@ -172,7 +160,6 @@ const Post = (props) => {
       .catch(e => console.log(e));
   };
 
-
   useEffect(() => {
     fetchNumberOfLikes();
     fetchComments();
@@ -182,11 +169,9 @@ const Post = (props) => {
   useEffect(() => {    
     if (myLikes) {
       setColor("#FF0000");
-      console.log('setting color to red here');
     }
     if (!myLikes) {
       setColor("#000000");
-      console.log('setting color to black here');
     }
   }, [myLikes])
 
@@ -229,7 +214,6 @@ const Post = (props) => {
           onChange = {(event) => {
             setInputContent(event.target.value)}
           }
-          // onKeyDown={onKeyDown}
         />
         <span style={editMode} className="save" onClick={editIt}><i className="fa-solid fa-floppy-disk"></i></span>
       </div>
@@ -246,10 +230,6 @@ const Post = (props) => {
           onClick={addLikes}
           style={ {color: `${color}`}}>
         <i className="fa-solid fa-paw"></i>
-        {/* <img 
-          alt='like'
-          src='images/paw-heart.png'
-        /> */}
         {likes}
       </span>
 

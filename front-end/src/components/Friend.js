@@ -10,13 +10,11 @@ const Friend = (props) => {
   
   // REMOVE FRIENDSHIP
   const destroy = () => {
-    console.log("Destroy function called")
     props.unfriend(props.id);
   };
 
   // NAVIGATE TO FRIEND'S PROFILE
   const handleClick = (friend_id) => {
-    console.log('In friends - navigate to profile id: ', friend_id)
     navigate(`/users/${friend_id}`);
   };
 
@@ -36,7 +34,6 @@ const Friend = (props) => {
  
     axios.put('https://api.chatengine.io/chats/', chatDetails, config)
       .then(res => {
-        console.log("Chat successfully started", res)
         navigate('/chat');
       })
       .catch(e => console.log("startMessage Axios request Error :", e));

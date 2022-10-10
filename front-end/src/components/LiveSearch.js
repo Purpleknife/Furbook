@@ -14,10 +14,8 @@ const LiveSearch = () => {
   // Axios call to query results in the database
   useEffect(() => {
     if (term) {
-      console.log("SEARCH TERM :", term)
       axios.get('/search', {params: {name: term}})
         .then(res => {
-          console.log("SEARCH RESULTS :", res.data);
           setResults([...res.data]);
         })
         .catch(err => console.log(err));
@@ -38,7 +36,6 @@ const LiveSearch = () => {
 
   // When clicking on a result, redirect to the friend's profile
   const navigateToProfile = (friend_id) => {
-    console.log("FRIEND ID :", friend_id);
 
     navigate(`/users/${friend_id}`);
   };

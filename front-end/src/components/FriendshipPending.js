@@ -9,21 +9,18 @@ const FriendshipPending = (props) => {
 
   // ACCEPT FRIENDSHIP
   const acceptFriendship = () => {
-    console.log("AcceptFriendship function called")
     props.accept(props.id);
     document.querySelector(".friend-title").click();
   };
 
   // DECLINE FRIENDSHIP
   const declineFriendship = () => {
-    console.log("declineFriendship function called")
     props.decline(props.id);
     document.querySelector(".friend-title").click();
   };
 
   // NAVIGATE TO FRIEND'S PROFILE
   const handleClick = (friend_id) => {
-    console.log('In friends - navigate to profile id: ', friend_id)
     navigate(`/users/${friend_id}`);
   };
 

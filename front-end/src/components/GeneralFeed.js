@@ -23,7 +23,6 @@ const GeneralFeed = (props) => {
 
   const updateRefetch = () => {
     setRefetch(true);
-    console.log('props refetch here', props.refetch);
     props.refetch();
   };
 

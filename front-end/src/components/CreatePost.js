@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from 'react'
+import { useState } from 'react'
 import axios from 'axios';
 
 import './CreatePost.scss';
@@ -52,6 +52,7 @@ const CreatePost = (props) => {
 
   const handleClick = async (e) => {
     e.preventDefault();
+
     await axios.post('/posts', value)
       .then(res => {
 
@@ -68,16 +69,16 @@ const CreatePost = (props) => {
           users_last: props.user.last_name,
           users_image: props.user.image_url
         };
+
         let oldPosts = [...props.posts];
+
         oldPosts.unshift(newPost);
 
-        //props.setPosts(oldPosts);
         props.refetch();
       })
       .catch(err => console.log(err));
   }
 
-  // Not working atm
   const onKeyDown = (event) => {
     if (event.key === "Enter") {
       event.preventDefault();
@@ -121,7 +122,6 @@ const CreatePost = (props) => {
         >
           Post
         </button>
-        {/* <img src={image} alt="upload-test"/> */}
       </div>
     </div>
   );

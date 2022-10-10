@@ -14,7 +14,6 @@ const LandingPage = (props) => {
   const login = async() => {
     await axios.get('/login/1')
       .then((res) => {
-        console.log("User data: ", {...res.data[0]});
         props.setUser(res.data[0]);
         navigate('/posts');
       })

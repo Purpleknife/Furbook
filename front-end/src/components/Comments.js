@@ -26,7 +26,7 @@ const Comments = (props) => {
   const navigateToProfile = (id) => {
     navigate(`/users/${id}`);
   }
-  // onClick={() => navigateToProfile(creator_user_id)}
+  
   return (
     <div className='all-comments'>
       <div className='comments-container'>

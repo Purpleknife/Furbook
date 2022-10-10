@@ -9,7 +9,6 @@ const SideNav = (props) => {
   const logout = () => {
     axios.get('/logout')
       .then((data) => {
-        console.log('logout data', data);
         props.setUser(null);
       })
   }
@@ -60,21 +59,9 @@ const SideNav = (props) => {
         <p className="other-name">My Chats</p>
       </div>
 
-      {/* <img
-        className="fun"
-        src='../images/peekaboo3.png'
-        alt="peekaboo"
-      /> */}
-
       <div className="logout">
         <Link className="logout__btn" to="/" onClick={logout}>Logout</Link>
       </div>
-
-      {/* <img
-            className="side-footer-image"
-            src='../images/corgi.png'
-            alt="profile"
-        /> */}
       
     </div>
   );

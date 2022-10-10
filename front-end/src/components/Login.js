@@ -18,11 +18,9 @@ const Login = (props) => {
     event.preventDefault();
 
     const { email, password } = document.forms[0];
-    console.log('DOC FORMS', { email, password });
 
     axios.get('/users')
       .then(res => {
-        console.log('ALL USERs', res.data);
 
         const allUsers = res.data;
         const findUser = allUsers.find((user) => user.email === email.value);

@@ -55,13 +55,11 @@ const Friendships = (props) => {
 
     // Add 1 in FriendsCounter
     setFriendsCounter(prev => prev + 1);
-    console.log("Friends counter :", friendsCounter)
   };
 
   // DECLINE FRIENDSHIP
   const decline = (friend_id) => {
     axios.delete(`/friendships/${friend_id}`);
-    console.log("Axios request to decline friendship");
     
     // Remove the friend from the pending state
     setPending(prev => prev.filter(friend => {
@@ -70,13 +68,11 @@ const Friendships = (props) => {
 
     // Remove 1 in PendingCounter
     setPendingCounter(prev => prev - 1);
-    console.log("Pending requests counter :", pendingCounter)
   };
 
   // REMOVE FRIENDSHIP
   const unfriend = (friend_id) => {
     axios.delete(`/friendships/${friend_id}`);
-    console.log("Axios request to unfriend");
     
     // Remove the friend from the friends state
     setFriends(prev => prev.filter(friend => {
@@ -85,7 +81,6 @@ const Friendships = (props) => {
 
     // Remove 1 in FriendsCounter
     setFriendsCounter(prev => prev - 1);
-    console.log("Friends counter :", friendsCounter)
   };
 
   // INDIVIDUAL FRIEND COMPONENT FOR PENDING FRIENDSHIPS
@@ -146,27 +141,3 @@ const Friendships = (props) => {
 };
  
 export default Friendships;
-
-
-
-{/* <main className="friendships-container">
-      <br />
-      
-        {<span className='friend-title'>Pending requests ({pendingCounter})</span>}
-
-        <p className='friends-list'>
-  
-          {pendingFriendItem}
-        </p>
-
-      <br />
-      <div className='friends'>
-        <span className='friend-title'>Friends ({friendsCounter})</span>
-        
-        <div className='friends-list'>
-          {friendItem}
-        </div>
-
-      </div>
-      
-    </main> */}

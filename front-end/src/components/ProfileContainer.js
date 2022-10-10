@@ -42,7 +42,6 @@ const ProfileContainer = (props) => {
 
         for (const friend of props.friends) {
           if (friend.receiver === res.data[0].users_id || friend.sender === res.data[0].users_id) {
-            console.log("Setting friend to blank");
             friendFound = true;
             break;
           }
@@ -54,7 +53,6 @@ const ProfileContainer = (props) => {
 
         for (const friend of props.pendingFriends) {
           if (friend.receiver === res.data[0].users_id || friend.sender === res.data[0].users_id) {
-            console.log("Setting friend to pending");
             setFriendButton('Pending');
             break;
           }
@@ -99,14 +97,6 @@ const ProfileContainer = (props) => {
     editMode.display = "none";
   };
 
-  // const onKeyDown = (event) => {
-  //   //console.log('event key', event.key);
-  //   if (event.key === "Enter") {
-  //     setEditInput({ editing: false });
-  //     editProfile();
-  //   }
-  // };
-
   const editIt = () => {
     setEditInput({ editing: false });
       editProfile();
@@ -150,7 +140,6 @@ const ProfileContainer = (props) => {
  
     axios.put('https://api.chatengine.io/chats/', chatDetails, config)
       .then(res => {
-        console.log("Chat successfully started", res)
         navigate('/chat');
       })
       .catch(e => console.log("startMessage Axios request Error :", e));
@@ -189,7 +178,6 @@ const ProfileContainer = (props) => {
         console.log(error);
       });
   };
-  // TO IMPLEMENT, add to 'Be Friends" button: onClick={sendFriendRequest}
   
   return (
     <div className="main">
@@ -214,7 +202,6 @@ const ProfileContainer = (props) => {
               onChange = {(event) => {
                 setInputName(event.target.value)}
               }
-              // onKeyDown={onKeyDown}
             />
           </p>
 
@@ -230,7 +217,6 @@ const ProfileContainer = (props) => {
               onChange = {(event) => {
                 setInputRelation(event.target.value)}
               }
-              // onKeyDown={onKeyDown}
             />
           </p>
           <p><span className="profile-title">Birthday:</span><span style={viewMode}> {inputBirthday ? inputBirthday : ''}</span>
@@ -243,7 +229,6 @@ const ProfileContainer = (props) => {
               onChange = {(event) => {
                 setInputBirthday(event.target.value)}
               }
-              // onKeyDown={onKeyDown}
             />
           </p>
 
@@ -257,7 +242,6 @@ const ProfileContainer = (props) => {
               onChange = {(event) => {
                 setInputLocation(event.target.value)}
               }
-              // onKeyDown={onKeyDown}
             />
           </p>
         </div>
