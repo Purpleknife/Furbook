@@ -1,10 +1,10 @@
 @import "../styles/variables";
 
 body {
-  background-image: linear-gradient(rgba(255,255,255,0.85), rgba(255,255,255,0.97)), url('../../public/images/background1.jpeg');
+  // background-image: linear-gradient(rgba(255,255,255,0.85), rgba(255,255,255,0.97)), url('../../public/images/background1.jpeg');
   // background-image: linear-gradient(rgba(255,255,255,0.85), rgba(255,255,255,0.95)), url('../../public/images/background2.jpeg');
   // background-image: linear-gradient(rgba(255,255,255,0.9), rgba(255,255,255,0.97)), url('../../public/images/background5.png');
-  // background-image: linear-gradient(rgba(255,255,255,0.85), rgba(255,255,255,0.95)), url('../../public/images/background7.jpeg');
+  background-image: linear-gradient(rgba(255,255,255,0.85), rgba(255,255,255,0.95)), url('../../public/images/background7.jpeg');
   // background-image: linear-gradient(rgba(255,255,255,0.9), rgba(255,255,255,0.97)), url('../../public/images/background10.png');
   background-attachment: fixed;
 }
