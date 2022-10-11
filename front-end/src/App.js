@@ -62,6 +62,7 @@ const App = () => {
               user={user} 
               setUser={setUser} 
               pendingFriends={pendingFriends} 
+              setPendingFriends={setPendingFriends}
               pendingCounter={pendingCounter} 
               setPendingCounter={setPendingCounter} 
               friends={friends} 
