@@ -164,7 +164,6 @@ const ProfileContainer = (props) => {
     );
   });
 
-  console.log("Profilecontainer, props:", props.friends);
   // // SEND FRIEND REQUEST === CURRENTLY HARDCODED / NOT FULLY WORKING
   const sendFriendRequest = () => {
     const sender = props.user.id;

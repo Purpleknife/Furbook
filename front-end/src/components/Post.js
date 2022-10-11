@@ -63,7 +63,6 @@ const Post = (props) => {
       });
   };
 
-
   //To delete a post:
   const deletePost = async() => {
     await axios.delete(`/posts/${props.postID}`)
@@ -88,11 +87,13 @@ const Post = (props) => {
 
   //To get the posts liked by the user:
   const fetchUserLikes = async() => {
+
+    
     await axios.get(`/posts/postlikes/${props.postID}/users/${props.userID}`)
-      .then(res => {
-        setMyLikes(res.data[0].post_id);
-      })
-      .catch(e => console.log(e));
+    .then(res => {
+      setMyLikes(res.data[0].post_id);
+    })
+    .catch(e => console.log(e));
   };
 
   //To get the comments of a post:
@@ -128,6 +129,7 @@ const Post = (props) => {
         fetchUserLikes();
         fetchNumberOfLikes();
         setMyLikes('');
+        console.log("mylikes:", myLikes);
       })
       .catch(e => console.log(e));
     }

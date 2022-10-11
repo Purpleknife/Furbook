@@ -91,9 +91,10 @@ const App = () => {
               pendingCounter={pendingCounter} 
             />
             <Friendships 
-            setFriends={setFriends} 
-            setPendingFriends={setPendingFriends} 
-            setPendingCounter={setPendingCounter} 
+              setFriends={setFriends} 
+              setPendingFriends={setPendingFriends} 
+              setPendingCounter={setPendingCounter}
+              user={user}
             />
           </>} 
         />

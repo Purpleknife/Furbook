@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import './FriendshipPending.scss';
 import './Friend.scss';
 import { useNavigate } from 'react-router-dom'
@@ -24,6 +24,15 @@ const FriendshipPending = (props) => {
     navigate(`/users/${friend_id}`);
   };
 
+  const checkSender = () => {
+    for (const friend of props.friends) {
+      if (friend.sender === props.user.id) {
+        return true;
+      }
+    }
+  }
+  
+
   return (
       <div className="friend-card-pending">
 
@@ -38,8 +47,8 @@ const FriendshipPending = (props) => {
         </div>
 
         <div className="friend-pending-btn">
-          <button className="btn" onClick={acceptFriendship}><i className="fa-solid fa-user-plus"></i> Accept</button> &nbsp;&nbsp;
-          <button className="btn" onClick={declineFriendship}><i className="fa-solid fa-xmark"></i> Decline</button>
+          {!checkSender() && <button className="btn" onClick={acceptFriendship}><i className="fa-solid fa-user-plus"></i> Accept</button>} &nbsp;&nbsp;
+          <button className="btn" onClick={declineFriendship}><i className="fa-solid fa-xmark"></i> {!checkSender() ? 'Decline' : 'Cancel'}</button>
         </div>
 
       </div>

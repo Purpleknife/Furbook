@@ -95,6 +95,8 @@ const Friendships = (props) => {
         date_added={pendingFriend.date_added}
         accept={accept}
         decline={decline}
+        user={props.user}
+        friends={friends}
       />
     )
   });
