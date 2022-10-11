@@ -194,7 +194,7 @@ const ProfileContainer = (props) => {
             receiver: receiver,
             relationship_status: inputRelation,
             sender: sender,
-            status: res.data.rows[0].status
+            status: false
           }
         ]
         props.setPendingFriends(newPending);
