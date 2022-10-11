@@ -164,36 +164,40 @@ const ProfileContainer = (props) => {
     );
   });
 
-  console.log("Profilecontainer, props:", props.friends);
   // // SEND FRIEND REQUEST === CURRENTLY HARDCODED / NOT FULLY WORKING
   const sendFriendRequest = () => {
     const sender = props.user.id;
     const receiver = userId;
 
-    // props to work with:
-    // pendingFriends
-    // friends
-
-    /**
-     * user obj:
-     * birthday
-     * date_added
-     * first_name
-     * id
-     * image_url
-     * last_name
-     * location
-     * password
-     * receiver
-     * relationship_status
-     * sender
-     * status: false
-     */
+    if (friendButton === 'Pending') {
+      console.log('This request is already pending');
+      return;
+    }
 
     axios.post('/friendships/new', {sender, receiver})
       .then((res) => {
-        console.log("Profilecontainer, res:", res.data.rows[0]);
+        const firstLastNames = inputName.split(' ');
+
+        const newPending = [
+          ...props.pendingFriends,
+          {
+            birthday: inputBirthday,
+            date_added: res.data.rows[0].date_added,
+            first_name: firstLastNames[0],
+            id: res.data.rows[0].id,
+            image_url: imageUrl,
+            last_name: firstLastNames[1],
+            location: inputLocation,
+            password: 'password',
+            receiver: res.data.rows[0].receiver,
+            relationship_status: inputRelation,
+            sender: res.data.rows[0].sender,
+            status: res.data.rows[0].status
+          }
+        ]
+        
         props.setPendingCounter(prev => prev + 1);
+        props.setPendingFriends(newPending);
         setFriendButton('Pending');
       })
       .catch((error) => {

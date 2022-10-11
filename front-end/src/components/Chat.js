@@ -11,8 +11,8 @@ const Chat = (props) => {
         offset={-7}
         height='95vh'
         projectID='8d68967f-e10d-4bbb-8e1b-d14f5592c345'
-        userName='Cindy'
-        userSecret='cindyclawford'
+        userName='Chris'
+        userSecret='chrispbacon'
       />
     </div>
 	);
