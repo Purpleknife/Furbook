@@ -82,6 +82,10 @@
   background-color: transparent !important;
 }
 
+.ce-message-timestamp {
+  color: rgb(205, 205, 205) !important;
+}
+
 .ce-my-message-bubble {
   color: black !important;
   background-color: $primary-color !important;
@@ -95,7 +99,7 @@
 #msg-form-container {
   width: 98% !important;
   bottom: 3px !important;
-  right: 10px;
+  right: 4px;
 }
 
 #ce-send-message-button {
@@ -119,5 +123,34 @@
 }
 
 #ce-options-drop-down {
+  display: none; 
   background-color: transparent !important;
+}
+
+label {
+  display:block !important;
+}
+
+.ql-bold {
+  display: none !important;
+}
+
+.ql-italic {
+  display: none !important;
+}
+
+.ql-underline {
+  display: none !important;
+}
+
+.ql-strike {
+  display: none !important;
+}
+
+.ql-code {
+  display: none !important;
+}
+
+.ql-link {
+  display: none !important;
 }
