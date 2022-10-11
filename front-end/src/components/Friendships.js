@@ -23,12 +23,15 @@ const Friendships = (props) => {
         const pendingFriendships = [];
         
         for (const friendship of res.data) {
-          if (friendship.status === true) {
+          if (friendship.status === true && friendship.id !== props.user.id) {
             confirmedFriendships.push(friendship);
-          } else {
+          }
+          if (friendship.status === false && friendship.id !== props.user.id) {
             pendingFriendships.push(friendship);
           };
         };
+
+        console.log("pendingFriendships", pendingFriendships);
  
         setFriends(confirmedFriendships);
         props.setFriends(confirmedFriendships);
@@ -37,7 +40,7 @@ const Friendships = (props) => {
         props.setPendingFriends(pendingFriendships)
         setPendingCounter(pendingFriendships.length);
         props.setPendingCounter(pendingFriendships.length);
-      });
+      })
   }, [friendsCounter, pendingCounter]);
 
   // ACCEPT FRIENDSHIP
@@ -85,6 +88,7 @@ const Friendships = (props) => {
 
   // INDIVIDUAL FRIEND COMPONENT FOR PENDING FRIENDSHIPS
   const pendingFriendItem = pending.map(pendingFriend => {
+    //console.log('pendingFriend', pendingFriend);
     return (
       <FriendshipPending
         key={pendingFriend.id}
@@ -96,7 +100,7 @@ const Friendships = (props) => {
         accept={accept}
         decline={decline}
         user={props.user}
-        friends={friends}
+        sender={pendingFriend.sender}
       />
     )
   });

@@ -28,9 +28,10 @@ const App = () => {
         const pendingFriendships = [];
         
         for (const friendship of res.data) {
-          if (friendship.status === true) {
+          if (friendship.status === true && friendship.id !== user.id) {
             confirmedFriendships.push(friendship);
-          } else {
+          } 
+          if (friendship.status === false && friendship.id !== user.id) {
             pendingFriendships.push(friendship);
           };
         };

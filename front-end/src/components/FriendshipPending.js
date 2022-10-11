@@ -25,33 +25,31 @@ const FriendshipPending = (props) => {
   };
 
   const checkSender = () => {
-    for (const friend of props.friends) {
-      if (friend.sender === props.user.id) {
-        return true;
-      }
+    if (props.sender === props.user.id) {
+      console.log("props.sender:", props.sender);
+      return true;
     }
   }
-  
 
   return (
-      <div className="friend-card-pending">
+    <div className="friend-card-pending">
 
-        <div className="friend-info" onClick={() => handleClick(props.id)}>
-          <img className="friend-pending-picture"
-            src={props.picture}
-            onClick={() => handleClick(props.id)}
-          />
-          <div className="name">
-            <p onClick={() => handleClick(props.id)}>{props.first_name} {props.last_name}</p>
-          </div>
+      <div className="friend-info" onClick={() => handleClick(props.id)}>
+        <img className="friend-pending-picture"
+          src={props.picture}
+          onClick={() => handleClick(props.id)}
+        />
+        <div className="name">
+          <p onClick={() => handleClick(props.id)}>{props.first_name} {props.last_name}</p>
         </div>
-
-        <div className="friend-pending-btn">
-          {!checkSender() && <button className="btn" onClick={acceptFriendship}><i className="fa-solid fa-user-plus"></i> Accept</button>} &nbsp;&nbsp;
-          <button className="btn" onClick={declineFriendship}><i className="fa-solid fa-xmark"></i> {!checkSender() ? 'Decline' : 'Cancel'}</button>
-        </div>
-
       </div>
+
+      <div className="friend-pending-btn">
+        {!checkSender() && <button className="btn" onClick={acceptFriendship}><i className="fa-solid fa-user-plus"></i> Accept</button>} &nbsp;&nbsp;
+        <button className="btn" onClick={declineFriendship}><i className="fa-solid fa-xmark"></i> {!checkSender() ? 'Decline' : 'Cancel'}</button>
+      </div>
+
+    </div>
   );
 };
 

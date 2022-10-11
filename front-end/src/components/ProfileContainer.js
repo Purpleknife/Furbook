@@ -163,6 +163,7 @@ const ProfileContainer = (props) => {
       />
     );
   });
+  console.log("currentPending:", props.pendingFriends);
 
   // // SEND FRIEND REQUEST === CURRENTLY HARDCODED / NOT FULLY WORKING
   const sendFriendRequest = () => {
@@ -178,6 +179,7 @@ const ProfileContainer = (props) => {
       .then((res) => {
         const firstLastNames = inputName.split(' ');
 
+        console.log("res:", res.data.rows[0]);
         const newPending = [
           ...props.pendingFriends,
           {
@@ -189,15 +191,14 @@ const ProfileContainer = (props) => {
             last_name: firstLastNames[1],
             location: inputLocation,
             password: 'password',
-            receiver: res.data.rows[0].receiver,
+            receiver: receiver,
             relationship_status: inputRelation,
-            sender: res.data.rows[0].sender,
+            sender: sender,
             status: res.data.rows[0].status
           }
         ]
-        
-        props.setPendingCounter(prev => prev + 1);
         props.setPendingFriends(newPending);
+        props.setPendingCounter(prev => prev + 1);
         setFriendButton('Pending');
       })
       .catch((error) => {
