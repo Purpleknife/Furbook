@@ -24,12 +24,12 @@ const FriendshipPending = (props) => {
     navigate(`/users/${friend_id}`);
   };
 
-  const checkSender = () => {
-    if (props.sender === props.user.id) {
-      console.log("props.sender:", props.sender);
-      return true;
-    }
-  }
+  // const checkSender = () => {
+  //   if (props.sender === props.user.id) {
+  //     console.log("props.sender:", props.sender);
+  //     return true;
+  //   }
+  // }
 
   return (
     <div className="friend-card-pending">
@@ -45,8 +45,8 @@ const FriendshipPending = (props) => {
       </div>
 
       <div className="friend-pending-btn">
-        {!checkSender() && <button className="btn" onClick={acceptFriendship}><i className="fa-solid fa-user-plus"></i> Accept</button>} &nbsp;&nbsp;
-        <button className="btn" onClick={declineFriendship}><i className="fa-solid fa-xmark"></i> {!checkSender() ? 'Decline' : 'Cancel'}</button>
+        <button className="btn" onClick={acceptFriendship}><i className="fa-solid fa-user-plus"></i> Accept</button> &nbsp;&nbsp;
+        <button className="btn" onClick={declineFriendship}><i className="fa-solid fa-xmark"></i> Decline</button>
       </div>
 
     </div>
