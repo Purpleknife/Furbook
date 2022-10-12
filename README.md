@@ -2,9 +2,8 @@
 
 Social Media app for pets where they can make friends, share posts or find true love.
 
-## Collaborators
-
 This is a collaborative project for Lighthouse Labs's Finals with [Sylvie Lacoque](https://github.com/sylvielcq) and [Colton Bitz](https://github.com/Coltonb-boop).
+
 
 ## Features
 - A user (pet) can log in or register to access all features.
@@ -14,6 +13,7 @@ This is a collaborative project for Lighthouse Labs's Finals with [Sylvie Lacoqu
 - A user can add new friends through the search bar.
 - A user can remove and message their friends.
 
+
 ## Setup
 
 1. Create the `.env` by using `.env.example` as a reference: `cp .env.example .env`
@@ -21,6 +21,7 @@ This is a collaborative project for Lighthouse Labs's Finals with [Sylvie Lacoqu
 3. Install dependencies: `npm i` in both `front-end` and `back-end` folders.
 4. Reset database: `npm run db:reset`
 5. `cd back-end` then `npm start` to run the Server in port 8080, and `cd front-end` to run the App in port 3000.
+
 
 ## Dependencies
 - Back-end:
@@ -43,6 +44,7 @@ This is a collaborative project for Lighthouse Labs's Finals with [Sylvie Lacoqu
   - React Router
   - Cloudinary API
   - Chat Engine API
+
 
 ## Final Product
 ![]()
