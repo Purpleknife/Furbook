@@ -17,7 +17,7 @@ This is a collaborative project for Lighthouse Labs's Finals with [Sylvie Lacoqu
 ## Setup
 
 1. Create the `.env` by using `.env.example` as a reference: `cp .env.example .env`
-2. Update the `.env` file with your correct local information (username, password, database)
+2. Update the `.env` file with your correct local information (username, password, database), plus your secret keys from Cloudinary API.
 3. Install dependencies: `npm i` in both `front-end` and `back-end` folders.
 4. Reset database: `npm run db:reset`
 5. `cd back-end` then `npm start` to run the Server in port 8080, and `cd front-end` to run the App in port 3000.
