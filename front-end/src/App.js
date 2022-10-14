@@ -39,9 +39,8 @@ const App = () => {
         setFriends(confirmedFriendships);
         setPendingFriends(pendingFriendships)
         setPendingCounter(pendingFriendships.length);
-        setRefetch(false);
       });
-  }, [user, refetch]);
+  }, [user]);
 
   return (
     <React.StrictMode>
