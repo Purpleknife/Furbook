@@ -21,7 +21,8 @@ const App = () => {
   
   // API CALL
   useEffect(() => {
-    axios.get('/friendships')
+    const controller = new AbortController();
+    axios.get('/friendships', { signal: controller.signal })
       .then((res) => {
         // Separate confirmed friendships from pending friendships
         const confirmedFriendships = [];
@@ -40,6 +41,10 @@ const App = () => {
         setPendingFriends(pendingFriendships)
         setPendingCounter(pendingFriendships.length);
       });
+
+      return () => {
+        controller.abort();
+      }
   }, [user]);
 
   return (

@@ -160,10 +160,11 @@ const ProfileContainer = (props) => {
         refetch={props.refetch}
         date={post.date_posted}
         user_image={imageUrl}
+        data={data}
+        setData={setData}
       />
     );
   });
-  console.log("currentPending:", props.pendingFriends);
 
   // // SEND FRIEND REQUEST === CURRENTLY HARDCODED / NOT FULLY WORKING
   const sendFriendRequest = () => {
@@ -171,7 +172,6 @@ const ProfileContainer = (props) => {
     const receiver = userId;
 
     if (friendButton === 'Pending') {
-      console.log('This request is already pending');
       return;
     }
 
@@ -179,7 +179,6 @@ const ProfileContainer = (props) => {
       .then((res) => {
         const firstLastNames = inputName.split(' ');
 
-        console.log("res:", res.data.rows[0]);
         const newPending = [
           ...props.pendingFriends,
           {

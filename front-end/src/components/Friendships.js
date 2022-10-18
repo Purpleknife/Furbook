@@ -30,8 +30,6 @@ const Friendships = (props) => {
             pendingFriendships.push(friendship);
           };
         };
-
-        console.log("pendingFriendships", pendingFriendships);
  
         setFriends(confirmedFriendships);
         props.setFriends(confirmedFriendships);
