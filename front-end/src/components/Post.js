@@ -67,8 +67,8 @@ const Post = (props) => {
   const deletePost = async() => {
     await axios.delete(`/posts/${props.postID}`)
       .then((res) => {
-        const newData = props.data.filter(post => post.id !== res.data[0].id);
-        props.setData(newData);
+        const newPosts = props.posts.filter(post => post.id !== res.data[0].id);
+        props.setPosts(newPosts);
         // Probably don't need the refetch anymore with the additions above. Better state management.
         // props.refetch();
       })

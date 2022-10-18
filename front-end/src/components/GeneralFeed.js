@@ -37,12 +37,13 @@ const GeneralFeed = (props) => {
           image_url={post.image_url}
           creator_name={post.users_first + ' ' + post.users_last}
           creator_image={post.users_image}
-          setPosts={setPosts}
           userID={props.user.id}
           user_image={props.user.image_url}
           postID={post.id}
           refetch={updateRefetch}
           date={post.date_posted}
+          posts={posts}
+          setPosts={setPosts}
         />
       )
     });

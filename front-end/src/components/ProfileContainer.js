@@ -10,7 +10,7 @@ const ProfileContainer = (props) => {
   // Params stores dynamic id's. Like express did with /users/:id. This is coming from Router on App.js
   const params = useParams();
   const [firstLoad, setFirstLoad] = useState(true);
-  const [data, setData] = useState([]);
+  const [posts, setPosts] = useState([]);
   const [editable, setEditable] = useState(false);
   const [friendButton, setFriendButton] = useState('');
   
@@ -66,7 +66,7 @@ const ProfileContainer = (props) => {
 
     await axios.get(`/users/${id}`)
       .then(res => {
-        setData(res.data);
+        setPosts(res.data);
       })
       .catch(e => console.log(e));
   };
@@ -104,7 +104,7 @@ const ProfileContainer = (props) => {
 
   const editProfile = async() => {
     const names = inputName.split(' ');
-    await axios.put(`/users/${data[0].users_id}`, { 
+    await axios.put(`/users/${posts[0].users_id}`, { 
       first_name: names[0],
       last_name: names[1],
       relationship_status: inputRelation,
@@ -121,7 +121,7 @@ const ProfileContainer = (props) => {
 
   useEffect(() => {
     document.title = `${props.user.first_name}'s Profile`;
-  }, [data]);
+  }, [posts]);
 
   // CREATE A NEW CHAT CONVO AND REDIRECT TO CHAT PAGE
   const startMessage = () => {
@@ -146,7 +146,7 @@ const ProfileContainer = (props) => {
   };
 
   // New postsList for dynamic profile loading
-  const postsList = data.map(post => {
+  const postsList = posts.map(post => {
     return (
       <Post
         key={post.id}
@@ -160,8 +160,8 @@ const ProfileContainer = (props) => {
         refetch={props.refetch}
         date={post.date_posted}
         user_image={imageUrl}
-        data={data}
-        setData={setData}
+        posts={posts}
+        setPosts={setPosts}
       />
     );
   });
