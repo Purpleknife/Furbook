@@ -10,8 +10,9 @@ This is a collaborative project for Lighthouse Labs's Finals with [Sylvie Lacoqu
 - A user can create posts (with captions or/and pictures), edit or delete them.
 - A user can add or delete a comment.
 - A user can edit their own profile.
-- A user can add new friends through the search bar.
-- A user can remove and message their friends.
+- A user can find/ add new friends through the search bar.
+- A user can message a friend.
+- A user can remove a friend.
 
 
 ## Setup
