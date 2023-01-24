@@ -2,7 +2,10 @@
 
 Social Media app for pets where they can make friends, share posts or find true love.
 
-This is a collaborative project for Lighthouse Labs's Finals with [Sylvie Lacoque](https://github.com/sylvielcq) and [Colton Bitz](https://github.com/Coltonb-boop).
+This is a collaborative project for Lighthouse Labs's Finals between:
+- [Hind Nayhi](https://github.com/Purpleknife)
+- [Sylvie Lacoque](https://github.com/sylvielcq)
+- [Colton Bitz](https://github.com/Coltonb-boop)
 
 
 ## Features
